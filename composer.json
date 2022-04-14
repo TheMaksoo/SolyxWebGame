@@ -1,5 +1,6 @@
 {
     "require": {
-        "mongodb/mongodb": "^1.12"
+        "mongodb/mongodb": "^1.12",
+        "wohali/oauth2-discord-new": "^1.1"
     }
 }
