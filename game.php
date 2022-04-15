@@ -2,17 +2,21 @@
     include_once 'header.php';
     require __DIR__ . "/backend/config.php";
     require __DIR__ . "/backend/conn.php";
+    require __DIR__ . "/backend/functions.php";
+    require __DIR__ . "/backend/discord.php";
 
     if(!isset($_SESSION['user_id']))
     {
         header("Location: $base_url/login.php?action=login");
         exit;
     }
-    $query = new MongoDB\Driver\Query(['_id' => $_SESSION['user_id']]);
-    $userinfo = $mongo->executeQuery('solyx.users', $query);
 
+    $userinfo = getuserinfo();
+    $guildinfo = guildname($userinfo);
+    $title = gettitle($userinfo);
+    $maxexp = getmaxexp($userinfo);
+    $pet = getpet($userinfo)
 
-    
     ?>
 <body>
     <main>
@@ -20,14 +24,24 @@
             <div class="game">
                 
                 <div class="game-container">
-                <img src="https://cdn.discordapp.com/avatars/<?php $_SESSION['user_avatar'];?>" style="width:35; height: 35px; border-radius: 5%;".jpg>
-                    <ul >
-                        <li><?php var_dump($_SESSION);?></li>
-                        <li>----------------------------------------------------------------</li>
-                        <li><?php var_dump($userinfo);?></li>
-                        <li><span>1600+ Servers.</span></li>
-                        <li><span>60+ user commands.</span></li>
-                        <li><span>150+ Total commands.</span></li>
+                    <ul>
+                        <img src="https://cdn.discordapp.com/avatars/<?php $extention = is_animated($_SESSION['user_avatar']); echo $_SESSION['user_id'] . "/" . $_SESSION['user_avatar'] . $extention; ?>" style="width:40; height: 40px; border-radius: 50%;"/>
+                        <li>Name:<?php print_r($userinfo["name"]);?></li>
+                        <li>Race:<?php print_r($userinfo["race"]);?></li>
+                        <li>Class:<?php print_r($userinfo["class"]);?></li>
+                        <li>Title:<?php print_r($title); ?></li>
+                        <li>Guild:<?php print_r($guildinfo->name);?></li>
+                        <br>
+                        <li>Level:<?php print_r($userinfo["lvl"]);?></li>
+                        <li>Exp:<?php print_r($userinfo["exp"]);?>/<?php print_r($maxexp);?></li>
+                        <li>Health:<?php print_r($userinfo["health"]);?>/<?php print_r($userinfo["MaxHealth"]);?></li>
+                        <li>Market ID:<?php print_r($userinfo["_id"]);?></li>
+                        <li>Pet:<?php print_r($pet);?></li>
+                        <br>
+                        <li>Equipment</li>
+                        <li>Weapon:<?php print_r($userinfo["equip"]["name"]);?></li>
+                        <li>Weapon Damage:<?php print_r($userinfo["equip"]["stats_min"]);?>-<?php print_r($userinfo["equip"]["stats_max"]);?></li>
+                        <!-- <li>Bonus Damage:<?php print_r($damage_bonus_min);?>-<?php print_r($damage_bonus_max);?></li> -->
                     </ul>
                 </div>
             </div>

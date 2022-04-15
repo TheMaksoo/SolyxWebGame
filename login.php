@@ -35,7 +35,7 @@ if(get('action') == 'login') {
     'client_id' => OAUTH2_CLIENT_ID,
     'redirect_uri' => 'http://localhost/solyx/login.php',
     'response_type' => 'code',
-    'scope' => 'identify'
+    'scope' => 'identify guilds'
   );
 
   // Redirect the user to Discord's authorization page
@@ -65,7 +65,8 @@ if(get('code')) {
 if(session('access_token')) {
   	$user = apiRequest($apiURLBase);
 	$_SESSION['user'] = $user;
-	$_SESSION['user_id'] = $user->id;
+	$id = (int) $user->id;
+	$_SESSION['user_id'] = $id;
 	$_SESSION['user_name'] = $user->username;
 	$_SESSION['user_avatar'] = $user->avatar;
 	$_SESSION['user_discriminator'] = $user->discriminator;

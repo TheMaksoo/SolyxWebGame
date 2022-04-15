@@ -35,8 +35,6 @@ require __DIR__ . "/backend/config.php";
     include_once 'footer.php';
     ?>
 
-<!--<p> Profile Picture : <img src="https://cdn.discordapp.com/avatars/<?php $_SESSION['user_avatar'];?>-->
-
 
 
 
