@@ -1,4 +1,5 @@
 <?php
+require __DIR__ . "/backend/config.php";
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 ini_set('max_execution_time', 300); //300 seconds = 5 minutes. In case if your CURL is slow and is loading too much (Can be IPv6 problem)
@@ -77,7 +78,7 @@ if(session('access_token')) {
 	echo '<pre>';
 	print_r($user);
   	echo '</pre>';
-	header("Location:index.php");
+	header("Location: $base_url/game.php");
 } 
 else {
   	echo '<h3>Not logged in</h3>';

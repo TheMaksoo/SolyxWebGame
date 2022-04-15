@@ -8,9 +8,4 @@
    $mongo = new Mongo("mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false");
    $db = $mongo->solyx;
    $db_users = $db->users;
-   $query = $db_users->find(['name' => "TheMaksoo"])->toArray();
-
-   print_r($query);
-   
- 
 ?>
