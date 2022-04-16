@@ -14,6 +14,7 @@ $dbPass = '';
 //De url waarop jouw project staat. Géén slash aan het einde.
 $base_url = 'http://localhost/solyx';
 
+
 # CLIENT ID
 # https://i.imgur.com/GHI2ts5.png (screenshot)
 $client_id = "495928914045304847";

@@ -1,9 +1,8 @@
 <?php
     include_once 'header.php';
     require __DIR__ . "/backend/config.php";
-    require __DIR__ . "/backend/conn.php";
     require __DIR__ . "/backend/functions.php";
-    require __DIR__ . "/backend/discord.php";
+    require $_SERVER['DOCUMENT_ROOT'] .'/solyx/backend/discord.php';
 
     if(!isset($_SESSION['user_id']))
     {

@@ -1,7 +1,6 @@
 <?php
     require __DIR__ . "/config.php";
-    require __DIR__ . "/conn.php";
-    require 'vendor/autoload.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/solyx/vendor/autoload.php';
   
 
 
