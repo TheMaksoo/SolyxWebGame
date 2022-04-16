@@ -25,7 +25,7 @@ if(get('action') == 'logout') {
     header('Location: ' . $_SERVER['PHP_SELF']);
     die();
 }
-
+session_cache_limiter('private_no_expire');
 session_start();
 
 // Start the login process by sending the user to Discord's authorization page
