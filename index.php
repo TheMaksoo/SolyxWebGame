@@ -8,6 +8,7 @@ require __DIR__ . "/backend/config.php";
 ?>
 <?php
     include_once 'header.php';
+    include_once 'head.php';
     ?>
 <!DOCTYPE html>
 <html lang="en">

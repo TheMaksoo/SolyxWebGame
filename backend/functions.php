@@ -28,10 +28,10 @@
         return $title;
     }
 
-    function getMaxExp()
+    function getmaxExp()
     {
-        $maxexp = 100 + (($GLOBALS["userinfo"]["lvl"] + 1) * 3.5);
-        return $maxexp;
+        $maxExp = 100 + (($GLOBALS["userinfo"]["lvl"] + 1) * 3.5);
+        return $maxExp;
     }
 
     function getPet()
@@ -44,74 +44,105 @@
     {
         
         if ($GLOBALS["userinfo"]["wearing"] != "None"){
-            $armorequipped = $GLOBALS["userinfo"]["wearing"]["name"];
-            $armormin = $GLOBALS["userinfo"]["wearing"]["stats_min"];
-            $armormax = $GLOBALS["userinfo"]["wearing"]["stats_max"];
+            $armorEquipped = $GLOBALS["userinfo"]["wearing"]["name"];
+            $armorMin = $GLOBALS["userinfo"]["wearing"]["stats_min"];
+            $armorMax = $GLOBALS["userinfo"]["wearing"]["stats_max"];
         }
         else{
-            $armorequipped = "None";
-            $armormin = 0;
-            $armormax = 0;
+            $armorEquipped = "None";
+            $armorMin = 0;
+            $armorMax = 0;
         }
             
         if ($GLOBALS["userinfo"]["neck"] != "None"){
-            $neckstats1 = $GLOBALS["userinfo"]["neck"]["stats_min"];
-            $neckstats2 = $GLOBALS["userinfo"]["neck"]["stats_max"];
+            $neckStats1 = $GLOBALS["userinfo"]["neck"]["stats_min"];
+            $neckStats2 = $GLOBALS["userinfo"]["neck"]["stats_max"];
         }  
         else{
-            $neckstats1 = 0;
-            $neckstats2 = 0;
+            $neckStats1 = 0;
+            $neckStats2 = 0;
         }
     
         if ($GLOBALS["userinfo"]["head"] != "None"){
-            $headstats1 = $GLOBALS["userinfo"]["head"]["stats_min"];
-            $headstats2 = $GLOBALS["userinfo"]["head"]["stats_max"];
+            $headStats1 = $GLOBALS["userinfo"]["head"]["stats_min"];
+            $headStats2 = $GLOBALS["userinfo"]["head"]["stats_max"];
         }    
         else{
-            $headstats1 = 0;
-            $headstats2 = 0;
+            $headStats1 = 0;
+            $headStats2 = 0;
         }
 
         if ($GLOBALS["userinfo"]["body"] != "None"){
-            $bodystats1 = $GLOBALS["userinfo"]["body"]["stats_min"];
-            $bodystats2 = $GLOBALS["userinfo"]["body"]["stats_max"];
+            $bodyStats1 = $GLOBALS["userinfo"]["body"]["stats_min"];
+            $bodyStats2 = $GLOBALS["userinfo"]["body"]["stats_max"];
         } 
         else{
-            $bodystats1 = 0;
-            $bodystats2 = 0;
+            $bodyStats1 = 0;
+            $bodyStats2 = 0;
         }
 
         if ($GLOBALS["userinfo"]["hand"] != "None"){
-            $handstats1 = $GLOBALS["userinfo"]["hand"]["stats_min"];
-            $handstats2 = $GLOBALS["userinfo"]["hand"]["stats_max"];
+            $handStats1 = $GLOBALS["userinfo"]["hand"]["stats_min"];
+            $handStats2 = $GLOBALS["userinfo"]["hand"]["stats_max"];
         }
         else{
-            $handstats1 = 0;
-            $handstats2 = 0;
+            $handStats1 = 0;
+            $handStats2 = 0;
         }
 
         if ($GLOBALS["userinfo"]["legs"] != "None"){
-            $legsstats1 = $GLOBALS["userinfo"]["legs"]["stats_min"];
-            $legsstats2 = $GLOBALS["userinfo"]["legs"]["stats_max"];
+            $legsStats1 = $GLOBALS["userinfo"]["legs"]["stats_min"];
+            $legsStats2 = $GLOBALS["userinfo"]["legs"]["stats_max"];
         }
         else{
-            $legsstats1 = 0;
-            $legsstats2 = 0;
+            $legsStats1 = 0;
+            $legsStats2 = 0;
         }
 
         if ($GLOBALS["userinfo"]["feet"] != "None"){
-            $feetstats1 = $GLOBALS["userinfo"]["feet"]["stats_min"];
-            $feetstats2 = $GLOBALS["userinfo"]["feet"]["stats_max"];
+            $feetStats1 = $GLOBALS["userinfo"]["feet"]["stats_min"];
+            $feetStats2 = $GLOBALS["userinfo"]["feet"]["stats_max"];
         }
         else{
-            $feetstats1 = 0;
-            $feetstats2 = 0;
+            $feetStats1 = 0;
+            $feetStats2 = 0;
         }
 
-        $damage_bonus_min = $handstats1;
-        $damage_bonus_max = $handstats2;
-        $total_defense_min = $neckstats1  +  $headstats1  + $bodystats1  + $legsstats1 + $feetstats1 + $armormin;
-        $total_defense_max = $neckstats2  +  $headstats2  + $bodystats2  + $legsstats2 + $feetstats2 + $armormax;
-        return array($armorequipped, $damage_bonus_min, $damage_bonus_max, $total_defense_min, $total_defense_max, $neckstats1,$neckstats2, $headstats1, $headstats2, $bodystats1, $bodystats2, $legsstats1, $legsstats2, $feetstats1, $feetstats2, $armormin, $armormax );
+        $damageBonusMin = $handStats1;
+        $damageBonusMax = $handStats2;
+        $totalDefenseMin = $neckStats1  +  $headStats1  + $bodyStats1  + $legsStats1 + $feetStats1 + $armorMin;
+        $totalDefenseMax = $neckStats2  +  $headStats2  + $bodyStats2  + $legsStats2 + $feetStats2 + $armorMax;
+        return array($armorEquipped, $damageBonusMin, $damageBonusMax, $totalDefenseMin, $totalDefenseMax, $neckStats1,$neckStats2, $headStats1, $headStats2, $bodyStats1, $bodyStats2, $legsStats1, $legsStats2, $feetStats1, $feetStats2, $armorMin, $armorMax );
+    }
+    function getRemainingTime($before, $cooldownTime)
+    { 
+        $diff = $cooldownTime - $before;
+
+        $w = $diff / 86400 / 7;
+        $d = $diff / 86400 % 7;
+        $h = $diff / 3600 % 24;
+        $m = $diff / 60 % 60; 
+        $s = $diff % 60;
+
+        return array($w, $d, $h, $m, $s);
+    }
+
+    function getFish()
+    {
+        $fishNames = ["&#128031;", "&#128032;", "&#128033;", "&#128255;", "&#128477;", "	
+        &#128206;", "&#129364;", "&#128465;", "&#129408;"];
+        $fishValues = [5, 10, 4, 15, 2, 2, 2, -10, -5];
+        $int = random_int(0,8);
+        $fishName = $fishNames[$int];
+        $fishValue = $fishValues[$int];
+        return array($fishName, $fishValue);
+    }
+
+    function getFishGold($fishValue)
+    {
+        if ($fishValue <= 0)
+        {$TheMaksooFishText = $fishValue;}
+        else{ $TheMaksooFishText = "+" . $fishValue;}
+        return $TheMaksooFishText;
     }
 ?>

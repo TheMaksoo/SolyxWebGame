@@ -59,18 +59,26 @@
                     </ul>
                 </div>
                 <div class="game-container">
-                <?php error_reporting(0); if ($_GET['content'] == 'gatherWood') {include 'content/gatherWood.php';} ?>
-
+                    <?php
+                    error_reporting(0); 
+                    if ($_GET['content'] == 'gatherChop') {include 'content/gatherChop.php';} 
+                    if ($_GET['content'] == 'gatherMine') {include 'content/gatherMine.php';}
+                    if ($_GET['content'] == 'gatherFish') {include 'content/gatherFish.php';}
+                    ?> 
                 </div>
             </div>
             <div class="commands">
                 <div class="commands-container">
                     <!-- Gather -->
                     <?php 
-                    error_reporting(0); if (!$_GET['content']) {include 'content/commands.php';}
-                    error_reporting(0); if ($_GET['content'] == 'gather') {include 'content/gather.php';} 
-                    
-                    ?>
+                    error_reporting(0); 
+                    if (!$_GET['content']) {include 'content/commands.php';}
+                    if ($_GET['content'] == 'gather' || $_GET['content'] == 'gatherChop' || $_GET['content'] == 'gatherMine' || $_GET['content'] == 'gatherFish') {include 'content/gather.php';}  
+                    if ($_GET['content']) {?>
+                        <form method="POST" action="<?php echo $base_url; ?>/game.php">
+                            <input type="submit" value="Back"/>  
+                        </form><?php }
+                    ?> 
                 </div>
             </div>
         </section>
