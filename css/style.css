@@ -299,8 +299,31 @@ body::-webkit-scrollbar-thumb:hover {
   letter-spacing: 1.5px;
   
 }
+/* game */
 
-
+.game-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
+  grid-column-gap: 25px;
+  grid-row-gap: 0px;
+  padding: 100px 0px;
+  background: rgb(255,255,255);
+  background: linear-gradient(180deg, rgba(255,255,255,1) 2%, rgba(242,242,242,1) 6%, rgba(242,242,242,1) 98%, rgba(255,255,255,1) 100%);
+  padding-right: 10%;
+  padding-left: 15%;
+}
+.commands-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.game-container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
 
 /* commands */
 
