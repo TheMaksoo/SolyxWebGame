@@ -64,27 +64,36 @@
                 if ($_GET['content'] == 'gatherMine') {include 'content/gather/gatherMine.php';}
                 if ($_GET['content'] == 'gatherFish') {include 'content/gather/gatherFish.php';}
                 if ($_GET['content'] == 'fight') {include 'content/fight/fight.php';}
+                
                 ?> 
             </div>
             <div class="inventory-container">
 
             </div>
             <div class="inventory-container">
-                
+
             </div>
             <div class="commands-container">
                 <?php 
                 error_reporting(0); 
                 if (!$_GET['content']) {include 'content/commands.php';}
                 if ($_GET['content'] == 'gather' || $_GET['content'] == 'gatherChop' || $_GET['content'] == 'gatherMine' || $_GET['content'] == 'gatherFish') {include 'content/gather/gather.php';}  
-                if ($_GET['content'] == 'fight') {?>
-                    <form method="POST" action="?content=Fight">  
+                if ($_GET['content'] == 'fight' && $GLOBALS["userinfo"]["selected_enemy"] == "None") {?>
+                    <form method="POST" action="?content=fight&Fight=true"> 
                         <input type="submit" value="Yes"/>  
                     </form>
-                    <form method="POST" action="?content=fight">  
+                    <form method="POST" action="?content=fight&Fight=false">  
                         <input type="submit" value="No"/>  
                     </form>
                 <?php }
+                if ($_GET['content'] == 'fight' && $GLOBALS["userinfo"]["selected_enemy"] != "None") {
+                    foreach ($GLOBALS["userinfo"]["skills_learned"] as $skill)
+                    {?>
+                    <form method="POST" action="?content=fight&Fight=true&<?php echo $skill ?>">
+                        <input type="submit" value="<?php echo $skill ?>"/>  
+                    </form>
+                <?php }
+                }
                 if ($_GET['content']) {?>
                     <form method="POST" action="<?php echo $base_url; ?>/game.php">
                         <input type="submit" value="Back"/>  

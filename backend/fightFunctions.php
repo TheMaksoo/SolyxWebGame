@@ -143,6 +143,10 @@
             }
         }
 
+        return $debi;
+    }
+    function getDebiName($debi)
+    {
         if ($debi == "Fire Golem" || $debi == "Phantasm" || $debi == "The Corrupted" || $debi == "The Accursed" || $debi == "The Nameless King" || $debi == "The Venomous" || $debi == "Death Knight" || $debi == "Frost Dragon"){
             $enemyname = "&#128305; " . $debi;
         }
@@ -154,7 +158,6 @@
         }
         return $enemyname;
     }
-
     function getDifficulty()
     {
         $difficulty = rand(1, 100);
@@ -200,4 +203,92 @@
             $img = "/img/frostDragon.jpg";
         }
         return $img;
+    }
+
+    function addEnemyToUser(){
+        $GLOBALS["userinfo"]["selected_enemy"] = $_SESSION['debi'];
+
+        if ($GLOBALS["userinfo"]["selected_enemy"] == "Rachi" || $GLOBALS["userinfo"]["selected_enemy"] == "Debin" || $GLOBALS["userinfo"]["selected_enemy"] == "Oofer"){ 
+                $GLOBALS["userinfo"]["enemyhp"] = rand(10, 30);
+        }
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Wyvern"){
+                $GLOBALS["userinfo"]["enemyhp"] = rand(30, 50);
+        }
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Fire Golem"){
+                $GLOBALS["userinfo"]["enemyhp"] = rand(40, 60);
+        }
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Draugr" || $GLOBALS["userinfo"]["selected_enemy"] == "Stalker"){
+                $GLOBALS["userinfo"]["enemyhp"] = rand(20, 40);
+        }
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Souleater"){
+                $GLOBALS["userinfo"]["enemyhp"] = rand(40, 60);
+        }
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "The Corrupted"){
+                $GLOBALS["userinfo"]["enemyhp"] = rand(40, 60);
+        }  
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Wolf" || $GLOBALS["userinfo"]["selected_enemy"] == "Goblin"){
+                $GLOBALS["userinfo"]["enemyhp"] = rand(50, 70);
+        }
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Zombie"){
+                $GLOBALS["userinfo"]["enemyhp"] = rand(60, 80);
+        }
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Phantasm"){
+                $GLOBALS["userinfo"]["enemyhp"] = rand(70, 90);
+        }
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Elder Dragon" || $GLOBALS["userinfo"]["selected_enemy"] == "Hades"){
+                $GLOBALS["userinfo"]["enemyhp"] = rand(70, 90);
+        }
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Ebony Guardian"){
+                $GLOBALS["userinfo"]["enemyhp"] = rand(80, 100);
+        }
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "The Accursed"){
+                $GLOBALS["userinfo"]["enemyhp"] = rand(90, 110);
+        }
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Ettin" || $GLOBALS["userinfo"]["selected_enemy"] == "Dormammu"){
+                $GLOBALS["userinfo"]["enemyhp"] = rand(90, 110);
+        }
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Harpy"){
+                $GLOBALS["userinfo"]["enemyhp"] = rand(100, 120);
+        }
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "The Nameless King"){
+                $GLOBALS["userinfo"]["enemyhp"] = rand(110, 130);
+        }
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Saurian" || $GLOBALS["userinfo"]["selected_enemy"] == "Deathclaw"){
+                $GLOBALS["userinfo"]["enemyhp"] = rand(90, 110);
+        }
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Largos"){
+                $GLOBALS["userinfo"]["enemyhp"] = rand(100, 120);
+        }  
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "The Venomous"){
+                $GLOBALS["userinfo"]["enemyhp"] = rand(110, 130);
+        }
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Skeleton" || $GLOBALS["userinfo"]["selected_enemy"] == "Lizardmen"){
+                $GLOBALS["userinfo"]["enemyhp"] = rand(120, 140);
+        }
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Giant"){
+                $GLOBALS["userinfo"]["enemyhp"] = rand(130, 150);
+        }
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Death Knight"){
+                $GLOBALS["userinfo"]["enemyhp"] = rand(140, 160);
+        }
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Ice Wolves" || $GLOBALS["userinfo"]["selected_enemy"] == "Frost Goblin"){
+                $GLOBALS["userinfo"]["enemyhp"] = rand(150, 170);
+        }
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Frost Orc"){
+                $GLOBALS["userinfo"]["enemyhp"] = rand(160, 180);
+        }
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Frost Dragon"){
+                $GLOBALS["userinfo"]["enemyhp"] = rand(170, 190);
+        }
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Skorpikis" || $GLOBALS["userinfo"]["selected_enemy"] == "Sandcrawler"){
+                $GLOBALS["userinfo"]["enemyhp"] = rand(180, 200);
+        }
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Anakore"){
+                $GLOBALS["userinfo"]["enemyhp"] = rand(190, 210);
+        }
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Giant Sand Worm"){
+                $GLOBALS["userinfo"]["enemyhp"] = rand(200, 220);
+        }
+
+    
     }
