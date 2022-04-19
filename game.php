@@ -3,11 +3,9 @@
     require __DIR__ . "/backend/config.php";
     require __DIR__ . "/backend/functions.php";
     require $_SERVER['DOCUMENT_ROOT'] .'/solyx/backend/discord.php';
-
-    if(!isset($_SESSION['user_id']))
-    {
+    
+    if(!isset($_SESSION["user_id"])){
         header("Location: $base_url/login.php?action=login");
-        exit;
     }
 
     $userinfo = getUserinfo();
@@ -16,8 +14,7 @@
     $maxExp = getMaxExp();
     $pet = getPet();
     $equipment = getEquipmentStats();
-    $gather = 'empty.php'
-
+    
     ?>
 <body>
     <main>
@@ -25,7 +22,7 @@
             <div class="stats-container">
                 <ul>
                     <img src="https://cdn.discordapp.com/avatars/<?php $extention = isAnimated($_SESSION['user_avatar']); echo $_SESSION['user_id'] . "/" . $_SESSION['user_avatar'] . $extention; ?>" style="width:40; height: 40px; border-radius: 50%;"/>
-                    <li>Name:<?php print_r($userinfo["name"]);?></li>
+                    <li>Name:<?php print_r($userinfo->name);?></li>
                     <li>Race:<?php print_r($userinfo["race"]);?></li>
                     <li>Class:<?php print_r($userinfo["class"]);?></li>
                     <li>Title:<?php print_r($title); ?></li>

@@ -1,6 +1,6 @@
 <?php
     require __DIR__ . "/config.php";
-    require $_SERVER['DOCUMENT_ROOT'] . '/solyxWebGame/vendor/autoload.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/solyx/vendor/autoload.php';
 
     
 
@@ -24,19 +24,20 @@
 
     function getUserinfo()
     {
-        $client = new MongoDB\Client('mongodb+srv://max:abc@solyx.7mjw2.mongodb.net/solyxbot?retryWrites=true&w=majority', []);
-        $db = $client->solyx;
-        $document = $db->users->find(['_id' => $_SESSION['user_id']])->toArray();
-        foreach ($document as $userinfo) 
-        {}
-        return  $userinfo;
+        
+        $client = new MongoDB\Client('mongodb+srv://max:abc@solyx.7mjw2.mongodb.net/Solyxbot?retryWrites=true&w=majority');
+        $db = $client->Solyx;
+        $document = $db->Users->find(['_id' => $_SESSION['user_id']])->ToArray();
+        foreach($document as $user) {
+        }
+        return  $user;
     }   
 
     function updateUserinfo($userinfo)
     {
-        $client = new MongoDB\Client('mongodb+srv://max:abc@solyx.7mjw2.mongodb.net/solyxbot?retryWrites=true&w=majority', []);
-        $db = $client->solyx;
-        $db->users->updateOne(['_id' => $userinfo['_id']], ['$set' => $userinfo], ['upsert' => true] );
+        $client = new MongoDB\Client('mongodb+srv://max:abc@solyx.7mjw2.mongodb.net/Solyxbot?retryWrites=true&w=majority');
+        $db = $client->Solyx;
+        $db->Users->updateOne(['_id' => $userinfo['_id']], ['$set' => $userinfo], ['upsert' => true] );
         
     }
 

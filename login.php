@@ -22,7 +22,9 @@ if(get('action') == 'logout') {
         'client_secret' => OAUTH2_CLIENT_SECRET,
       ));
     unset($_SESSION['access_token']);
-    header('Location: ' . $_SERVER['PHP_SELF']);
+    header("Location: $base_url/index.php");
+    session_start();
+    session_destroy();
     die();
 }
 session_cache_limiter('private_no_expire');
@@ -33,7 +35,7 @@ if(get('action') == 'login') {
 
   $params = array(
     'client_id' => OAUTH2_CLIENT_ID,
-    'redirect_uri' => 'http://localhost/solyx/login.php',
+    'redirect_uri' => $redirect_url,
     'response_type' => 'code',
     'scope' => 'identify guilds'
   );
@@ -52,7 +54,7 @@ if(get('code')) {
     "grant_type" => "authorization_code",
     'client_id' => OAUTH2_CLIENT_ID,
     'client_secret' => OAUTH2_CLIENT_SECRET,
-    'redirect_uri' => 'http://localhost/solyx/login.php',
+    'redirect_uri' => $redirect_url,
     'code' => get('code')
   ));
   $logout_token = $token->access_token;
@@ -63,22 +65,17 @@ if(get('code')) {
 }
 
 if(session('access_token')) {
-  	$user = apiRequest($apiURLBase);
+  $user = apiRequest($apiURLBase);
 	$_SESSION['user'] = $user;
 	$id = (int) $user->id;
 	$_SESSION['user_id'] = $id;
 	$_SESSION['user_name'] = $user->username;
 	$_SESSION['user_avatar'] = $user->avatar;
 	$_SESSION['user_discriminator'] = $user->discriminator;
-    $_SESSION['user_banner'] = $user->banner;
+  $_SESSION['user_banner'] = $user->banner;
 	$_SESSION['user_locale'] = $user->locale;
     
-    
- 	echo '<h3>Logged In</h3>';
-  	echo '<h4>Welcome, ' . $_SESSION['username'] . '</h4>';
-	echo '<pre>';
-	print_r($user);
-  	echo '</pre>';
+  
 	header("Location: $base_url/game.php");
 } 
 else {

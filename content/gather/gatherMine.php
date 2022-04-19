@@ -29,7 +29,7 @@
     updateUserinfo($GLOBALS["userinfo"]);
     }
     else { 
-        $chop = false;
+        $mine = false;
         $remainingTime = getRemainingTime($delta, $cooldownTime);
 
     }

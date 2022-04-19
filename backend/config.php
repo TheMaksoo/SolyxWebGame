@@ -30,7 +30,7 @@ $scopes = "identify";
 # REDIRECT URL
 # example: https://mydomain.com/includes/login.php
 # example: https://mydomain.com/test/includes/login.php
-$redirect_url = "http://localhost/solyx/index.php";
+$redirect_url = $base_url . "/login.php";
 
 # IMPORTANT READ THIS:
 # - Set the `$bot_token` to your bot token if you want to use guilds.join scope to add a member to your server

@@ -1,7 +1,7 @@
 
 <?php require_once 'backend/config.php'; ?>
 <?php
-	session_cache_limiter('private_no_expire');
+	//session_cache_limiter('private_no_expire');
 	session_start();
 ?>
 
@@ -32,10 +32,10 @@
 				<a href='contact.php'>Contact</a>	
 				<?php
 				if(isset($_SESSION['user_id'])): ?>
-					<a href="<?php echo $base_url; ?>/game.php" ><?php echo 'Hello <strong>', $_SESSION['user_name'] . '#' . $_SESSION['user_discriminator'],  '</strong>'?></a>
-					<a href="<?php echo $base_url; ?>/backend/logout.php">Uitloggen</a>
+					<a href="game.php" ><?php echo 'Hello <strong>', $_SESSION['user_name'] . '#' . $_SESSION['user_discriminator'],  '</strong>'?></a>
+					<a href="login.php?action=logout">Uitloggen</a>
 				<?php else: ?>
-					<a href="<?php echo $base_url; ?>/backend/login.php?action=login">Inloggen</a>
+					<a href="login.php?action=login">Inloggen</a>
 				<?php endif; ?>
 			</ul>
 		</header>
