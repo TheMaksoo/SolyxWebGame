@@ -1,8 +1,8 @@
 <?php
     require __DIR__ . "/config.php";
-    
-    use MongoDB\Client as Mongo;
+    require $_SERVER['DOCUMENT_ROOT'] . '/solyxWebGame/vendor/autoload.php';
 
+    
 
     function guildName()
     {
@@ -24,20 +24,20 @@
 
     function getUserinfo()
     {
-   
-        $mongo = new Mongo("mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false");
-        $db = $mongo->solyx;
-        $db_users = $db->users;
-        $document = $db_users->find(['_id' => $_SESSION['user_id']])->toArray();
+        $client = new MongoDB\Client('mongodb+srv://max:abc@solyx.7mjw2.mongodb.net/solyxbot?retryWrites=true&w=majority', []);
+        $db = $client->solyx;
+        $document = $db->users->find(['_id' => $_SESSION['user_id']])->toArray();
         foreach ($document as $userinfo) 
         {}
         return  $userinfo;
-    }
+    }   
 
     function updateUserinfo($userinfo)
     {
-        $mongo = new Mongo("mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false");
-        $db = $mongo->solyx;
+        $client = new MongoDB\Client('mongodb+srv://max:abc@solyx.7mjw2.mongodb.net/solyxbot?retryWrites=true&w=majority', []);
+        $db = $client->solyx;
         $db->users->updateOne(['_id' => $userinfo['_id']], ['$set' => $userinfo], ['upsert' => true] );
         
     }
+
+    
