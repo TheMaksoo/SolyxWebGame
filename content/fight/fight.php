@@ -12,13 +12,32 @@
             $bossImage = getBossImage($debi);
         }
     }   
-    if  ($_GET['Fight'] == 'false'){
+    if  ($_GET['Fight'] == 'true'){
         if ($GLOBALS["userinfo"]["selected_enemy"] == "None")
         {
             addEnemyToUser();
             updateUserinfo($GLOBALS["userinfo"]);
             $_SESSION['debi'] = "None";
         }
+        $enemyinfo = getEnemyinfo();
+        $enemyattack = $enemyinfo[0];
+        $enemydmg = $enemyinfo[1];
+        $enemyname = $GLOBALS["userinfo"]["selected_enemy"];
+        $enemyhp = $GLOBALS["userinfo"]["enemyhp"];
+        $skill = $_GET['skill'];
+        $move = getmove($skill);
+        $youdmg = getYouDmg();
+        $youdef = getYouDef();
+        $enemygold = $enemyinfo[2];
+        $goldlost = $enemyinfo[3];
+        $xpgain = $enemyinfo[4];
+        
+        $username = $GLOBALS["userinfo"]["name"];
+        $userhp = $GLOBALS["userinfo"]["health"];
+        $totaldmg = 0;
+		$bleeding = 0;
+		$reap = 0;
+		$overloadselfdmg = 0;
 
     }
 ?>  
@@ -31,7 +50,6 @@
             <img src="<?php $bossImage ?>"/>
             <p>Would you like to fight it?</p>
         <?php } elseif ($_GET['Fight'] == 'true'){ ?>
-            <h1> Name: <?php echo $GLOBALS["userinfo"]["selected_enemy"];  ?><br>HP: <?php echo $GLOBALS["userinfo"]["enemyhp"]?></h1>
-        <?php }?>
+            <p><?php include 'skills/' . $skill . '.php'; }?></p>
     </body>
-</html>     
+</html>         
