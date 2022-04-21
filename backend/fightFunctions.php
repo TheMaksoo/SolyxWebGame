@@ -575,8 +575,20 @@
 			$goldlost = (($goldlost / 100) * 150);
 			$xpgain = (($xpgain / 100) * 150);
         }
+
+        if ($GLOBALS["userinfo"]["selected_enemy"] == "Phantasm"){
+            $img = "/img/phantasm.jpg";}
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Fire Golem"){
+            $img = "/img/fire_golem_by_sourshade.jpg";}
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "The Corrupted"){
+            $img = "/img/corrupted.jpg";}
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Death Knight"){
+            $img = "/img/deathKnight.jpg";}
+        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Frost Dragon"){
+            $img = "/img/frostDragon.jpg";}
+
         $num = array_rand($attack); 
-        return array($attack[$num], $enemydmg, $enemygold, $goldlost, $xpgain);
+        return array($attack[$num], $enemydmg, $enemygold, $goldlost, $xpgain, $img);
     }
 
     function getmove($skill){

@@ -26,7 +26,7 @@
     $GLOBALS["userinfo"]["stone"] += $stoneMined;
     $GLOBALS["userinfo"]["metal"] += $metalMined;
     $GLOBALS["userinfo"]["mine_block"] = $currTime;
-    updateUserinfo($GLOBALS["userinfo"]);
+    updateUserinfo();
     }
     else { 
         $mine = false;

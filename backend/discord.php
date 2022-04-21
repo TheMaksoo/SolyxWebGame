@@ -33,11 +33,11 @@
         return  $user;
     }   
 
-    function updateUserinfo($userinfo)
+    function updateUserinfo()
     {
         $client = new MongoDB\Client('mongodb+srv://max:abc@solyx.7mjw2.mongodb.net/Solyxbot?retryWrites=true&w=majority');
         $db = $client->Solyx;
-        $db->Users->updateOne(['_id' => $userinfo['_id']], ['$set' => $userinfo], ['upsert' => true] );
+        $db->Users->updateOne(['_id' =>$GLOBALS["userinfo"]['_id']], ['$set' => $GLOBALS["userinfo"]], ['upsert' => true] );
         
     }
 
