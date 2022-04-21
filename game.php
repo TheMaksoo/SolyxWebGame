@@ -22,7 +22,7 @@
             <div class="stats-container">
                 <ul>
                     <img src="https://cdn.discordapp.com/avatars/<?php $extention = isAnimated($_SESSION['user_avatar']); echo $_SESSION['user_id'] . "/" . $_SESSION['user_avatar'] . $extention; ?>" style="width:40; height: 40px; border-radius: 50%;"/>
-                    <li>Name:<?php print_r($userinfo->name);?></li>
+                    <li>Name:<?php print_r($userinfo["name"]);?></li>
                     <li>Race:<?php print_r($userinfo["race"]);?></li>
                     <li>Class:<?php print_r($userinfo["class"]);?></li>
                     <li>Title:<?php print_r($title); ?></li>
@@ -61,11 +61,31 @@
                 if ($_GET['content'] == 'gatherMine') {include 'content/gather/gatherMine.php';}
                 if ($_GET['content'] == 'gatherFish') {include 'content/gather/gatherFish.php';}
                 if ($_GET['content'] == 'fight') {include 'content/fight/fight.php';}
-                
+
+                updateUserinfo();
                 ?> 
             </div>
             <div class="inventory-container">
-
+                <ul>
+                    <li>Supplies:</li>
+                    <li>Gold:<?php print_r($userinfo["gold"]);?></li>
+                    <li>Wood:<?php print_r($userinfo["wood"]);?></li>
+                    <li>Stone:<?php print_r($userinfo["stone"]);?></li>
+                    <li>Metal:<?php print_r($userinfo["metal"]); ?></li>
+                    <li>Planks:<?php print_r($userinfo["planks"]);?></li>
+                    <li>Bricks:<?php print_r($userinfo["bricks"]);?></li>
+                    <li>Iron Plates:<?php print_r($userinfo["iron_plates"]);?></li>
+                    <br>
+                    <li>Items:</li>
+                    <li>keys:<?php print_r($userinfo["keys"]);?></li>
+                    <li>Crates:<?php print_r($userinfo["lootbag"]);?></li>
+                    <li>Health Potions:<?php print_r($userinfo["hp_potions"]);?></li>
+                    <li>Exp Potions:<?php print_r($userinfo["exp_potions"]);?></li>
+                    <li>Pet Food:<?php print_r($userinfo["pet_food"]);?></li>
+                    <br>
+                    <li>buildings: <?php print_r($youdef)?></li>
+                    
+                </ul>
             </div>
             <div class="inventory-container">
 

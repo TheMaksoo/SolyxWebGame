@@ -19,7 +19,7 @@
 
         $GLOBALS["userinfo"]["gold"] += $fishValue;
         $GLOBALS["userinfo"]["online"] = $currTime;
-        updateUserinfo();
+
     }
     else { 
         $fished = false;

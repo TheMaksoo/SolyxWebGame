@@ -22,7 +22,7 @@
     $chopped = rand($choppedMin,$choppedMax );
     $GLOBALS["userinfo"]["wood"] += $chopped;
     $GLOBALS["userinfo"]["chop_block"] = $currTime;
-    updateUserinfo();
+    
     }
     else { 
         $chop = false;

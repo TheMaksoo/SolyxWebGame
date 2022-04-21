@@ -16,18 +16,6 @@ else{
     $list =  $list . "<strong> " . $move . " dealing " . $youdmg . " damage. </strong>";}
 
 
-    // repeated end math.
-$userhealth = $userhealth - $enemydmg - $overloadselfdmg;
-$userhealth += $reap;
-$enemyhp = $enemyhp - $youdmg - $totaldmg - $bleeding;
-
-if ($userhealth >= $userinfo["MaxHealth"]){
-    $userhealth = $userinfo["MaxHealth"];}
-if ($enemyhp < 0){
-    $enemyhp = 0;}
-if ($userhealth < 0){
-    $userhealth = 0;}
-
     //repeated end text.
 if ($GLOBALS["userinfo"]["EnemyStun"] > 0){
     if ($skill == "Distort"){

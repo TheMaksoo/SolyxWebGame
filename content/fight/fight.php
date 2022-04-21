@@ -35,11 +35,25 @@
         $bossImage = "http://localhost/solyx" . $enemyinfo[5];
         
         $username = $GLOBALS["userinfo"]["name"];
-        $userhp = $GLOBALS["userinfo"]["health"];
+        $userhealth = $GLOBALS["userinfo"]["health"];
         $totaldmg = 0;
 		$bleeding = 0;
 		$reap = 0;
 		$overloadselfdmg = 0;
+
+        $userhealth = $userhealth - $enemydmg - $overloadselfdmg;
+        $userhealth += $reap;
+        $enemyhp = $enemyhp - $youdmg - $totaldmg - $bleeding;
+
+        if ($userhealth >= $userinfo["MaxHealth"]){
+            $userhealth = $userinfo["MaxHealth"];}
+        if ($enemyhp < 0){
+            $enemyhp = 0;}
+        if ($userhealth < 0){
+            $userhealth = 0;}
+
+            //repeated end text.
+        
 
     }
 ?>  
@@ -52,7 +66,7 @@
             <img src="<?php print_r($bossImage) ?>"/>
             <p>Would you like to fight it?</p>
         <?php } elseif ($_GET['Fight'] == 'true'){ ?>
-            <p><?php include 'skills/' . $skill . '.php'; } updateUserinfo(); ?></p>
+            <p><?php include 'skills/' . $skill . '.php'; } ?></p>
             
         <?php if (!$_GET['skill']){?>
             <h1> Name: <?php echo $GLOBALS["userinfo"]["selected_enemy"];  ?><br>HP: <?php echo $GLOBALS["userinfo"]["enemyhp"];}?></h1>

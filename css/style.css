@@ -370,6 +370,13 @@ body::-webkit-scrollbar-thumb:hover {
   text-align: center;
 }
 
+.inventory-container{
+  display: flex;
+  justify-content: right;
+
+  text-align: left;
+  margin-right: 0;
+}
 /* commands */
 
 .commands-section {
