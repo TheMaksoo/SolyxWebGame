@@ -62,7 +62,7 @@
                 if ($_GET['content'] == 'gatherFish') {include 'content/gather/gatherFish.php';}
                 if ($_GET['content'] == 'fight') {include 'content/fight/fight.php';}
 
-                updateUserinfo();
+                
                 ?> 
             </div>
             <div class="inventory-container">
@@ -94,6 +94,7 @@
                 <?php 
                 error_reporting(0); 
                 include 'content/commands.php';
+                updateUserinfo();
                 ?> 
             </div>
         </section>

@@ -52,9 +52,18 @@
         if ($userhealth < 0){
             $userhealth = 0;}
 
-            //repeated end text.
+        if ($userhealth >= $userinfo["MaxHealth"]){
+            $userhealth = $userinfo["MaxHealth"];
+            $GLOBALS["userinfo"]["EnemyStun"] -= 1;
+        }
+        everyTurn();
         
-
+        if ($enemyhp <= 0 || $userhealth <= 0){
+            deadCheck($enemyhp, $userhealth, $goldlost);
+        }
+           
+        
+        
     }
 ?>  
 

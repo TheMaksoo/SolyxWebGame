@@ -633,3 +633,67 @@
         return $youdef;
 
     }
+
+    function everyTurn(){
+        if ($GLOBALS["userinfo"]["EnemyStun"] <= 0){
+            $GLOBALS["userinfo"]["EnemyStun"] = 0;
+            $GLOBALS["userinfo"]["SkillCooldown1"] -= 1;
+        }
+        if ($GLOBALS["userinfo"]["SkillCooldown1"] <= 0){
+            $GLOBALS["userinfo"]["SkillCooldown1"] = 0;
+            $GLOBALS["userinfo"]["SkillCooldown2"] -= 1;
+        }
+        if ($GLOBALS["userinfo"]["SkillCooldown2"] <= 0){
+            $GLOBALS["userinfo"]["SkillCooldown2"] = 0;
+        }
+        if ($GLOBALS["userinfo"]["Buff1"] != "None"){
+            $GLOBALS["userinfo"]["Buff1Time"] -= 1;
+        }
+        if ($GLOBALS["userinfo"]["Buff1Time"] <= 0){
+            $GLOBALS["userinfo"]["Buff1"] = "None";
+            $GLOBALS["userinfo"]["Buff1Time"] = 0;
+        }
+    }
+
+    function deadCheck($enemyhp, $userhealth, $goldlost){
+        $msg = "";
+        if ($enemyhp <= 0 && $userhealth <= 0){
+			$msg = ":skull: You both died!\n<:Gold:639484869809930251> " . $GLOBALS["userinfo"]["name"] . " lost " . $goldlost . " gold.";
+            $GLOBALS["userinfo"]["gold"] -= $goldlost;
+			if ( $GLOBALS["userinfo"]["gold"] < 0){
+                $GLOBALS["userinfo"]["gold"] = 0;
+            }
+			if ( $GLOBALS["userinfo"]["health"] < 0){
+                $GLOBALS["userinfo"]["health"] = 0;
+            }
+			if ( $GLOBALS["userinfo"]["Buff1"] == "Corrupt"){
+                $GLOBALS["userinfo"]["Buff1"] = "None";
+                $GLOBALS["userinfo"]["Buff1Time"] = 0;
+            }
+            $GLOBALS["userinfo"]["health"] = 0;
+            $GLOBALS["userinfo"]["selected_enemy"] = "None";
+            $GLOBALS["userinfo"]["enemydifficulty"] = "None";
+            $GLOBALS["userinfo"]["enemieskilled"] += 1;
+            $GLOBALS["userinfo"]["deaths"] += 1;
+            
+        }
+
+        elseif ($userhealth <= 0){
+            $msg = ":skull: " . $GLOBALS["userinfo"]["selected_enemy"] . " killed  " . $GLOBALS["userinfo"]["name"] . "<br><:Gold:639484869809930251> " . $GLOBALS["userinfo"]["name"] . " lost " . $goldlost . " gold";
+			$GLOBALS["userinfo"]["gold"] -= $goldlost;
+			if ($GLOBALS["userinfo"]["gold"] < 0){
+				$GLOBALS["userinfo"]["gold"] = 0;
+            }
+			if ($GLOBALS["userinfo"]["health"] < 0){
+				$GLOBALS["userinfo"]["health"] = 0;
+            }
+			if ($GLOBALS["userinfo"]["Buff1"] == "Corrupt"){
+				$GLOBALS["userinfo"]["Buff1"] = "None";
+				$GLOBALS["userinfo"]["Buff1Time"] = 0;
+            }
+            $GLOBALS["userinfo"]["selected_enemy"] = "None";
+            $GLOBALS["userinfo"]["enemydifficulty"] = "None";
+            $GLOBALS["userinfo"]["deaths"] += 1;
+        }
+        return $msg;
+    }
