@@ -828,16 +828,16 @@
                     }
 
 					$friend_info["gold"] += $shared_gold;
-					$friend_info["exp"] += $shared_xpgain;
-				
-					$flist = ($friend_info["name"] . ": <:Gold:639484869809930251>" . $shared_gold . "  Shared gold, :sparkles: " . $shared_xpgain . " Shared Exp<br>";
+					$friend_info["exp"] += $shared_xpgain; 
+
+                    $flist = $friend_info["name"] . ": <:Gold:639484869809930251>" . $shared_gold . "  Shared gold, :sparkles: " . $shared_xpgain . " Shared Exp<br>";
 					$party_reward_list = $party_reward_list . $flist;
 					
 					if ($friend_info["exp"] >= 100 + (($friend_info["lvl"] + 1) * 3.5)){
 						$friend_info["exp"] = $friend_info["exp"] - (100 + (($friend_info["lvl"] + 1) * 3.5));
 						$friend_info["lvl"] = $friend_info["lvl"] + 1;
 						$friend_info["health"] = $friend_info["MaxHealth"];
-                        $lvl_up_text = ":tada: **" . <?php
+                        $lvl_up_text = ":tada: **";
     require __DIR__ . "/config.php";
     require $_SERVER['DOCUMENT_ROOT'] . '/solyx/vendor/autoload.php';
 
@@ -1669,7 +1669,7 @@
 					$friend_info["gold"] += $shared_gold;
 					$friend_info["exp"] += $shared_xpgain;
 				
-					$flist = ($friend_info["name"] . ": <:Gold:639484869809930251>" . $shared_gold . "  Shared gold, :sparkles: " . $shared_xpgain . " Shared Exp<br>";
+					$flist = $friend_info["name"] . ": <:Gold:639484869809930251>" . $shared_gold . "  Shared gold, :sparkles: " . $shared_xpgain . " Shared Exp<br>";
 					$party_reward_list = $party_reward_list . $flist;
 					
 					if ($friend_info["exp"] >= 100 + (($friend_info["lvl"] + 1) * 3.5)){
@@ -1702,8 +1702,7 @@
 					$add = 1;
 					guild_mission_check($user, $mission, $guild, $add);
                 }
-                catch(Exception $e){
-                    }
+                
 
 			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Goblin"){
                 try{
@@ -1739,142 +1738,166 @@
             }
 			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Fire Golem"){
 				$GLOBALS["userinfo"]["FireGolemkilled"] += 1;
+				$pet_spawn = rand(1, 100);
+				if ($pet_spawn >= 90){
+					if ($GLOBALS["userinfo"]["pet_stage"] == "Golden Goose"){
+						$pet_text = "A tameable pet has spawned! It's a goose.";
+						$GLOBALS["userinfo"]["pet_find"] = "Golden Goose";
+                    }
+                }
             }
-				pet_spawn = random.randint(1, 100)
-				if pet_spawn >= 90:
-					if $GLOBALS["userinfo"]["pet_stage"] == "Golden Goose":
-						em = discord.Embed(title="A pet!", description="A tameable pet has spawned! It's a goose.\nTo tame it type `{}pet tame`".format(ctx.prefix), color=discord.Colour(0xbb4424))
-						em.set_image(url="")
-						await ctx.send(embed=em)
-						$GLOBALS["userinfo"]["pet_find"] = "Golden Goose"
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Wyvern":
-				$GLOBALS["userinfo"]["Wyvernkilled"] += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Oofer":
-				$GLOBALS["userinfo"]["Ooferkilled"]  += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Souleater":
-				$GLOBALS["userinfo"]["Souleaterkilled"] += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Wolf":
-				$GLOBALS["userinfo"]["Wolfkilled"] += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Goblin":
-				$GLOBALS["userinfo"]["Goblinkilled"] += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Zombie":
-				$GLOBALS["userinfo"]["Zombiekilled"] += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Phantasm":
-				$GLOBALS["userinfo"]["Phantasmkilled"] += 1
-				pet_spawn = random.randint(1, 100)
-				if pet_spawn >= 90:
-					if $GLOBALS["userinfo"]["pet_stage"] == "Polar Bear":
-						em = discord.Embed(title="A pet!", description="A tameable pet has spawned! It's a polar bear.\nTo tame it type `{}pet tame`".format(ctx.prefix), color=discord.Colour(0xD4D8D7))
-						em.set_image(url="")
-						await ctx.send(embed=em)
-						$GLOBALS["userinfo"]["pet_find"] = "Polar Bear"
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "The Corrupted":
-				$GLOBALS["userinfo"]["TheCorruptedkilled"] += 1
-				pet_spawn = random.randint(1, 100)
-				if pet_spawn >= 90:
-					if $GLOBALS["userinfo"]["pet_stage"] == "Fox":
-						em = discord.Embed(title="A pet!", description="A tameable pet has spawned! It's a fox.\nTo tame it type `{}pet tame`".format(ctx.prefix), color=discord.Colour(0x7a2c05))
-						em.set_image(url="")
-						await ctx.send(embed=em)
-						$GLOBALS["userinfo"]["pet_find"] = "Fox"
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "The Accursed":
-				$GLOBALS["userinfo"]["TheAccursedkilled"] += 1
-				pet_spawn = random.randint(1, 100)
-				if pet_spawn >= 90:
-					if $GLOBALS["userinfo"]["pet_stage"] == "Small Cerberus":
-						em = discord.Embed(title="A pet!", description="A tameable pet has spawned! It's a small cerberus.\nTo tame it type `{}pet tame`".format(ctx.prefix), color=discord.Colour(0xcb2004))
-						em.set_image(url="")
-						await ctx.send(embed=em)
-						$GLOBALS["userinfo"]["pet_find"] = "Small Cerberus"
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Elder Dragon":
-				$GLOBALS["userinfo"]["ElderDragonkilled"] += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Hades":
-				$GLOBALS["userinfo"]["Hadeskilled"] += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Ebony Guardian":
-				$GLOBALS["userinfo"]["EbonyGuardiankilled"] += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Harpy":
-				$GLOBALS["userinfo"]["Harpykilled"] += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Dormammu":
-				$GLOBALS["userinfo"]["Dormammukilled"] += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Ettin":
-				$GLOBALS["userinfo"]["Ettinkilled"] += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "The Nameless King":
-				$GLOBALS["userinfo"]["TheNamelessKingkilled"] += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Largos":
-				$GLOBALS["userinfo"]["Largoskilled"] += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Deathclaw":
-				$GLOBALS["userinfo"]["Deathclawkilled"] += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Saurian":
-				$GLOBALS["userinfo"]["Sauriankilled"] += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "The venemous":
-				$GLOBALS["userinfo"]["TheVenomouskilled"] += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Skeleton":
-				$GLOBALS["userinfo"]["Skeletonkilled"] += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Lizardmen":
-				$GLOBALS["userinfo"]["Lizardmenkilled"] += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Giant":
-				$GLOBALS["userinfo"]["Giantkilled"] += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Death Knight":
-				$GLOBALS["userinfo"]["DeathKnightkilled"] += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Ice Wolves":
-				$GLOBALS["userinfo"]["IceWolveskilled"] += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Frost Orc":
-				$GLOBALS["userinfo"]["FrostOrckilled"] += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Frost Goblin":
-				$GLOBALS["userinfo"]["FrostGoblinkilled"] += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Frost Dragon":
-				$GLOBALS["userinfo"]["FrostDragonkilled"] += 1
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Wyvern"){
+				$GLOBALS["userinfo"]["Wyvernkilled"] += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Oofer"){
+				$GLOBALS["userinfo"]["Ooferkilled"]  += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Souleater"){
+				$GLOBALS["userinfo"]["Souleaterkilled"] += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Wolf"){
+				$GLOBALS["userinfo"]["Wolfkilled"] += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Goblin"){
+				$GLOBALS["userinfo"]["Goblinkilled"] += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Zombie"){
+				$GLOBALS["userinfo"]["Zombiekilled"] += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Phantasm"){
+				$GLOBALS["userinfo"]["Phantasmkilled"] += 1;
+				$pet_spawn = rand(1, 100);
+				if ($pet_spawn >= 90){
+					if ($GLOBALS["userinfo"]["pet_stage"] == "Polar Bear"){
+						$pet_text = "A tameable pet has spawned! It's a polar bear.";
+						$GLOBALS["userinfo"]["pet_find"] = "Polar Bear";
+                    }
+                }
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "The Corrupted"){
+				$GLOBALS["userinfo"]["TheCorruptedkilled"] += 1;
+				$pet_spawn = rand(1, 100);
+				if ($pet_spawn >= 90){
+					if ($GLOBALS["userinfo"]["pet_stage"] == "Fox"){
+						$pet_text = "A tameable pet has spawned! It's a fox.";
+						$GLOBALS["userinfo"]["pet_find"] = "Fox";
+                    }
+                }
+            }            
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "The Accursed"){
+				$GLOBALS["userinfo"]["TheAccursedkilled"] += 1;
+				$pet_spawn = rand(1, 100);
+				if ($pet_spawn >= 90){
+					if ($GLOBALS["userinfo"]["pet_stage"] == "Small Cerberus"){
+						$pet_text = "A tameable pet has spawned! It's a small cerberus.";
+						$GLOBALS["userinfo"]["pet_find"] = "Small Cerberus";
+                    }
+                }
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Elder Dragon"){
+				$GLOBALS["userinfo"]["ElderDragonkilled"] += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Hades"){
+				$GLOBALS["userinfo"]["Hadeskilled"] += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Ebony Guardian"){
+				$GLOBALS["userinfo"]["EbonyGuardiankilled"] += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Harpy"){
+				$GLOBALS["userinfo"]["Harpykilled"] += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Dormammu"){
+				$GLOBALS["userinfo"]["Dormammukilled"] += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Ettin"){
+				$GLOBALS["userinfo"]["Ettinkilled"] += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "The Nameless King"){
+				$GLOBALS["userinfo"]["TheNamelessKingkilled"] += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Largos"){
+				$GLOBALS["userinfo"]["Largoskilled"] += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Deathclaw"){
+				$GLOBALS["userinfo"]["Deathclawkilled"] += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Saurian"){
+				$GLOBALS["userinfo"]["Sauriankilled"] += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "The venemous"){
+				$GLOBALS["userinfo"]["TheVenomouskilled"] += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Skeleton"){
+				$GLOBALS["userinfo"]["Skeletonkilled"] += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Lizardmen"){
+				$GLOBALS["userinfo"]["Lizardmenkilled"] += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Giant"){
+				$GLOBALS["userinfo"]["Giantkilled"] += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Death Knight"){
+				$GLOBALS["userinfo"]["DeathKnightkilled"] += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Ice Wolves"){
+				$GLOBALS["userinfo"]["IceWolveskilled"] += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Frost Orc"){
+				$GLOBALS["userinfo"]["FrostOrckilled"] += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Frost Goblin"){
+				$GLOBALS["userinfo"]["FrostGoblinkilled"] += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Frost Dragon"){
+				$GLOBALS["userinfo"]["FrostDragonkilled"] += 1;
+            }
 
-			try: 
-				if $GLOBALS["userinfo"]["toggle"][0]["loot"] == True:
-					db.users.replace_one({"_id": user.id}, $GLOBALS["userinfo"], upsert=True)			
-					await _level_up_check_user(self, ctx, user)
-					
-				if $GLOBALS["userinfo"]["toggle"][0]["loot"] == False:
-					em = discord.Embed(description=":dagger: {} killed the {}\n<:GoldBars:573781770709893130> {} gained {} gold{}\n:sparkles: {} gained {} experience{}".format($GLOBALS["userinfo"]["name"], $GLOBALS["userinfo"]["selected_enemy"], $GLOBALS["userinfo"]["name"], int(enemygold), goose_bonus_text, $GLOBALS["userinfo"]["name"], xpgain, pterodactyl_bonus_text), color=discord.Colour(0x00ff00))
-					await ctx.send(embed=em)
-					db.users.replace_one({"_id": user.id}, $GLOBALS["userinfo"], upsert=True)
-					await _level_up_check_user(self, ctx, user)
-					
-			except:
-				pass
+			try{ 
+				if ($GLOBALS["userinfo"]["toggle"][0]["loot"] == False){
+					$loot_text = ":dagger: " . $GLOBALS["userinfo"]["name"] . " killed the " .  $GLOBALS["userinfo"]["selected_enemy"]. "<br><:GoldBars:573781770709893130> " . $GLOBALS["userinfo"]["name"] . " gained " . $enemygold . " gold" . $goose_bonus_text . "<br>:sparkles: " . $GLOBALS["userinfo"]["name"] . " gained " . $xpgain . " experience" . $pterodactyl_bonus_text;
+                }
+                _level_up_check_user();
+            } 
+            catch(Exception $e){
+                }
 
-			$GLOBALS["userinfo"]["selected_enemy"] = "None"
-			$GLOBALS["userinfo"]["enemydifficulty"] = "None"
-			$GLOBALS["userinfo"]["gold"] += int(enemygold + goose_bonus)
-			$GLOBALS["userinfo"]["exp"] += int(xpgain + pterodactyl_bonus)	
+			$GLOBALS["userinfo"]["selected_enemy"] = "None";
+			$GLOBALS["userinfo"]["enemydifficulty"] = "None";
+			$GLOBALS["userinfo"]["gold"] += $enemygold + $goose_bonus;
+			$GLOBALS["userinfo"]["exp"] += $xpgain + $pterodactyl_bonus;	
 
 		
-			eventinfo = db.users.find_one({ "_id": 387317544228487168 })
-			if eventinfo["events"][1]["christmas"] == True:
-					chance2 = random.randint(1, 100)
-					if chance2 <= 5:
-						em = discord.Embed(description=fileIO(f"data/languages/{language}.json", "load")["fight"]["cratechristmas"]["translation"].format($GLOBALS["userinfo"]["name"], ctx.prefix), color=discord.Colour(0xffffff))
-						await ctx.send(embed=em)
-						$GLOBALS["userinfo"]["event"]["santaGift"] += 1
-					else:
-						if lootbag <= lootbag_chance:
-							if chance2 >= 50:
-								em = discord.Embed(description=fileIO(f"data/languages/{language}.json", "load")["fight"]["crate"]["translation"].format($GLOBALS["userinfo"]["name"], fox_bonus_text), color=discord.Colour(0xffffff))
-								await ctx.send(embed=em)
-								$GLOBALS["userinfo"]["lootbag"] += 1
-							else:			
-								em = discord.Embed(description=fileIO(f"data/languages/{language}.json", "load")["fight"]["key"]["translation"].format($GLOBALS["userinfo"]["name"], fox_bonus_text), color=discord.Colour(0xffffff))
-								await ctx.send(embed=em)
-								$GLOBALS["userinfo"]["keys"] += 1		
+			// eventinfo = db.users.find_one({ "_id": 387317544228487168 })
+			// if eventinfo["events"][1]["christmas"] == True:
+			// 		chance2 = random.randint(1, 100)
+			// 		if chance2 <= 5:
+			// 			em = discord.Embed(description=fileIO(f"data/languages/{language}.json", "load")["fight"]["cratechristmas"]["translation"].format($GLOBALS["userinfo"]["name"], ctx.prefix), color=discord.Colour(0xffffff))
+			// 			await ctx.send(embed=em)
+			// 			$GLOBALS["userinfo"]["event"]["santaGift"] += 1
+			// 		else:
+			// 			if lootbag <= lootbag_chance:
+			// 				if chance2 >= 50:
+			// 					em = discord.Embed(description=fileIO(f"data/languages/{language}.json", "load")["fight"]["crate"]["translation"].format($GLOBALS["userinfo"]["name"], fox_bonus_text), color=discord.Colour(0xffffff))
+			// 					await ctx.send(embed=em)
+			// 					$GLOBALS["userinfo"]["lootbag"] += 1
+			// 				else:			
+			// 					em = discord.Embed(description=fileIO(f"data/languages/{language}.json", "load")["fight"]["key"]["translation"].format($GLOBALS["userinfo"]["name"], fox_bonus_text), color=discord.Colour(0xffffff))
+			// 					await ctx.send(embed=em)
+			// 					$GLOBALS["userinfo"]["keys"] += 1		
 							
-			else:
-				if lootbag <= lootbag_chance:
-					chance2 = random.randint(1, 100)
-					if chance2 >= 50:
-						em = discord.Embed(description=fileIO(f"data/languages/{language}.json", "load")["fight"]["crate"]["translation"].format($GLOBALS["userinfo"]["name"], fox_bonus_text), color=discord.Colour(0xffffff))
-						await ctx.send(embed=em)
-						$GLOBALS["userinfo"]["lootbag"] += 1
+			//else:
+				if ($lootbag <= $lootbag_chance){
+					$chance2 = rand(1, 100);
+					if ($chance2 >= 50){
+                        $lootbag_text = "<:Crate:639425690072252426> " . $GLOBALS["userinfo"]["name"] . " obtained a crate!" . $fox_bonus_text;
+				
+						$GLOBALS["userinfo"]["lootbag"] += 1;
+                    }
 					else:			
 						em = discord.Embed(description=fileIO(f"data/languages/{language}.json", "load")["fight"]["key"]["translation"].format($GLOBALS["userinfo"]["name"], fox_bonus_text), color=discord.Colour(0xffffff))
 						await ctx.send(embed=em)
 						$GLOBALS["userinfo"]["keys"] += 1
-
+                }
 			
 			$GLOBALS["userinfo"]["enemieskilled"] += 1
 			
