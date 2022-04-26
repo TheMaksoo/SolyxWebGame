@@ -1728,14 +1728,18 @@
                         }
                     }
                 }
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Draugr":
-				$GLOBALS["userinfo"]["Draugrkilled"] += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Debin":
-				$GLOBALS["userinfo"]["Debinkilled"] += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Stalker":
-				$GLOBALS["userinfo"]["Stalkerkilled"] += 1
-			elif $GLOBALS["userinfo"]["selected_enemy"] == "Fire Golem":
-				$GLOBALS["userinfo"]["FireGolemkilled"] += 1
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Draugr"){
+				$GLOBALS["userinfo"]["Draugrkilled"] += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Debin"){
+				$GLOBALS["userinfo"]["Debinkilled"] += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Stalker"){
+				$GLOBALS["userinfo"]["Stalkerkilled"] += 1;
+            }
+			elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Fire Golem"){
+				$GLOBALS["userinfo"]["FireGolemkilled"] += 1;
+            }
 				pet_spawn = random.randint(1, 100)
 				if pet_spawn >= 90:
 					if $GLOBALS["userinfo"]["pet_stage"] == "Golden Goose":
