@@ -33,11 +33,14 @@
         return  $user;
     }   
 
-    function updateUserinfo()
+    function updateUserinfo($filter)
     {
+        if ($filter == "None"){
+            $filter = ['$set' => $GLOBALS["userinfo"]];
+        }
         $client = new MongoDB\Client('mongodb+srv://max:abc@solyx.7mjw2.mongodb.net/Solyxbot?retryWrites=true&w=majority');
         $db = $client->Solyx;
-        $db->Users->updateOne(['_id' =>$GLOBALS["userinfo"]['_id']], ['$set' => $GLOBALS["userinfo"]], ['upsert' => true] );
+        $db->Users->updateOne(['_id' =>$GLOBALS["userinfo"]['_id']], $filter, ['upsert' => true] );
         
     }
 

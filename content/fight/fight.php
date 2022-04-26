@@ -1,6 +1,6 @@
 <?php
     require $_SERVER['DOCUMENT_ROOT'] .'/solyx/backend/fightFunctions.php';
-
+    $filter = "None"
     if  ($_GET['Fight'] == 'false'){
         if ($GLOBALS["userinfo"]["selected_enemy"] == "None")
         {   
@@ -17,7 +17,7 @@
         if ($GLOBALS["userinfo"]["selected_enemy"] == "None")
         {
             addEnemyToUser();
-            updateUserinfo();
+            updateUserinfo($filter);
             $_SESSION['debi'] = "None";
         }
         $enemyinfo = getEnemyinfo();
@@ -59,7 +59,7 @@
         everyTurn();
         
         if ($enemyhp <= 0 || $userhealth <= 0){
-            deadCheck($enemyhp, $userhealth, $goldlost);
+            deadCheck($enemyhp, $enemygold ,$userhealth, $goldlost, $xpgain);
         }
            
         

@@ -14,6 +14,7 @@
     $maxExp = getMaxExp();
     $pet = getPet();
     $equipment = getEquipmentStats();
+    $filer = "None";
     
     ?>
 <body>
@@ -94,7 +95,7 @@
                 <?php 
                 error_reporting(0); 
                 include 'content/commands.php';
-                updateUserinfo();
+                updateUserinfo($filter);
                 ?> 
             </div>
         </section>
