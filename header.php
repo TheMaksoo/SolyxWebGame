@@ -23,6 +23,8 @@
 		<header class="nav-bar">
 			<a href="index.php" class="nav-logo-text">Solyx</a>
 			<ul class="nav-list">
+				<?php if($_SESSION['user_id'] == 387317544228487168){ ?>
+				<a href='onlineCode.php'>Code :D</a> <?php } ?>
 				<a href='game.php'>Play</a>
 				<a href='index.php'>Home</a>
 				<a href='news.php'>News</a>

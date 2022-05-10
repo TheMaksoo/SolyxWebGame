@@ -44,4 +44,25 @@
         
     }
 
+    function updatePartyinfo($filter, $partyinfo)
+    {
+        if ($filter == "None"){
+            $filter = ['$set' => $partyinfo];
+        }
+        $client = new MongoDB\Client('mongodb+srv://max:abc@solyx.7mjw2.mongodb.net/Solyxbot?retryWrites=true&w=majority');
+        $db = $client->Solyx;
+        $db->Users->updateOne(['_id' => $partyinfo['_id']], $filter, ['upsert' => true] );
+        
+    }
+
+    function getLocations(){
+        $client = new MongoDB\Client('mongodb+srv://max:abc@solyx.7mjw2.mongodb.net/Solyxbot?retryWrites=true&w=majority');
+        $db = $client->Solyx;
+        $document = $db->locations->find()->ToArray();
+        foreach($document as $location) {
+            $locations = $locations . $location;
+        }
+        return  $locations;
+    }
+
     

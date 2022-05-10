@@ -1,16 +1,17 @@
 <?php
     require $_SERVER['DOCUMENT_ROOT'] .'/solyx/backend/fightFunctions.php';
-    $filter = "None"
-    if  ($_GET['Fight'] == 'false'){
+    $filter = "None";
+    if ($_GET['Fight'] == 'false'){
         if ($GLOBALS["userinfo"]["selected_enemy"] == "None")
         {   
 
             $debi = getEnemy();
             $_SESSION['debi'] = $debi;
+            $bossImage = "http://localhost/solyx" . getBossImage($debi);
             $debi = getDebiName($debi);
             $difficulty = getDifficulty();
             $enemyName = $difficulty . " " . $debi;
-            $bossImage = getBossImage($debi);
+            
         }
     }   
     if  ($_GET['Fight'] == 'true'){
@@ -32,7 +33,7 @@
         $enemygold = $enemyinfo[2];
         $goldlost = $enemyinfo[3];
         $xpgain = $enemyinfo[4];
-        $bossImage = "http://localhost/solyx" . $enemyinfo[5];
+        $bossImage = "http://localhost/solyx" . getBossImage($debi);
         
         $username = $GLOBALS["userinfo"]["name"];
         $userhealth = $GLOBALS["userinfo"]["health"];
@@ -72,13 +73,16 @@
     <body>
         <?php if ($_GET['Fight'] == 'false'){?>
             <h1>You wandered around <?php echo $GLOBALS["userinfo"]["location"]?> and found <br> <?php echo $enemyName ?></h1>
-            <img src="<?php print_r($bossImage) ?>"/>
-            <p>Would you like to fight it?</p>
+            <?php if ($bossImage != "http://localhost/solyx"){ ?>
+            <img src="<?php print_r($bossImage) ?> " class="bossimg"/>
+            <?php } ?>
+            <h1><br>Would you like to fight it? <br></h1>
         <?php } elseif ($_GET['Fight'] == 'true'){ ?>
             <p><?php include 'skills/' . $skill . '.php'; } ?></p>
             
-        <?php if (!$_GET['skill']){?>
-            <h1> Name: <?php echo $GLOBALS["userinfo"]["selected_enemy"];  ?><br>HP: <?php echo $GLOBALS["userinfo"]["enemyhp"];}?></h1>
+        <?php if (isset($_GET['skill'])) {?>
+            <h1> Name: <?php echo $GLOBALS["userinfo"]["selected_enemy"];  ?><br>HP: <?php echo $GLOBALS["userinfo"]["enemyhp"];?></h1>
             <img src="<?php print_r($bossImage) ?>" class="bossimg";/>
+        <?php } ?>
     </body>
 </html>    

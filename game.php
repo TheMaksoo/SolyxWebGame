@@ -57,7 +57,7 @@
             </div>
             <div class="game-container">
                 <?php
-                error_reporting(0); 
+                // error_reporting(0); 
                 if ($_GET['content'] == 'gatherChop') {include 'content/gather/gatherChop.php';} 
                 if ($_GET['content'] == 'gatherMine') {include 'content/gather/gatherMine.php';}
                 if ($_GET['content'] == 'gatherFish') {include 'content/gather/gatherFish.php';}
@@ -84,7 +84,7 @@
                     <li>Exp Potions:<?php print_r($userinfo["exp_potions"]);?></li>
                     <li>Pet Food:<?php print_r($userinfo["pet_food"]);?></li>
                     <br>
-                    <li>buildings: <?php print_r($youdef)?></li>
+                    <li>buildings: <?php ?></li>
                     
                 </ul>
             </div>
