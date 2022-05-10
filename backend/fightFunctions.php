@@ -675,6 +675,7 @@
         }
 
         elseif ($enemyhp <= 0){
+            $pet_text = "";
 			$lootbag_chance = 3;
 			try{
 				$pterodactyl_bonus = 0;
@@ -771,8 +772,9 @@
 
             if ($GLOBALS["userinfo"]["party"] != "None"){
 				// $partyinfo = db.party.find_one({"_id": $GLOBALS["userinfo"]["party"]})
-				$party_reward_list = " ";
-                $party_text = " ";
+				$party_reward_list = "";
+                $party_text = "";
+                $lvl_up_text = "";
                 for($i = 0; $i < count($partyinfo["amount"]); ++$i){
 
 					$shared_gold = 0;
@@ -832,7 +834,7 @@
 				try{
 					$mission = "Kill 100 Oofers";
 					$add = 1;
-					_guild_mission_check($user, $mission, $guild, $add);
+					_guild_mission_check();
                 }
                 catch(Exception $e){
                 }
@@ -841,7 +843,7 @@
                 try{
 					$mission = "Kill 100 Goblins";
 					$add = 1;
-					_guild_mission_check($user, $mission, $guild, $add);
+					_guild_mission_check();
 				}
                 catch(Exception $e){
                     }
@@ -1022,6 +1024,7 @@
 			// 					$GLOBALS["userinfo"]["keys"] += 1		
 							
 			//else:
+            $lootbag = rand(1, 100);
             if ($lootbag <= $lootbag_chance){
                 $chance2 = rand(1, 100);
                 if ($chance2 >= 50){

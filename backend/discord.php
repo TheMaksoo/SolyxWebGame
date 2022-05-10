@@ -56,13 +56,12 @@
     }
 
     function getLocations(){
+        $locations = array();
         $client = new MongoDB\Client('mongodb+srv://max:abc@solyx.7mjw2.mongodb.net/Solyxbot?retryWrites=true&w=majority');
         $db = $client->Solyx;
         $document = $db->locations->find()->ToArray();
-        foreach($document as $location) {
-            $locations = $locations . $location;
-        }
-        return  $locations;
+        $array = json_decode(json_encode($document), true);
+        return  $array;
     }
 
     
