@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="profiles">
-        <img src="img/TheMaksoo.jpg" .jpg>
+        <img src="img/common/TheMaksoo.jpg" .jpg>
     </div>
     <div class="team">
         <div class="team-container">
@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="profiles">
-        <img src="img/BurrrDurgondonenobgsigned.png">
+        <img src="img/common/BurrrDurgondonenobgsigned.png">
     </div>
     <div class="team">
         <div class="team-container">
@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="profiles">
-        <img src="img/Twanpfp.jpg">
+        <img src="img/common/Twanpfp.jpg">
     </div>
     <div class="team">
         <div class="team-container">

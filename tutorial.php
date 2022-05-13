@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="imges">
-        <img src="img/guild.png">
+        <img src="img/common/guild.png">
     </div>
     <div class="tutorial">
         <div class="tutorial-container">
@@ -47,7 +47,7 @@
         </div>
     </div>
     <div class="imges">
-        <img src="img/rogue.png">
+        <img src="img/common/rogue.png">
     </div>
     <div class="tutorial">
         <div class="tutorial-container">
@@ -72,7 +72,7 @@
         ‍</div>
     </div>
     <div class="imges">
-        <img src="img/warning.png">
+        <img src="img/common/warning.png">
     </div>
     <div class="tutorial">
         <div class="tutorial-container">
@@ -84,7 +84,7 @@
         </div>
     </div>
     <div class="imges">
-        <img src="img/paladin.png">    
+        <img src="img/common/paladin.png">    
     </div>
     <div class="tutorial">
         <div class="tutorial-container">

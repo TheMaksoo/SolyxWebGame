@@ -41,7 +41,7 @@
 
 /* Hero */
 .hero {
-  background-image: url('../img/solyxbg.png');
+  background-image: url('../img/common/solyxbg.png');
   background-position: right;
   background-repeat: no-repeat;
   padding: 20px 20px 20px 0px;
@@ -339,14 +339,16 @@ body::-webkit-scrollbar-thumb:hover {
 /* game */
 
 .game-section {
+  background-image: url('../img/locations/GoldenTemple.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   display: grid;
   grid-template-columns: repeat(3, auto);
   grid-template-rows: repeat(2, auto);
   grid-column-gap: 25px;
   grid-row-gap: 0px;
   padding: 100px 0px;
-  background: rgb(255,255,255);
-  background: linear-gradient(180deg, rgba(255,255,255,1) 2%, rgba(242,242,242,1) 6%, rgba(242,242,242,1) 98%, rgba(255,255,255,1) 100%);
   padding-right: 10%;
   padding-left: 15%;
 }
@@ -362,6 +364,7 @@ body::-webkit-scrollbar-thumb:hover {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  background-color: #595959 0,5;
 }
 .game-container{
   display: flex;
@@ -373,9 +376,10 @@ body::-webkit-scrollbar-thumb:hover {
 .inventory-container{
   display: flex;
   justify-content: right;
-
   text-align: left;
   margin-right: 0;
+  
+
 }
 /* commands */
 

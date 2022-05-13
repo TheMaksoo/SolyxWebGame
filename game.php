@@ -16,10 +16,11 @@
     $equipment = getEquipmentStats();
     $filer = "None";
     
+    
     ?>
-<body>
+<body >
     <main>
-        <section class="game-section">
+        <section class="game-section" >
             <div class="stats-container">
                 <ul>
                     <img src="https://cdn.discordapp.com/avatars/<?php $extention = isAnimated($_SESSION['user_avatar']); echo $_SESSION['user_id'] . "/" . $_SESSION['user_avatar'] . $extention; ?>" style="width:40; height: 40px; border-radius: 50%;"/>
@@ -57,7 +58,7 @@
             </div>
             <div class="game-container">
                 <?php
-                // error_reporting(0); 
+                error_reporting(0); 
                 if ($_GET['content'] == 'gatherChop') {include 'content/gather/gatherChop.php';} 
                 if ($_GET['content'] == 'gatherMine') {include 'content/gather/gatherMine.php';}
                 if ($_GET['content'] == 'gatherFish') {include 'content/gather/gatherFish.php';}
