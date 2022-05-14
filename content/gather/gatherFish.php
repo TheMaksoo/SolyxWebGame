@@ -1,3 +1,4 @@
+
 <?php
     $fish = getFish();
 
@@ -19,7 +20,8 @@
 
         $GLOBALS["userinfo"]["gold"] += $fishValue;
         $GLOBALS["userinfo"]["online"] = $currTime;
-
+        $filter = "None";
+        updateUserinfo($filter);
     }
     else { 
         $fished = false;
@@ -40,4 +42,4 @@
             <p>You can't fish yet wait: <?php echo $remainingTime[3] . " Minutes and " . $remainingTime[4] . " Seconds."?></p>
         <?php }?>
     </body>
-</html> 
+</html>

@@ -2,6 +2,7 @@
 require __DIR__ . "/config.php";
 require $_SERVER['DOCUMENT_ROOT'] . '/solyx/vendor/autoload.php';
 
+$imgname = str_replace(' ', '', $_POST['name']);
 $name = $_POST['name'];
 $type = $_POST["type"];
 $location = $_POST["location"];
@@ -59,9 +60,9 @@ if(empty($creator))
 }
 
 if ($msg == ""){
-    move_uploaded_file($image['tmp_name'],"../img/monsters/" . $name . "." . $imageFileType);
+    move_uploaded_file($image['tmp_name'],"../img/monsters/" . $imgname . "." . $imageFileType);
 
-    $attacks = explode("*", $attack);
+    $attacks = explode('*', $attack);
 
     $client = new MongoDB\Client('mongodb+srv://max:abc@solyx.7mjw2.mongodb.net/Solyxbot?retryWrites=true&w=majority');
     $db = $client->Solyx;
@@ -87,7 +88,7 @@ if ($msg == ""){
         ]
         );
 
-    $msg = $msg . "<br>Added the location.";
-    $msg = $msg . "../img/monsters/" . $name . "." . $imageFileType;
+    $msg = $msg . "<br>Added the Monster.<br>" . $name;
+    $msg = $msg . "<br>../img/monsters/" . $name . "." . $imageFileType;
 }
 header("Location: $base_url/onlineCode.php?msg=$msg");

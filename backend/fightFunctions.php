@@ -1,290 +1,69 @@
 <?php
-    require __DIR__ . "/config.php";
-    require $_SERVER['DOCUMENT_ROOT'] . '/solyx/vendor/autoload.php';
+    function findEnemy(){
+        json_encode($currentLocationinfo = getCurrentLocation());
 
+        foreach($currentLocationinfo[0]["monsters"] as $enemy){
+            if ($enemy["name"] == $GLOBALS["userinfo"]["selected_enemy"]){
+                return $enemy;
+            }
+        }     
+    }
     function getEnemy(){
-        $chance = rand(1, 100);
-        if ($GLOBALS["userinfo"]["location"] == "Golden Temple"){
-            if ($chance >= 90){
-                $debi = "Fire Golem";
-            }
-            elseif  ($chance >= 60){
-                $debi = "Wyvern";
-            }
-            elseif  ($chance >= 40){
-                $debi = "Rachi";
-            }
-            elseif  ($chance >= 20){
-                $debi = "debin";
-            }
-            elseif ($chance >= 0){
-                $debi = "Oofer";
-            }
-        }
- 
-        if ($GLOBALS["userinfo"]["location"] == "Saker Keep"){
-            if ($chance >= 90){
-                $debi = "The Corrupted";
-            }
-            elseif  ($chance  >= 60){
-                $debi = "Souleater";
-            }
-            elseif   ($chance >= 30){
-                $debi = "Draugr";
-            }
-            elseif  ($chance >= 0){
-                $debi = "Stalker";
-            }
-        }
-
-        if ($GLOBALS["userinfo"]["location"] == "The Forest"){
-            if ($chance >= 90){
-                $debi = "Phantasm";
-            }
-            elseif  ($chance  >= 60){
-                $debi = "Zombie";
-            }
-            elseif  ($chance >= 30){
-                $debi = "Wolf";
-            }
-            elseif ($chance >= 0){
-                $debi = "Goblin";
-            }
-        }
- 
-        if ($GLOBALS["userinfo"]["location"] == "Ebony Mountains"){
-            if ($chance >= 90){
-                $debi = "The Accursed";
-            }
-            elseif  ($chance  >= 60){
-                $debi = "Ebony Guardian";
-            }
-            elseif  ($chance >= 30){
-                $debi = "Elder Dragon";
-            }
-            elseif ($chance >= 0){
-                $debi = "Hades";
-            }
-        }
-
-        if ($GLOBALS["userinfo"]["location"] == "Township of Arkina"){
-            if ($chance >= 90){
-                $debi = "The Nameless King";
-            }
-            elseif  ($chance  >= 60){
-                $debi = "Harpy";
-            }
-            elseif  ($chance >= 30){
-                $debi = "Ettin";
-            }
-            elseif ($chance >= 0){
-                $debi = "Dormammu";
-            }
-        }
-
-        if ($GLOBALS["userinfo"]["location"] == "Zulanthu"){
-            if ($chance >= 90){
-                $debi = "The Venomous";
-            }
-            elseif  ($chance  >= 60){
-                $debi = "Largos";
-            }
-            elseif  ($chance >= 30){
-                $debi = "Saurian";
-            }
-            elseif ($chance >= 0){
-                $debi = "Deathclaw";
-            }
-        }
-
-        if ($GLOBALS["userinfo"]["location"] == "Lost City"){
-            if ($chance >= 90){
-                $debi = "Death Knight";
-            }
-            elseif  ($chance  >= 60){
-                $debi = "Giant";
-            }
-            elseif  ($chance >= 30){
-                $debi = "Skeleton";
-            }
-            elseif ($chance >= 0){
-                $debi = "Lizardmen";
-            }
-        }
-
-        if ($GLOBALS["userinfo"]["location"] == "Drenheim"){
-            if ($chance >= 90){
-                $debi = "Frost Dragon";
-            }
-            elseif  ($chance  >= 60){
-                $debi = "Frost Orc";
-            }
-            elseif  ($chance >= 30){
-                $debi = "Ice Wolves";
-            }
-            elseif ($chance >= 0){
-                $debi = "Frost Goblin";
-            }
-        }
-
-        if ($GLOBALS["userinfo"]["location"] == "Havelow"){
-            if ($chance >= 90){
-                $debi = "Giant Sand Worm";
-            }
-            elseif  ($chance  >= 60){
-                $debi = "Anakore";
-            }
-            elseif  ($chance >= 30){
-                $debi = "Skorpikis";
-            }
-            elseif ($chance >= 0){
-                $debi = "Sandcrawler";
-            }
-        }
-
+        json_encode($currentLocationinfo = getCurrentLocation());
+        $num = array_rand($currentLocationinfo[0]["monsters"]);
+        $debi = $currentLocationinfo[0]["monsters"][$num];
         return $debi;
     }
     function getDebiName($debi){
-        if ($debi == "Fire Golem" || $debi == "Phantasm" || $debi == "The Corrupted" || $debi == "The Accursed" || $debi == "The Nameless King" || $debi == "The Venomous" || $debi == "Death Knight" || $debi == "Frost Dragon"){
-            $enemyname = "&#128305; " . $debi;
+        if ($debi["type"] == "boss"){
+            $debiname = "&#128305; " . $debi["name"];
         }
-        elseif ($debi == "Wyvern" || $debi == "Souleater" || $debi == "Zombie" || $debi == "Ebony Guardian" || $debi == "Harpy" || $debi == "Largos" || $debi == "Giant" || $debi == "Frost Orc"){
-            $enemyname = "&#9884; " . $debi;
-            }
+        elseif ($debi["type"] == "strong"){
+            $debiname = "&#9884; " . $debi["name"];
+        }
         else{
-            $enemyname = " " . $debi;
+            $debiname = " " . $debi["name"];
         }
-        return $enemyname;
+        return $debiname;
     }
     function getDifficulty(){
         $difficulty = rand(1, 100);
 		$GLOBALS["userinfo"]["enemydifficulty"] = "Common";
         if ($difficulty >= 99){
-            $difficulty = "<:Mythical:573784881386225694> Mythical " ;
+            $difficulty = "Mythical " ;
             $GLOBALS["userinfo"]["enemydifficulty"] = "Mythical";
         }
         elseif ($difficulty >= 90){
-            $difficulty = "<:Legendary:639425368167809065> Legendary " ;
+            $difficulty = "Legendary " ;
             $GLOBALS["userinfo"]["enemydifficulty"] = "Legendary";
         }
         elseif ($difficulty >= 70){
-            $difficulty = "<:Rare:573784880815538186> Rare ";
+            $difficulty = "Rare ";
             $GLOBALS["userinfo"]["enemydifficulty"] = "Rare";
         }
         elseif ($difficulty >= 40){
-            $difficulty = "<:Uncommon:641361853817159685> Uncommon ";
+            $difficulty = "Uncommon ";
             $GLOBALS["userinfo"]["enemydifficulty"] = "Uncommon";
         }
         elseif ($difficulty >= 0){
-            $difficulty = "<:Common:573784881012932618> Common "; 
+            $difficulty = "Common "; 
             $GLOBALS["userinfo"]["enemydifficulty"] = "Common";
         }
         return $difficulty;
     }
     function getBossImage($debi){
         $img = "";
-        if ($debi == "Phantasm"){
-            $img = "/img/phantasm.jpg";
-        }
-        elseif ($debi == "Fire Golem"){
-            $img = "/img/fire_golem_by_sourshade.jpg";
-        }
-        elseif ($debi == "The Corrupted"){
-            $img = "/img/corrupted.jpg";
-        }
-        elseif ($debi == "Death Knight"){
-            $img = "/img/deathKnight.jpg";
-        }
-        elseif ($debi == "Frost Dragon"){
-            $img = "/img/frostDragon.jpg";
+        
+        try {
+            $imgname = str_replace(' ', '', $debi["name"]);
+            $img = "/img/monsters/" . $imgname . ".jpeg";
+        } catch (\Throwable $th) {
         }
         return $img;
     }
     function addEnemyToUser(){
-        $GLOBALS["userinfo"]["selected_enemy"] = $_SESSION['debi'];
-
-        if ($GLOBALS["userinfo"]["selected_enemy"] == "Rachi" || $GLOBALS["userinfo"]["selected_enemy"] == "Debin" || $GLOBALS["userinfo"]["selected_enemy"] == "Oofer"){ 
-                $GLOBALS["userinfo"]["enemyhp"] = rand(10, 30);
-        }
-        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Wyvern"){
-                $GLOBALS["userinfo"]["enemyhp"] = rand(30, 50);
-        }
-        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Fire Golem"){
-                $GLOBALS["userinfo"]["enemyhp"] = rand(40, 60);
-        }
-        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Draugr" || $GLOBALS["userinfo"]["selected_enemy"] == "Stalker"){
-                $GLOBALS["userinfo"]["enemyhp"] = rand(20, 40);
-        }
-        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Souleater"){
-                $GLOBALS["userinfo"]["enemyhp"] = rand(40, 60);
-        }
-        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "The Corrupted"){
-                $GLOBALS["userinfo"]["enemyhp"] = rand(40, 60);
-        }  
-        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Wolf" || $GLOBALS["userinfo"]["selected_enemy"] == "Goblin"){
-                $GLOBALS["userinfo"]["enemyhp"] = rand(50, 70);
-        }
-        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Zombie"){
-                $GLOBALS["userinfo"]["enemyhp"] = rand(60, 80);
-        }
-        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Phantasm"){
-                $GLOBALS["userinfo"]["enemyhp"] = rand(70, 90);
-        }
-        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Elder Dragon" || $GLOBALS["userinfo"]["selected_enemy"] == "Hades"){
-                $GLOBALS["userinfo"]["enemyhp"] = rand(70, 90);
-        }
-        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Ebony Guardian"){
-                $GLOBALS["userinfo"]["enemyhp"] = rand(80, 100);
-        }
-        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "The Accursed"){
-                $GLOBALS["userinfo"]["enemyhp"] = rand(90, 110);
-        }
-        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Ettin" || $GLOBALS["userinfo"]["selected_enemy"] == "Dormammu"){
-                $GLOBALS["userinfo"]["enemyhp"] = rand(90, 110);
-        }
-        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Harpy"){
-                $GLOBALS["userinfo"]["enemyhp"] = rand(100, 120);
-        }
-        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "The Nameless King"){
-                $GLOBALS["userinfo"]["enemyhp"] = rand(110, 130);
-        }
-        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Saurian" || $GLOBALS["userinfo"]["selected_enemy"] == "Deathclaw"){
-                $GLOBALS["userinfo"]["enemyhp"] = rand(90, 110);
-        }
-        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Largos"){
-                $GLOBALS["userinfo"]["enemyhp"] = rand(100, 120);
-        }  
-        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "The Venomous"){
-                $GLOBALS["userinfo"]["enemyhp"] = rand(110, 130);
-        }
-        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Skeleton" || $GLOBALS["userinfo"]["selected_enemy"] == "Lizardmen"){
-                $GLOBALS["userinfo"]["enemyhp"] = rand(120, 140);
-        }
-        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Giant"){
-                $GLOBALS["userinfo"]["enemyhp"] = rand(130, 150);
-        }
-        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Death Knight"){
-                $GLOBALS["userinfo"]["enemyhp"] = rand(140, 160);
-        }
-        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Ice Wolves" || $GLOBALS["userinfo"]["selected_enemy"] == "Frost Goblin"){
-                $GLOBALS["userinfo"]["enemyhp"] = rand(150, 170);
-        }
-        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Frost Orc"){
-                $GLOBALS["userinfo"]["enemyhp"] = rand(160, 180);
-        }
-        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Frost Dragon"){
-                $GLOBALS["userinfo"]["enemyhp"] = rand(170, 190);
-        }
-        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Skorpikis" || $GLOBALS["userinfo"]["selected_enemy"] == "Sandcrawler"){
-                $GLOBALS["userinfo"]["enemyhp"] = rand(180, 200);
-        }
-        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Anakore"){
-                $GLOBALS["userinfo"]["enemyhp"] = rand(190, 210);
-        }
-        elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Giant Sand Worm"){
-                $GLOBALS["userinfo"]["enemyhp"] = rand(200, 220);
-        }
-        
+        $GLOBALS["userinfo"]["selected_enemy"] = $_SESSION['debi']["name"];
+        $GLOBALS["userinfo"]["enemyhp"] = rand($_SESSION['debi']["healthMin"], $_SESSION['debi']["healthMax"]);
         $uncommon = (($GLOBALS["userinfo"]["enemyhp"] / 100) * 20);
         $rare = (($GLOBALS["userinfo"]["enemyhp"] / 100) * 30);
         $legendary = (($GLOBALS["userinfo"]["enemyhp"] / 100) * 40);
@@ -304,232 +83,16 @@
         }
     }
     function getEnemyinfo(){
-        if ($GLOBALS["userinfo"]["selected_enemy"] == "Rachi" || $GLOBALS["userinfo"]["selected_enemy"] == "Debin" || $GLOBALS["userinfo"]["selected_enemy"] == "Oofer"){
-			$attack = ["chomp and", "dash and", "bite and"];
-			$enemydmg = rand(5, 10);
-			$enemygold = rand(10, 30);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(5, 25);
+        if ($_SESSION['debi'] = "None"){
+            $_SESSION['debi'] = findEnemy();
         }
+        $enemyinfo = $_SESSION['debi'];
+        $enemydmg = rand($enemyinfo["damageMin"], $enemyinfo["damageMax"]);
+        $enemygold = rand($enemyinfo["goldMin"], $enemyinfo["goldMax"]);
+        $goldlost = ($enemygold * 2);
+        $xpgain = rand($enemyinfo["experienceMin"], $enemyinfo["experienceMax"]);
 
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Wyvern"){
-			$attack = ["slash and", "scratch and", "bite and"];
-			$enemydmg = rand(10, 15);
-			$enemygold = rand(15, 35);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(10, 30);
-        }
-	
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Fire Golem"){
-			$attack = ["smash and", "throw and throw's a rock.<br>Fire Golem", "hot head and spews lava.<br>Fire Golem"];
-			$enemydmg = rand(20, 30);
-			$enemygold = rand(25, 50);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(20, 40);
-        }
-
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Draugr" || $GLOBALS["userinfo"]["selected_enemy"] == "Stalker"){
-			$attack = ["swing and", "chase and", "stab and"];
-			$enemydmg = rand(15, 20);
-			$enemygold = rand(20, 40);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(15, 35);
-        }
-
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Souleater"){
-			$attack = ["devour and", "shatter and", "rip and"];
-			$enemydmg = rand(20, 25);
-			$enemygold = rand(25, 45);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(20, 40);
-        }
-			
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "The Corrupted"){
-			$attack = ["toxicity and breathes toxic flames<br>The Corrupted", "sense and hits a weak spot<br>The Corrupted", "flash appreaing right infront of you.<br>The Corrupted"];
-			$enemydmg = rand(30, 40);
-			$enemygold = rand(35, 55);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(30, 50);
-        }
-			
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Wolf" || $GLOBALS["userinfo"]["selected_enemy"] == "Goblin"){
-			$attack = ["chase and", "impact and", "gauge and"];
-			$enemydmg = rand(25, 30);
-			$enemygold = rand(30, 50);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(25, 45);
-        }
-
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Zombie"){
-			$attack = ["devour and", "bite and", "sratch and"];
-			$enemydmg = rand(30, 35);
-			$enemygold = rand(35, 55);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(30, 50);
-        }
-
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Phantasm"){
-			$attack = ["lighting and striking you<br>Phantasm", "storm cloud and hides in the storm to attack you.<br>Phantasm", "lightning guide and charges up and guides the energy towards you.<br>Phantasm"];
-			$enemydmg = rand(40, 50);
-			$enemygold = rand(45, 65);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(40, 60);
-        }
-
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Elder Dragon" || $GLOBALS["userinfo"]["selected_enemy"] == "Hades"){
-			$attack = ["decay and", "rage and", "mutilate and"];
-			$enemydmg = rand(35, 40);
-			$enemygold = rand(40, 60);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(35, 55);
-        }
-
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Ebony Guardian"){
-			$attack = ["oblitirate and", "pounce and", "impair and"];
-			$enemydmg = rand(40, 45);
-			$enemygold = rand(45, 65);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(40, 60);
-        }
-
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "The Accursed"){
-			$attack = ["soul burn and making u feel pain withing.<br>The Accursed", "Agony making your mind flooded with Agony.<br>The Accursed", "chain and furiously attacks you with its chains.<br>The Accursed"];
-			$enemydmg = rand(50, 60);
-			$enemygold = rand(55, 75);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(50, 70);
-        }
-
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Ettin" || $GLOBALS["userinfo"]["selected_enemy"] == "Dormammu"){
-			$attack = ["charge and", "whack and", "revenge and"];
-			$enemydmg = rand(45, 50);
-			$enemygold = rand(50, 70);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(45, 65);
-        }
-			
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Harpy"){
-			$attack = ["backstab and", "rage and", "grasp and"];
-			$enemydmg = rand(50, 55);
-			$enemygold = rand(55, 75);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(50, 70);
-        }
-			
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "The Nameless King"){
-			$attack = ["DOOM and deals a deadly critical strike.<br>The Nameless king", "Nightmare vanishing from view and attacking you from behind scaring you.<br>The Nameless king", "Overpower making you see why they call him a king...<br>The Namelss King"];
-			$enemydmg = rand(60, 70);
-			$enemygold = rand(65, 85);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(60, 80);
-        }
-			
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Deathclaw" || $GLOBALS["userinfo"]["selected_enemy"] == "Saurian"){
-			$attack = ["lacerate and", "cauterize and", "torment and"];
-			$enemydmg = rand(55, 65);
-			$enemygold = rand(60, 80);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(55, 75);
-        }
-			
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Largos"){
-			$attack = ["curse and", "reckoning and", "exterminate and"];
-			$enemydmg = rand(60, 70);
-			$enemygold = rand(65, 85);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(60, 80);
-        }
-
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "The Venomous"){
-			$attack = ["poise  biting you and temporarily poisoning you for 1 turn<br> The Venomous", "spoil creates this spoiled food smell in the air making you feel unwell.<br> The Venomous", "Headbutt simple but harmfull attack.<br> The Venomous"];
-			$enemydmg = rand(70, 80);
-			$enemygold = rand(75, 95);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(70, 90);
-        }
-
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Skeleton" || $GLOBALS["userinfo"]["selected_enemy"] == "Lizardmen"){
-			$attack = ["dread and", "pierce and", "whip and"];
-			$enemydmg = rand(65, 75);
-			$enemygold = rand(70, 90);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(65, 85);
-        }
-
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Giant"){
-			$attack = ["fracture and", "embrace and", "avalanche and"];
-			$enemydmg = rand(70, 80);
-			$enemygold = rand(75, 95);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(70, 90);
-        }
-
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Death Knight"){
-			$attack = ["swift strike and strikes you with out noticing. <br>Death Knight", "sidestep and hits yu in the side by surprise.<br>Death Knight", "devastate swings his massive sword down on top of you devestating your armor.<br>Death Knight"];
-			$enemydmg = rand(80, 90);
-			$enemygold = rand(85, 105);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(80, 100);
-        }
-
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Ice Wolves" || $GLOBALS["userinfo"]["selected_enemy"] == "Frost Goblin"){
-			$attack = ["freeze and", "fake hibernate and", "bolt and"];
-			$enemydmg = rand(75, 85);
-			$enemygold = rand(80, 100);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(75, 95);
-        }
-
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Frost Orc"){
-			$attack = ["terror and", "maul and", "smite and"];
-			$enemydmg = rand(80, 90);
-			$enemygold = rand(85, 105);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(80, 100);
-        }
-
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Frost Dragon"){
-			$attack = ["snow storm hiding its appearance while attacking you from all sides. <br>Frost dragon.", "Icy breath slowing you down and giving you slight frostbite.<br>Frost Dragon", "Cold Fire breathe icy cold fire at you instead of burning you freezing you.<br>Frost dragon"];
-			$enemydmg = rand(90, 100);
-			$enemygold = rand(95, 115);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(90, 110);
-        }
-
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Skorpikis"){
-			$attack = ["sting and", "slash and", "claw and"];
-			$enemydmg = rand(85, 95);
-			$enemygold = rand(85, 110);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(85, 105);
-        }
-
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Sandcrawler"){
-			$attack = ["bite and", "slam and", "throw sand and"];
-			$enemydmg = rand(85, 95);
-			$enemygold = rand(85, 110);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(85, 105);
-        }
-
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Anakore"){
-			$attack = ["multiattack and", "smite and", " pounce and"];
-			$enemydmg = rand(90, 100);
-			$enemygold = rand(90, 115);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(95, 110);
-        }
-
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Giant Sand Worm"){
-			$attack = ["sand Shifter and shakes the whole ground catching you off balance. <br>Giant Sand Worm.", "tunneler hiding its position and attack from where you least exspect it.<br>Giant Sand Worm", "devour and consumes everything in its way.<br>Giant Sand Worm"];
-			$enemydmg = rand(100, 120);
-			$enemygold = rand(95, 115);
-			$goldlost = ($enemygold * 2);
-			$xpgain = rand(105, 120);
-        }
-
-
-		elseif ($GLOBALS["userinfo"]["selected_enemy"] == "Gortac the Indestructible"){
+		if ($GLOBALS["userinfo"]["selected_enemy"] == "Gortac the Indestructible"){
 			$mindmg =  $GLOBALS["userinfo"]["equip"]["stats_min"];
 			$maxdmg =  $GLOBALS["userinfo"]["equip"]["stats_max"];
 			$bossdmg = rand($mindmg, $maxdmg);
@@ -541,37 +104,32 @@
 			$goldlost =  rand($minreward, $maxreward) * 1.5;
         }
 
-
 		if ($GLOBALS["userinfo"]["enemydifficulty"] == "Uncommon"){
 			$enemydmg = (($enemydmg / 100) * 120);
 			$enemygold = (($enemygold / 100) * 120);
 			$goldlost = (($goldlost / 100) * 120);
 			$xpgain = (($xpgain / 100) * 120);
         }
-
 		elseif ($GLOBALS["userinfo"]["enemydifficulty"] == "Rare"){
 			$enemydmg = (($enemydmg / 100) * 130);
 			$enemygold = (($enemygold / 100) * 130);
 			$goldlost = (($goldlost / 100) * 130);
 			$xpgain = (($xpgain / 100) * 130);
         }
-
 		elseif ($GLOBALS["userinfo"]["enemydifficulty"] == "Legendary"){
 			$enemydmg = (($enemydmg / 100) * 140);
 			$enemygold = (($enemygold / 100) * 140);
 			$goldlost = (($goldlost / 100) * 140);
 			$xpgain = (($xpgain / 100) * 140);
         }
-
 		elseif ($GLOBALS["userinfo"]["enemydifficulty"] == "Mythical"){
 			$enemydmg = (($enemydmg / 100) * 150);
 			$enemygold = (($enemygold / 100) * 150);
 			$goldlost = (($goldlost / 100) * 150);
 			$xpgain = (($xpgain / 100) * 150);
         }
-
-        $num = array_rand($attack); 
-        return array($attack[$num], $enemydmg, $enemygold, $goldlost, $xpgain);
+        $num = array_rand($enemyinfo["attacks"]); 
+        return array($enemyinfo["attacks"][$num], ceil($enemydmg), ceil($enemygold), ceil($goldlost), ceil($xpgain));
     }
     function getmove($skill){
 
@@ -636,7 +194,7 @@
     function deadCheck($enemyhp, $enemygold, $userhealth, $goldlost, $xpgain){
         $msg = "";
         if ($enemyhp <= 0 && $userhealth <= 0){
-			$msg = ":skull: You both died!<br><:Gold:639484869809930251> " . $GLOBALS["userinfo"]["name"] . " lost " . $goldlost . " gold.";
+			$msg = "&#9760; You both died!<br><:Gold:639484869809930251> " . $GLOBALS["userinfo"]["name"] . " lost " . $goldlost . " gold.";
             $GLOBALS["userinfo"]["gold"] -= $goldlost;
 			if ( $GLOBALS["userinfo"]["gold"] < 0){
                 $GLOBALS["userinfo"]["gold"] = 0;
@@ -657,7 +215,7 @@
         }
 
         elseif ($userhealth <= 0){
-            $msg = ":skull: " . $GLOBALS["userinfo"]["selected_enemy"] . " killed  " . $GLOBALS["userinfo"]["name"] . "<br><:Gold:639484869809930251> " . $GLOBALS["userinfo"]["name"] . " lost " . $goldlost . " gold";
+            $msg = "&#9760; " . $GLOBALS["userinfo"]["selected_enemy"] . " killed  " . $GLOBALS["userinfo"]["name"] . "<br><:Gold:639484869809930251> " . $GLOBALS["userinfo"]["name"] . " lost " . $goldlost . " gold";
 			$GLOBALS["userinfo"]["gold"] -= $goldlost;
 			if ($GLOBALS["userinfo"]["gold"] < 0){
 				$GLOBALS["userinfo"]["gold"] = 0;
@@ -676,155 +234,149 @@
 
         elseif ($enemyhp <= 0){
             $pet_text = "";
-			$lootbag_chance = 3;
+			$pterodactyl_bonus = 0;
+            $pterodactyl_bonus_text = "";
+            $fox_bonus_text = "";
+            $goose_bonus_text = "";
+            $goose_bonus = 0;
 			try{
-				$pterodactyl_bonus = 0;
-				$pterodactyl_bonus_text = "";
-				$fox_bonus_text = "";
-				$goose_bonus_text = "";
-				$goose_bonus = 0;
+				
 				foreach ($GLOBALS["userinfo"]["pet_list"] as $petinfo){
 					$pet_level = $petinfo["level"];
 					$pet_type = $petinfo["type"];
 					if ($pet_type == "Goose"){
 						if ($pet_level <= 10){
 							$goose_bonus = (($enemygold / 100) * 5);
-							$goose_bonus_text = "<br><:Gold:639484869809930251> +" . $goose_bonus . " pet bonus.";
                         }
 						elseif ($pet_level <= 20){
 							$goose_bonus = (($enemygold / 100) * 10);
-							$goose_bonus_text = "<br><:Gold:639484869809930251> +" . $goose_bonus . " pet bonus.";
                         }
 						elseif ($pet_level <= 30){
 							$goose_bonus = (($enemygold / 100) * 15);
-							$goose_bonus_text = "<br><:Gold:639484869809930251> +" . $goose_bonus . " pet bonus.";
                         }
 						elseif ($pet_level <= 40){
 							$goose_bonus = (($enemygold / 100) * 20);
-							$goose_bonus_text = "<br><:Gold:639484869809930251> +" . $goose_bonus . " pet bonus.";
                         }
 						elseif ($pet_level <= 50){
 							$goose_bonus = (($enemygold / 100) * 25);
-							$goose_bonus_text = "<br><:Gold:639484869809930251> +" . $goose_bonus . " pet bonus.";
                         }
 						elseif ($pet_level >= 51){
 							$goose_bonus = (($enemygold / 100) * 30);
-							$goose_bonus_text = "<br><:Gold:639484869809930251> +" . $goose_bonus . " pet bonus.";
+							
                         }
                     }
 					if ($pet_type == "Pterodactyl"){
 						if ($pet_level <= 10){
 							$pterodactyl_bonus = (($xpgain / 100) * 2.5);
-							$pterodactyl_bonus_text = "<br>:sparkles: +" . $pterodactyl_bonus . " pet bonus.";
                         }
 						elseif ($pet_level <= 20){
-							$pterodactyl_bonus = (($xpgain / 100) * 5);					
-							$pterodactyl_bonus_text = "<br>:sparkles: +" . $pterodactyl_bonus . " pet bonus.";
+							$pterodactyl_bonus = (($xpgain / 100) * 5);	
                         }
 						elseif ($pet_level <= 30){
 							$pterodactyl_bonus = (($xpgain / 100) * 7.5);							
-							$pterodactyl_bonus_text = "<br>:sparkles: +" . $pterodactyl_bonus . " pet bonus.";
                         }
 						elseif ($pet_level <= 40){
 							$pterodactyl_bonus = (($xpgain / 100) * 10);						
-							$pterodactyl_bonus_text = "<br>:sparkles: +" . $pterodactyl_bonus . " pet bonus.";
                         }
 						elseif ($pet_level <= 50){
 							$pterodactyl_bonus = (($xpgain / 100) * 12.5);
-							$pterodactyl_bonus_text = "<br>:sparkles: +" . $pterodactyl_bonus . " pet bonus.";
                         }
 						elseif ($pet_level >= 51){
 							$pterodactyl_bonus = (($xpgain / 100) * 15);
-							$pterodactyl_bonus_text = "<br>:sparkles: +" . $pterodactyl_bonus . " pet bonus.";
+                            
                         }
+                        
                     }
 					if ($pet_type == "Fox"){
 						if ($pet_level <= 10){
 							$lootbag_chance = 8;
-							$fox_bonus_text = "<br>:sparkles: +5% pet bonus chance.";
+							$fox_bonus_text = "<br>+5% pet crate bonus chance.";
                         }
 						elseif ($pet_level <= 20){
 							$lootbag_chance = 13;
-							$fox_bonus_text = "<br>:sparkles: +10% pet bonus chance.";
+							$fox_bonus_text = "<br>+10% pet crate bonus chance.";
                         }
 						elseif ($pet_level <= 30){
 							$lootbag_chance = 18;
-							$fox_bonus_text = "<br>:sparkles: +15% pet bonus chance.";
+							$fox_bonus_text = "<br>+15% pet crate bonus chance.";
                         }
 						elseif ($pet_level <= 40){	
 							$lootbag_chance = 23;
-							$fox_bonus_text = "<br>:sparkles: +20% pet bonus chance.";
+							$fox_bonus_text = "<br>+20% pet crate bonus chance.";
                         }
 						elseif ($pet_level <= 50){
 							$lootbag_chance = 28;
-							$fox_bonus_text = "<br>:sparkles: +25% pet bonus chance.";
+							$fox_bonus_text = "<br>+25% pet crate bonus chance.";
                         }
 						elseif ($pet_level >= 51){
 							$lootbag_chance = 33;
-							$fox_bonus_text = "<br>:sparkles: +30% pet bonus chance.";
+							$fox_bonus_text = "<br>+30% pet crate bonus chance.";
                         }
                     }
                 }
-                $pet_text = $pet_text . $pterodactyl_bonus_text . $goose_bonus_text . $fox_bonus_text;
+                $goose_bonus_text = "<br> +" . ceil($goose_bonus) . " Gold pet bonus.";
+                $pterodactyl_bonus_text = "<br>&#10024; +" . ceil($pterodactyl_bonus) . " Experience pet bonus.";
+
+               
             }
             catch(Exception $e){
             }
+            $pet_text = $pet_text . $pterodactyl_bonus_text . $goose_bonus_text . $fox_bonus_text;
+            // if ($GLOBALS["userinfo"]["party"] != "None"){
+			// 	// $partyinfo = db.party.find_one({"_id": $GLOBALS["userinfo"]["party"]})
+			// 	$party_reward_list = "";
+            //     $party_text = "";
+            //     $lvl_up_text = "";
+            //     for($i = 0; $i < count($partyinfo["amount"]); ++$i){
 
-            if ($GLOBALS["userinfo"]["party"] != "None"){
-				// $partyinfo = db.party.find_one({"_id": $GLOBALS["userinfo"]["party"]})
-				$party_reward_list = "";
-                $party_text = "";
-                $lvl_up_text = "";
-                for($i = 0; $i < count($partyinfo["amount"]); ++$i){
-
-					$shared_gold = 0;
-					$shared_xpgain = 0;
-					$friend_id = $partyinfo["members"][$i];
-					//$friend_info = db.users.find_one({"_id": $friend_id})
+			// 		$shared_gold = 0;
+			// 		$shared_xpgain = 0;
+			// 		$friend_id = $partyinfo["members"][$i];
+			// 		//$friend_info = db.users.find_one({"_id": $friend_id})
 		
-					if ($friend_info["role"] == "Player"){
-						$shared_gold = ($enemygold / 100) * 10;
-						$shared_xpgain = ($xpgain / 100) * 10;
-                    }
-					if ($friend_info["role"] == "Developer"){
-						$shared_gold = ($enemygold / 100) * 10;
-						$shared_xpgain = ($xpgain / 100) * 10;
-                    }
-					if ($friend_info["role"] == "patreon1"){
-						$shared_gold = ($enemygold / 100) * 15;
-						$shared_xpgain = ($xpgain / 100) * 15;
-                    }
-					if ($friend_info["role"] == "patreon2"){
-						$shared_gold = ($enemygold / 100) * 20;
-						$shared_xpgain = ($xpgain / 100) * 20;
-                    }
-					if ($friend_info["role"] == "patreon3"){
-						$shared_gold = ($enemygold / 100) * 25;
-						$shared_xpgain = ($xpgain / 100) * 25;
-                    }
-					if ($friend_info["role"] == "patreon4"){
-						$shared_gold = ($enemygold / 100) * 30;
-						$shared_xpgain = ($xpgain / 100) * 30;
-                    }
+			// 		if ($friend_info["role"] == "Player"){
+			// 			$shared_gold = ($enemygold / 100) * 10;
+			// 			$shared_xpgain = ($xpgain / 100) * 10;
+            //         }
+			// 		if ($friend_info["role"] == "Developer"){
+			// 			$shared_gold = ($enemygold / 100) * 10;
+			// 			$shared_xpgain = ($xpgain / 100) * 10;
+            //         }
+			// 		if ($friend_info["role"] == "patreon1"){
+			// 			$shared_gold = ($enemygold / 100) * 15;
+			// 			$shared_xpgain = ($xpgain / 100) * 15;
+            //         }
+			// 		if ($friend_info["role"] == "patreon2"){
+			// 			$shared_gold = ($enemygold / 100) * 20;
+			// 			$shared_xpgain = ($xpgain / 100) * 20;
+            //         }
+			// 		if ($friend_info["role"] == "patreon3"){
+			// 			$shared_gold = ($enemygold / 100) * 25;
+			// 			$shared_xpgain = ($xpgain / 100) * 25;
+            //         }
+			// 		if ($friend_info["role"] == "patreon4"){
+			// 			$shared_gold = ($enemygold / 100) * 30;
+			// 			$shared_xpgain = ($xpgain / 100) * 30;
+            //         }
 
-					$friend_info["gold"] += $shared_gold;
-					$friend_info["exp"] += $shared_xpgain;
+			// 		$friend_info["gold"] += $shared_gold;
+			// 		$friend_info["exp"] += $shared_xpgain;
 				
-					$flist = $friend_info["name"] . ": <:Gold:639484869809930251>" . $shared_gold . "  Shared gold, :sparkles: " . $shared_xpgain . " Shared Exp<br>";
-					$party_reward_list = $party_reward_list . $flist;
+			// 		$flist = $friend_info["name"] . ": <:Gold:639484869809930251>" . $shared_gold . "  Shared gold, &#10024; " . $shared_xpgain . " Shared Exp<br>";
+			// 		$party_reward_list = $party_reward_list . $flist;
 					
-					if ($friend_info["exp"] >= 100 + (($friend_info["lvl"] + 1) * 3.5)){
-						$friend_info["exp"] = $friend_info["exp"] - (100 + (($friend_info["lvl"] + 1) * 3.5));
-						$friend_info["lvl"] = $friend_info["lvl"] + 1;
-						$friend_info["health"] = $friend_info["MaxHealth"];
-                        $lvl_up_text = $lvl_up_text . ":tada: " . $friend_info["name"] . " gained a level! :tada:<br>";
-                    }
+			// 		if ($friend_info["exp"] >= 100 + (($friend_info["lvl"] + 1) * 3.5)){
+			// 			$friend_info["exp"] = $friend_info["exp"] - (100 + (($friend_info["lvl"] + 1) * 3.5));
+			// 			$friend_info["lvl"] = $friend_info["lvl"] + 1;
+			// 			$friend_info["health"] = $friend_info["MaxHealth"];
+            //             $lvl_up_text = $lvl_up_text . ":tada: " . $friend_info["name"] . " gained a level! :tada:<br>";
+            //         }
 						
-                    $filter = "None";
-					updatePartyinfo($filter, $friend_info);
-					$party_text = $lvl_up_text . ":dagger:". $GLOBALS["userinfo"]["name"] . " Killed the " . $GLOBALS["userinfo"]["selected_enemy"] . "<br><:PvP:573580993055686657>The Party gets <br> " .$party_reward_list;
-                }
-            }
+            //         $filter = "None";
+			// 		updatePartyinfo($filter, $friend_info);
+			// 		$party_text = $lvl_up_text . "&#128481;". $GLOBALS["userinfo"]["name"] . " Killed the " . $GLOBALS["userinfo"]["selected_enemy"] . "<br><:PvP:573580993055686657>The Party gets <br> " .$party_reward_list;
+            //     }
+            // }
 
 			if ($GLOBALS["userinfo"]["Buff1"] == "Corrupt"){
 				$GLOBALS["userinfo"]["Buff1"] = "None";
@@ -991,18 +543,18 @@
 
 			try{ 
 				if ($GLOBALS["userinfo"]["toggle"][0]["loot"] == False){
-					$loot_text = ":dagger: " . $GLOBALS["userinfo"]["name"] . " killed the " .  $GLOBALS["userinfo"]["selected_enemy"]. "<br><:GoldBars:573781770709893130> " . $GLOBALS["userinfo"]["name"] . " gained " . $enemygold . " gold" . $goose_bonus_text . "<br>:sparkles: " . $GLOBALS["userinfo"]["name"] . " gained " . $xpgain . " experience" . $pterodactyl_bonus_text;
+					$loot_text = "&#128481; " . $GLOBALS["userinfo"]["name"] . " killed the " .  $GLOBALS["userinfo"]["selected_enemy"]. "<br>" . $GLOBALS["userinfo"]["name"] . " gained " . $enemygold . " gold" . $goose_bonus_text . "<br>&#10024; " . $GLOBALS["userinfo"]["name"] . " gained " . $xpgain . " experience" . $pterodactyl_bonus_text;
                 }
                 _level_up_check_user();
             } 
             catch(Exception $e){
                 $loot_text = "";
                 }
-
+            $GLOBALS["userinfo"]["health"] = ceil($userhealth);
 			$GLOBALS["userinfo"]["selected_enemy"] = "None";
 			$GLOBALS["userinfo"]["enemydifficulty"] = "None";
-			$GLOBALS["userinfo"]["gold"] += $enemygold + $goose_bonus;
-			$GLOBALS["userinfo"]["exp"] += $xpgain + $pterodactyl_bonus;	
+			$GLOBALS["userinfo"]["gold"] += ceil($enemygold + $goose_bonus);
+			$GLOBALS["userinfo"]["exp"] += ceil($xpgain + $pterodactyl_bonus);	
 
 		
 			// eventinfo = db.users.find_one({ "_id": 387317544228487168 })
@@ -1024,6 +576,8 @@
 			// 					$GLOBALS["userinfo"]["keys"] += 1		
 							
 			//else:
+            $lootbag_chance = 3;
+            $lootbag_text = "";
             $lootbag = rand(1, 100);
             if ($lootbag <= $lootbag_chance){
                 $chance2 = rand(1, 100);
@@ -1039,8 +593,8 @@
 			
 			$GLOBALS["userinfo"]["enemieskilled"] += 1;
         }
-        $final_msg = array($msg . $loot_text . $party_text . $pet_text . $lootbag_text . $pet_text);
-	    return $final_msg;
+        // . $party_text
+	    return $loot_text;
     }
 
     function _guild_mission_check(){

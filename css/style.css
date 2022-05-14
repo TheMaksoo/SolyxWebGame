@@ -339,7 +339,7 @@ body::-webkit-scrollbar-thumb:hover {
 /* game */
 
 .game-section {
-  background-image: url('../img/locations/GoldenTemple.jpeg');
+  /* background-image: url('../img/locations/Golden\ Temple.jpeg'); */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

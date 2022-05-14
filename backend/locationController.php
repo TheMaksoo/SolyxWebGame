@@ -2,6 +2,7 @@
 require __DIR__ . "/config.php";
 require $_SERVER['DOCUMENT_ROOT'] . '/solyx/vendor/autoload.php';
 
+$imgname = str_replace(' ', '', $_POST['name']);
 $name = $_POST['name'];
 $unlocklevel = $_POST["unlocklevel"];
 $backstory = $_POST['backstory'];
@@ -34,7 +35,7 @@ if(!isset($image)){
 
 
 if ($msg == ""){
-    move_uploaded_file($image['tmp_name'],"../img/locations/" . $name . "." . $imageFileType);
+    move_uploaded_file($image['tmp_name'],"../img/locations/" . $imgname . "." . $imageFileType);
 
     $client = new MongoDB\Client('mongodb+srv://max:abc@solyx.7mjw2.mongodb.net/Solyxbot?retryWrites=true&w=majority');
     $db = $client->Solyx;

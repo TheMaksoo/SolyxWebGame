@@ -64,4 +64,12 @@
         return  $array;
     }
 
+    function getCurrentLocation(){
+        $client = new MongoDB\Client('mongodb+srv://max:abc@solyx.7mjw2.mongodb.net/Solyxbot?retryWrites=true&w=majority');
+        $db = $client->Solyx;
+        $document = $db->locations->find(['name' =>$GLOBALS["userinfo"]['location']])->ToArray();
+        $array = json_decode(json_encode($document), true);
+        return  $array;
+    }
+
     

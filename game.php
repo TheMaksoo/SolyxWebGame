@@ -14,7 +14,7 @@
     $maxExp = getMaxExp();
     $pet = getPet();
     $equipment = getEquipmentStats();
-    $filer = "None";
+    $filter = "None";
     
     
     ?>
@@ -58,12 +58,12 @@
             </div>
             <div class="game-container">
                 <?php
-                error_reporting(0); 
-                if ($_GET['content'] == 'gatherChop') {include 'content/gather/gatherChop.php';} 
-                if ($_GET['content'] == 'gatherMine') {include 'content/gather/gatherMine.php';}
-                if ($_GET['content'] == 'gatherFish') {include 'content/gather/gatherFish.php';}
-                if ($_GET['content'] == 'fight') {include 'content/fight/fight.php';}
-
+                if (isset($_GET['content'])){
+                    if ($_GET['content'] == 'gatherChop') {include 'content/gather/gatherChop.php';} 
+                    if ($_GET['content'] == 'gatherMine') {include 'content/gather/gatherMine.php';}
+                    if ($_GET['content'] == 'gatherFish') {include 'content/gather/gatherFish.php';}
+                    if ($_GET['content'] == 'fight') {include 'content/fight/fight.php';}
+                }
                 
                 ?> 
             </div>
@@ -94,7 +94,7 @@
             </div>
             <div class="commands-container">
                 <?php 
-                error_reporting(0); 
+                //error_reporting(0); 
                 include 'content/commands.php';
                 updateUserinfo($filter);
                 ?> 

@@ -2,7 +2,7 @@
 
 
 // special skill only.
-$list = $enemyname ." has " . $enemyhp . " HP.<br>" . $username . " has " . $userhp . " HP<br><br>";
+$list = $enemyname ." has " . $enemyhp . " HP.<br>" . $username . " has " . $userhealthstart . " HP<br><br>";
 if ($GLOBALS["userinfo"]["Buff1"] == "Blockade"){
     $youdmg = ($youdmg / 100) * 85;
     $youdef = $youdef * 2;

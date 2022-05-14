@@ -3,23 +3,24 @@
     <body>
         <?php
         // if no content show all commands.
-        if (!$_GET['content']) {?>
+        if (!isset($_GET['content'])) {?>
         <form method="POST" action="?content=gather">  
             <input type="submit" value="Gather"/>  
         </form>
 
         <?php }
         // check if user in a fight or not.
-        if (!$_GET['content'] && $GLOBALS["userinfo"]["selected_enemy"] == "None") {?>
+        if (!isset($_GET['content']) && $GLOBALS["userinfo"]["selected_enemy"] == "None") {?>
         <form method="POST" action="?content=fight&Fight=false">  
             <input type="submit" value="Fight"/>  
         </form>
-        <?php } elseif (!$_GET['content'] && $GLOBALS["userinfo"]["selected_enemy"] != "None") { ?>
+        <?php } elseif (!isset($_GET['content']) && $GLOBALS["userinfo"]["selected_enemy"] != "None") { ?>
         <form method="POST" action="?content=fight&Fight=true">  
             <input type="submit" value="Fight"/>  
         </form>
         <?php }
         // if user gathering show all gather buttons.
+        if (isset($_GET['content'])){
         if ($_GET['content'] == 'gather' || $_GET['content'] == 'gatherChop' || $_GET['content'] == 'gatherMine' || $_GET['content'] == 'gatherFish') {
             include 'content/gather/gather.php';}
 
@@ -44,6 +45,6 @@
         if ($_GET['content']) {?>
         <form method="POST" action="<?php echo $base_url; ?>/game.php">
             <input type="submit" value="Back"/>  
-        </form><?php } ?>
+        </form><?php }} ?>
     </body>
 </html> 
