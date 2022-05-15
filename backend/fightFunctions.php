@@ -55,8 +55,10 @@
         $img = "";
         
         try {
+            if ($debi["img"] == true){
             $imgname = str_replace(' ', '', $debi["name"]);
             $img = "/img/monsters/" . $imgname . ".jpeg";
+            }
         } catch (\Throwable $th) {
         }
         return $img;

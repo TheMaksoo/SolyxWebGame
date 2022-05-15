@@ -17,14 +17,14 @@
 		<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link rel="icon" type="image/png" href="img/solyxicon.png"/>
+		<link rel="icon" type="image/png" href="img/common/solyxicon.png"/>
 	</head>
 	<body>
 		<header class="nav-bar">
 			<a href="index.php" class="nav-logo-text">Solyx</a>
 			<ul class="nav-list">
-				<?php if($_SESSION['user_id'] == 387317544228487168){ ?>
-				<a href='onlineCode.php'>Code :D</a> <?php } ?>
+				<?php if (isset($_SESSION['user_id'])){ if ($_SESSION['user_id'] == 387317544228487168){ ?>
+				<a href='onlineCode.php'>Code :D</a> <?php }} ?>
 				<a href='game.php'>Play</a>
 				<a href='index.php'>Home</a>
 				<a href='news.php'>News</a>

@@ -88,7 +88,9 @@
             
         <?php if (!isset($_GET['skill'])) {?>
             <h1> Name: <?php echo $GLOBALS["userinfo"]["selected_enemy"];  ?><br>HP: <?php echo $GLOBALS["userinfo"]["enemyhp"];?></h1>
-            <img src="<?php print_r($bossImage) ?>" class="bossimg";/>
+            <?php if ($bossImage != $base_url){ ?>
+            <img src="<?php print_r($bossImage) ?> " class="bossimg"/>
+            <?php } ?>
             <h1>Choose your skill.</h1>
         <?php }} ?>
     </body>
