@@ -56,12 +56,12 @@
     
             if ($userhealth >= $userinfo["MaxHealth"]){
                 $userhealth = $userinfo["MaxHealth"];
-                $GLOBALS["userinfo"]["EnemyStun"] -= 1;
+               
             }
             everyTurn();
             
             if ($enemyhp <= 0 || $userhealth <= 0){
-               $msg = deadCheck($enemyhp, $enemygold ,$userhealth, $goldlost, $xpgain);
+               $deathmsg = deadCheck($enemyhp, $enemygold ,$userhealth, $goldlost, $xpgain);
             }
             $filter = "None";
             updateUserinfo($filter);
@@ -81,9 +81,25 @@
             <?php } ?>
             <h1><br>Would you like to fight it?</h1>
         <?php } elseif ($_GET['Fight'] == 'true'){ ?>
-            <h1><?php if (isset($_GET['skill'])){ 
+            <h1><?php if (isset($_GET['skill'])){
+                // starting hp of the enemy and user
+                $list = $enemyname ." has " . $enemyhp . " HP.<br>" . $username . " has " . $userhealthstart . " HP<br><br>";
+                // check if enemy is stun
+                if ($GLOBALS["userinfo"]["EnemyStun"] > 0){
+                    $enemydmg = 0;
+                    // add enemy stun text
+                    $list = $list . "<br>" . $enemyname . " is stunned and can't fight."; 
+                }
+                else{
+                    // add enemy attack text
+                    $list = $list . "<br>" . $enemyname . " uses  " . $enemyattack. " hits " . $username. " for " . $enemydmg. " damage.</strong>";
+                    $list =  $list . $move . " dealing " . $youdmg . " damage.";
+                }
+                // get the skill file
                 include 'skills/' . $skill . '.php';
-                print_r($msg);
+                
+                $list = $list . "<br><br>" . $enemyname . " has " . $enemyhp . " HP<br>" . $username . " has " . $userhealth . " HP<br><br>";                
+                print_r($deathmsg);
             } ?></h1>
             
         <?php if (!isset($_GET['skill'])) {?>
