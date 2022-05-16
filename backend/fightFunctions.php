@@ -133,17 +133,17 @@
         $num = array_rand($enemyinfo["attacks"]); 
         return array($enemyinfo["attacks"][$num], ceil($enemydmg), ceil($enemygold), ceil($goldlost), ceil($xpgain));
     }
-    function getmove($skill){
+    function getmove($currentskill){
 
-        if ($skill == 'Swing'){
-            $move = ["You swing your weapon and hit a light blow", "You strike a light blow"];
-            if ($GLOBALS["userinfo"]["lvl"] >= 30){
-                $move = ["You swing your weapon and hit a strong blow", "You strike a strong blow"];
-            }
-            if ($GLOBALS["userinfo"]["lvl"] >= 90){
-                $move = ["You swing your weapon and hit a heavy blow", "You strike a heavy blow"];
-            }
+        $skillinfo = getSkillInfo($currentskill);
+        $move = $skillinfo[0]["attack1"];
+        if ($GLOBALS["userinfo"]["lvl"] >= 30){
+            $move = $skillinfo[0]["attack2"];
         }
+        if ($GLOBALS["userinfo"]["lvl"] >= 90){
+            $move = $skillinfo[0]["attack3"];
+        }
+        
 
         $num = array_rand($move);
         return $move[$num];
@@ -194,9 +194,9 @@
         }
     }
     function deadCheck($enemyhp, $enemygold, $userhealth, $goldlost, $xpgain){
-        $msg = "";
+        $loot_text = "";
         if ($enemyhp <= 0 && $userhealth <= 0){
-			$msg = "&#9760; You both died!<br><:Gold:639484869809930251> " . $GLOBALS["userinfo"]["name"] . " lost " . $goldlost . " gold.";
+			$loot_text = "&#9760; You both died!<br>" . $GLOBALS["userinfo"]["name"] . " lost " . $goldlost . " gold.";
             $GLOBALS["userinfo"]["gold"] -= $goldlost;
 			if ( $GLOBALS["userinfo"]["gold"] < 0){
                 $GLOBALS["userinfo"]["gold"] = 0;
@@ -217,7 +217,7 @@
         }
 
         elseif ($userhealth <= 0){
-            $msg = "&#9760; " . $GLOBALS["userinfo"]["selected_enemy"] . " killed  " . $GLOBALS["userinfo"]["name"] . "<br><:Gold:639484869809930251> " . $GLOBALS["userinfo"]["name"] . " lost " . $goldlost . " gold";
+            $loot_text = "&#9760; " . $GLOBALS["userinfo"]["selected_enemy"] . " killed  " . $GLOBALS["userinfo"]["name"] . "<br> " . $GLOBALS["userinfo"]["name"] . " lost " . $goldlost . " gold";
 			$GLOBALS["userinfo"]["gold"] -= $goldlost;
 			if ($GLOBALS["userinfo"]["gold"] < 0){
 				$GLOBALS["userinfo"]["gold"] = 0;

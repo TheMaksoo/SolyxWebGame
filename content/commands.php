@@ -46,8 +46,5 @@
         <form method="POST" action="<?php echo $base_url; ?>/game.php">
             <input type="submit" value="Back"/>  
         </form><?php }} ?>
-        <form method="POST" action="<?php echo $base_url; ?>/updating.php">
-            <input type="submit" value="update"/>  
-        </form>
     </body>
 </html> 

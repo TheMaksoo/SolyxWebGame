@@ -36,3 +36,5 @@ $list = $list . "<br><br>" . $enemyname . " has " . $enemyhp . " HP<br>" . $user
         <p><?php print_r($list)?></p>
     </body>
 </html>
+
+// ADD BUFFS TO  THE SKILL DB MAKE THIS AUTOMATIC CREATION BOZO

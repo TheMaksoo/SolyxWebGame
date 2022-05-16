@@ -19,7 +19,7 @@
 
         <form action="backend/locationController.php" method="POST" enctype="multipart/form-data">
             <div class="form-group">
-                <label for="Name">Name Location:</label>
+                <label for="name">Name Location:</label>
                 <input type="text" name="name" id="name" class="form-input">
             </div>
             <div class="form-group">
@@ -41,7 +41,7 @@
             <input type="submit" value="Add location">
         </form>
 
-        <h1>New Monster</h1>
+        <h1><br>New Monster</h1>
         <form action="backend/monsterController.php" method="POST" enctype="multipart/form-data">   
             <div class="form-group">
                 <label for="name">Name Monster:</label>
@@ -119,6 +119,28 @@
             </div>
             <input type="submit" value="Add monster">
     
+        </form>
+        <h1><br>New Skill</h1>
+
+        <form action="backend/skillController.php" method="POST">
+            <div class="form-group">
+                <label for="name">Name skill:</label>
+                <input type="text" name="name" id="name" class="form-input">
+            </div>
+            <p>All attack start automattically with 'uses' and end with 'hits'.<br>Add 2 or more attacks for each level at any length. (visual text only)<br> To start a new attack end with a '*' and dont use a space after.<br> Example: You swing your weapon and hit a light blow*You strike a light blow</p>
+            <div class="form-group">
+                <label for="attacks1">Attacks level 0 - 29</label>
+                <input type="text" id="attacks1" name="attacks1">
+            </div>
+            <div class="form-group">
+                <label for="attacks2">Attacks level 30 - 89</label>
+                <input type="text" id="attacks2" name="attacks2">
+            </div>
+            <div class="form-group">
+                <label for="attacks3">Attacks level 90+</label>
+                <input type="text" id="attacks3" name="attacks3">
+            </div>
+            <input type="submit" value="Add skill">
         </form>
     </div>
 </section>

@@ -72,4 +72,13 @@
         return  $array;
     }
 
+    function getskillInfo($skill){
+        
+        $client = new MongoDB\Client('mongodb+srv://max:abc@solyx.7mjw2.mongodb.net/Solyxbot?retryWrites=true&w=majority');
+        $db = $client->Solyx;
+        $document = $db->skills->find(['name' => $skill])->ToArray();
+        $array = json_decode(json_encode($document), true);
+        return  $array;
+    }
+
     
