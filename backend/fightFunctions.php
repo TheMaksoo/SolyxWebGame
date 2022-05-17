@@ -606,3 +606,9 @@
     function _level_up_check_user(){
 
     }
+
+    function getAttack($attacks){
+        $num = array_rand($attacks);
+        $move = $attacks[$num];
+        return $move;
+    }

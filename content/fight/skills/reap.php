@@ -1,15 +1,12 @@
 <?php 
-reap = int((enemyhp / 100) * 30)
-userinfo["SkillCooldown1"] = 3
-list += randchoice(["**You reap 30% of {}'s health and add it to your own health.\n healing for {} hp.**".format(enemyname, reap),"**You reap {} hp from the enemy to heal yourself.**".format(reap)])
-if userinfo["Buff1"] == "Arise":
-    hit = int((youdmg / 100) * 25)
-    totaldmg = hit + hit + hit + hit + hit
-    list += "\nThe army of skeletons attacks.\nDealing {} damage each\nDealing a total of {} damage.".format(hit, totaldmg)
-
-else{
-    $list =  $list . $move . " dealing " . $youdmg . " damage.";}
-
+$reap = rand(($enemyhp / 100) * 30);
+$userinfo["SkillCooldown1"] = 3;
+$list .= getAttack(["You reap 30% of " . $enemyname . "'s health and add it to your own health.\n healing for " . $reap . " hp.", "You reap " . $reap . " hp from the enemy to heal yourself."]);
+if ($userinfo["Buff1"] == "Arise"){
+    $hit = int(($youdmg / 100) * 25);
+    $totaldmg = $hit * 5;
+    $list .= "\nThe army of skeletons attacks.\nDealing " . $hit . " damage each\nDealing a total of " . $totaldmg . " damage.";
+}
 ?>
 <!DOCTYPE html>
 <html>  

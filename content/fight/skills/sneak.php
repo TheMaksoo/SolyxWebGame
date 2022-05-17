@@ -1,12 +1,8 @@
 <?php 
-youdmg = int((youdmg / 100) * 150)
-enemydmg = 0
-userinfo["SkillCooldown2"] = 4
-list += randchoice(["**You come out the shadows and surprise {}.\nYou deal a critical strike to them!\nYou deal {} damage.**".format(enemyname, youdmg), "**You ambush {} and attack them with a critical hit!\nYou deal {} damage.**".format(enemyname, youdmg), "**You emerge from the darkness.\n Taking the enemy by surprise and dealing a critical hit.\nYou deal {} damage.**".format(youdmg)])
-
-else{
-    $list =  $list . $move . " dealing " . $youdmg . " damage.";}
-
+$youdmg = rand(($youdmg / 100) * 150);
+$enemydmg = 0;
+$userinfo["SkillCooldown2"] = 4;
+$list .= getAttack(["You come out the shadows and surprise " . $enemyname . ".\nYou deal a critical strike to them!\nYou deal " . $youdmg . " damage.", "You ambush " . $enemyname . " and attack them with a critical hit!\nYou deal " . $youdmg . " damage.", "You emerge from the darkness.\n Taking the enemy by surprise and dealing a critical hit.\nYou deal " . $youdmg . " damage.**"]);
 ?>
 <!DOCTYPE html>
 <html>  

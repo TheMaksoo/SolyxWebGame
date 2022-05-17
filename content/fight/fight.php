@@ -88,17 +88,17 @@
                 if ($GLOBALS["userinfo"]["EnemyStun"] > 0){
                     $enemydmg = 0;
                     // add enemy stun text
-                    $list = $list . "<br>" . $enemyname . " is stunned and can't fight."; 
+                    $list .= "<br>" . $enemyname . " is stunned and can't fight."; 
                 }
                 else{
                     // add enemy attack text
-                    $list = $list . "<br>" . $enemyname . " uses  " . $enemyattack. " hits " . $username. " for " . $enemydmg. " damage.</strong>";
+                    $list .= "<br>" . $enemyname . " uses  " . $enemyattack. " hits " . $username. " for " . $enemydmg. " damage.</strong>";
                     $list =  $list . $move . " dealing " . $youdmg . " damage.";
                 }
                 // get the skill file
                 include 'skills/' . $skill . '.php';
                 
-                $list = $list . "<br><br>" . $enemyname . " has " . $enemyhp . " HP<br>" . $username . " has " . $userhealth . " HP<br><br>";                
+                $list .= "<br><br>" . $enemyname . " has " . $enemyhp . " HP<br>" . $username . " has " . $userhealth . " HP<br><br>";                
                 print_r($deathmsg);
             } ?></h1>
             
