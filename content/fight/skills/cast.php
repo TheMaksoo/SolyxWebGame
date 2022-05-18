@@ -1,30 +1,25 @@
 <?php 
 
 $orb = "a small orb";
-if ($userinfo["lvl"] >= 30){
+if ($GLOBALS["userinfo"]["lvl"] >= 30){
     $orb = "an orb";
 }
-if ($userinfo["lvl"] >= 90){
+if ($GLOBALS["userinfo"]["lvl"] >= 90){
     $orb = "a large orb";
 }
-if ($userinfo["Buff1"] == "Surge"){
+if ($GLOBALS["userinfo"]["Buff1"] == "Surge"){
     $list .= "you have been stunned for 1 turn";
 }
 else{
     $list .= $username . " casts " . $orb . " and hits " . $enemyname . " for " . $youdmg . " damage.";
 }
-if ($userinfo["Buff1"] == "Arise"){
-    $hit = rand(($youdmg / 100) * 25);
+if ($GLOBALS["userinfo"]["Buff1"] == "Arise"){
+    $hit = round(($youdmg / 100) * 25);
     $totaldmg = $hit * 5;
-    $list .= "\nThe army of skeletons attacks.\nDealing " . $hit . " damage each\nDealing a total of " . $totaldmg . " damage.";
+    $list .= "<br>The army of skeletons attacks.<br>Dealing " . $hit . " damage each.<br>With a total of " . $totaldmg . " damage.";
+    $enemyhp -= $totaldmg;
+    if ($enemyhp < 0){
+        $enemyhp = 0;}
 }
-else{
-    $list .= $move . " dealing " . $youdmg . " damage.";}
 
 ?>
-<!DOCTYPE html>
-<html>  
-    <body>
-        <p><?php print_r($list)?></p>
-    </body>
-</html>

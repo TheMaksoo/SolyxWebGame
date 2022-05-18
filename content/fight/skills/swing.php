@@ -1,24 +1,21 @@
 <?php 
-move = randchoice(["You swing your weapon and hit a light blow", "You strike a light blow"])
-if userinfo["lvl"] >= 30:
-    move = randchoice(["You swing your weapon and hit a strong blow", "You strike a strong blow"])
-if userinfo["lvl"] >= 90:
-    move = randchoice(["You swing your weapon and hit a heavy blow", "You strike a heavy blow"])
-if userinfo["Buff1"] == "Blockade":
-    youdmg = int((youdmg / 100) * 85)
-    youdef = youdef * 2
-    list += "**{} has the blockade buff doubling defense.\n{} dealing {} damage.**".format(username, move, youdmg)
-elif userinfo["Buff1"] == "Slice":
-    bleeding = int((enemyhp / 100) * 25)
-    list += "**{} is still bleeding and losing health.\nTaking {} bleeding damage\n{} dealing {} damage.**".format(enemyname, bleeding, move, youdmg)
-
+$move = randchoice(["You swing your weapon and hit a light blow.", "You strike a light blow."]);
+if ($GLOBALS["userinfo"]["lvl"] >= 30){
+    $move = randchoice(["You swing your weapon and hit a strong blow.", "You strike a strong blow."]);
+}
+if ($GLOBALS["userinfo"]["lvl"] >= 90){
+    $move = randchoice(["You swing your weapon and hit a heavy blow.", "You strike a heavy blow."]);
+}
+if ($GLOBALS["userinfo"]["Buff1"] == "Blockade"){
+    $youdmg = round(($youdmg / 100) * 85);
+    $youdef = $youdef * 2;
+    $list .= $username . " has the blockade buff doubling defense.<br>" . $move . " dealing " . $youdmg . " damage.";
+}
+elseif ($GLOBALS["userinfo"]["Buff1"] == "Slice"){
+    $bleeding = round(($enemyhp / 100) * 25);
+    $list .= $enemyname . " is still bleeding and losing health.<br>Taking " . $bleeding . " bleeding damage<br>" . $move . " dealing " . $youdmg . " damage.";
+}
 else{
-    $list =  $list . $move . " dealing " . $youdmg . " damage.";}
-
+	$list .= $move . "<br>Dealing ". $youdmg . " damage.";
+}
 ?>
-<!DOCTYPE html>
-<html>  
-    <body>
-        <p><?php print_r($list)?></p>
-    </body>
-</html>

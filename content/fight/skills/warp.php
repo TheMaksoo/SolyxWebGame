@@ -1,17 +1,7 @@
 <?php 
-userinfo["Buff1"] = "Warp"
-userinfo["Buff1Time"] = 2
-enemydmg = int((enemydmg / 100) * 60)
-userinfo["SkillCooldown2"] = 5
-list += randchoice(["**You warp the enemies movement.\nMaking their attack hit you in the shoulder.\nthey deal {} damage\nYou deal {} damage.**".format(enemydmg, youdmg), "**You warp the enemies attack.\ntheir attack hits you in the leg.\nthey deal {} damage\nYou deal {} damage.**".format(enemydmg, youdmg), "**You warp the enemies vision.\nMaking their attack hit you in foot.\nthey deal {} damage\nYou deal {} damage.**".format(enemydmg, youdmg)])
-
-else{
-    $list =  $list . $move . " dealing " . $youdmg . " damage.";}
-
+$GLOBALS["userinfo"]["Buff1"] = "Warp";
+$GLOBALS["userinfo"]["Buff1Time"] = 2;
+$enemydmg = round(($enemydmg / 100) * 60);
+$GLOBALS["userinfo"]["SkillCooldown2"] = 5;
+$list .= randchoice(["You warp the enemies movement.<br>Making their attack hit you in the shoulder.<br>they deal " . $enemydmg . " damage.<br>You deal " . $youdmg . " damage.", "You warp the enemies attack.<br>their attack hits you in the leg.<br>they deal " . $enemydmg . " damage.<br>You deal " . $youdmg . " damage.", "You warp the enemies vision.<br>Making their attack hit you in foot.<br>they deal " . $enemydmg . " damage.<br>You deal " . $youdmg . " damage."])
 ?>
-<!DOCTYPE html>
-<html>  
-    <body>
-        <p><?php print_r($list)?></p>
-    </body>
-</html>

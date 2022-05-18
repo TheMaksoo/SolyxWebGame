@@ -1,19 +1,13 @@
 <?php 
-$youdmg = rand(($youdmg / 100) * 140);
-$list .= getAttack(["You hit the enemy on a critical spot.", "You stab the enemy on a critical spot.", "You pierce the enemy on a critical spot."]);
-$userinfo["SkillCooldown1"] = 3;
-if ($userinfo["Buff1"] == "Slice"){
-	$bleeding = rand(($enemyhp / 100) * 25);
-	$list .= $enemyname . " is still bleeding and losing health.\nTaking " . $bleeding . " bleeding damage\n" . $combo . "\n Dealing" . $youdmg . " damage.";
+$youdmg = round(($youdmg / 100) * 140);
+$combo = randchoice(["You hit the enemy on a critical spot.", "You stab the enemy on a critical spot.", "You pierce the enemy on a critical spot."]);
+$GLOBALS["userinfo"]["SkillCooldown1"] = 3;
+if ($GLOBALS["userinfo"]["Buff1"] == "Slice"){
+	$bleeding = round(($enemyhp / 100) * 25);
+	$list .= $enemyname . " is still bleeding and losing health.<br>Taking " . $bleeding . " bleeding damage<br>" . $combo . "<br> Dealing" . $youdmg . " damage.";
 }
 else{
-	$list .= $combo . "\n dealing ". $youdmg . " damage**";
+	$list .= $combo . "<br> dealing ". $youdmg . " damage";
 }
 
 ?>
-<!DOCTYPE html>
-<html>  
-    <body>
-        <p><?php print_r($list)?></p>
-    </body>
-</html>

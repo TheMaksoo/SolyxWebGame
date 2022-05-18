@@ -133,21 +133,7 @@
         $num = array_rand($enemyinfo["attacks"]); 
         return array($enemyinfo["attacks"][$num], ceil($enemydmg), ceil($enemygold), ceil($goldlost), ceil($xpgain));
     }
-    function getmove($currentskill){
 
-        $skillinfo = getSkillInfo($currentskill);
-        $move = $skillinfo[0]["attack1"];
-        if ($GLOBALS["userinfo"]["lvl"] >= 30){
-            $move = $skillinfo[0]["attack2"];
-        }
-        if ($GLOBALS["userinfo"]["lvl"] >= 90){
-            $move = $skillinfo[0]["attack3"];
-        }
-        
-
-        $num = array_rand($move);
-        return $move[$num];
-    }
     function getYouDmg(){
         $mindmg = $GLOBALS["userinfo"]["equip"]["stats_min"];
 		$maxdmg = $GLOBALS["userinfo"]["equip"]["stats_max"];
@@ -174,13 +160,15 @@
 
     }
     function everyTurn(){
-        if ($GLOBALS["userinfo"]["EnemyStun"] <= 0){
+        $GLOBALS["userinfo"]["EnemyStun"] -= 1;
+        $GLOBALS["userinfo"]["SkillCooldown1"] -= 1;
+        $GLOBALS["userinfo"]["SkillCooldown2"] -= 1;
+        $GLOBALS["userinfo"]["Buff1Time"] -= 1;
+        if ($GLOBALS["userinfo"]["EnemyStun"]<= 0){
             $GLOBALS["userinfo"]["EnemyStun"] = 0;
-            $GLOBALS["userinfo"]["SkillCooldown1"] -= 1;
         }
         if ($GLOBALS["userinfo"]["SkillCooldown1"] <= 0){
             $GLOBALS["userinfo"]["SkillCooldown1"] = 0;
-            $GLOBALS["userinfo"]["SkillCooldown2"] -= 1;
         }
         if ($GLOBALS["userinfo"]["SkillCooldown2"] <= 0){
             $GLOBALS["userinfo"]["SkillCooldown2"] = 0;
@@ -217,7 +205,7 @@
         }
 
         elseif ($userhealth <= 0){
-            $loot_text = "&#9760; " . $GLOBALS["userinfo"]["selected_enemy"] . " killed  " . $GLOBALS["userinfo"]["name"] . "<br> " . $GLOBALS["userinfo"]["name"] . " lost " . $goldlost . " gold";
+            $loot_text = "&#9760; " . $GLOBALS["userinfo"]["selected_enemy"] . " killed  " . $GLOBALS["userinfo"]["name"] . ".<br>" . $GLOBALS["userinfo"]["name"] . " lost " . $goldlost . " gold.";
 			$GLOBALS["userinfo"]["gold"] -= $goldlost;
 			if ($GLOBALS["userinfo"]["gold"] < 0){
 				$GLOBALS["userinfo"]["gold"] = 0;
@@ -545,7 +533,7 @@
 
 			try{ 
 				if ($GLOBALS["userinfo"]["toggle"][0]["loot"] == False){
-					$loot_text = "&#128481; " . $GLOBALS["userinfo"]["name"] . " killed the " .  $GLOBALS["userinfo"]["selected_enemy"]. "<br>" . $GLOBALS["userinfo"]["name"] . " gained " . $enemygold . " gold" . $goose_bonus_text . "<br>&#10024; " . $GLOBALS["userinfo"]["name"] . " gained " . $xpgain . " experience" . $pterodactyl_bonus_text;
+					$loot_text = "&#128481; " . $GLOBALS["userinfo"]["name"] . " killed the " .  $GLOBALS["userinfo"]["selected_enemy"]. ".<br>" . $GLOBALS["userinfo"]["name"] . " gained " . $enemygold . " gold." . $goose_bonus_text . "<br>&#10024; " . $GLOBALS["userinfo"]["name"] . " gained " . $xpgain . " experience." . $pterodactyl_bonus_text;
                 }
                 _level_up_check_user();
             } 
@@ -607,8 +595,4 @@
 
     }
 
-    function getAttack($attacks){
-        $num = array_rand($attacks);
-        $move = $attacks[$num];
-        return $move;
-    }
+    

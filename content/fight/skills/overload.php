@@ -1,18 +1,15 @@
 <?php 
-if ($userinfo["Buff1"] == "Surge"){
+if ($GLOBALS["userinfo"]["Buff1"] == "Surge"){
     $list .= "**you have been stunned for 1 turn**";
 }
 else{
-    $overloaddmg = rand(($youdmg / 100) * 40);
-    $overloadselfdmg = rand(($overloaddmg / 100) * 50);
+    $overloaddmg = round(($youdmg / 100) * 40);
+    $overloadselfdmg = round(($overloaddmg / 100) * 50);
     $youdmg += $overloaddmg;
-    $userinfo["SkillCooldown1"] = 2;
-    $list .= getAttack([$username . " overloads " . $enemyname . " for " . $youdmg . " damage\nBut also deals 50% self damage", $username . " overloads " . $enemyname . " for " . $youdmg . " damage\nBut also deals " . $overloadselfdmg . " self damage", "you overload yourself increasing your damage to " . $youdmg . " damage total but end up hurting yourself for " . $overloadselfdmg . " hp."]);
+    $GLOBALS["userinfo"]["SkillCooldown1"] = 2;
+    $list .= randchoice([$username . " overloads " . $enemyname . " for " . $youdmg . " damage`.<br>But also deals 50% self damage.", $username . " overloads " . $enemyname . " for " . $youdmg . " damage.<br>But also deals " . $overloadselfdmg . " self damage.", "You overload yourself increasing your damage to " . $youdmg . " damage total but end up hurting yourself for " . $overloadselfdmg . " hp."]);
 }
+$userhealth -= $overloadselfdmg;
+if ($userhealth < 0){
+    $userhealth = 0;}
 ?>
-<!DOCTYPE html>
-<html>  
-    <body>
-        <p><?php print_r($list)?></p>
-    </body>
-</html>

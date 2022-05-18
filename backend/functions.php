@@ -145,4 +145,10 @@
         else{ $TheMaksooFishText = "+" . $fishValue;}
         return $TheMaksooFishText;
     }
+
+    function randchoice($array){
+        $num = array_rand($array);
+        $random = $array[$num];
+        return $random;
+    }
 ?>
