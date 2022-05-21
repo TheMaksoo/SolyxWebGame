@@ -62,30 +62,33 @@
                
             }
             
-            // starting hp of the enemy and user
-            $list .= $enemyname ." has " . round($enemyhpstart) . " HP<br>" . $username . " has " . $userhealthstart . " HP<br>";
-            // check if enemy is stun
-            if ($GLOBALS["userinfo"]["EnemyStun"] > 0){
-                $enemydmg = 0;
-                // add enemy stun text
-                $list .= "<br>" . $enemyname . " is stunned and can't fight.<br>"; 
-            }
-            else{
-                // add enemy attack text
-                $list .= "<br>" . $enemyname . " uses  " . $enemyattack. " hits " . $username. " for " . $enemydmg. " damage.<br>";
-                  
+            if ($skill != "heal"){
+                // starting hp of the enemy and user
+                $list .= $enemyname ." has " . round($enemyhpstart) . " HP<br>" . $username . " has " . $userhealthstart . " HP<br>";
+                // check if enemy is stun
+                if ($GLOBALS["userinfo"]["EnemyStun"] > 0){
+                    $enemydmg = 0;
+                    // add enemy stun text
+                    $list .= "<br>" . $enemyname . " is stunned and can't fight.<br>"; 
+                }
+                else{
+                    // add enemy attack text
+                    $list .= "<br>" . $enemyname . " uses  " . $enemyattack. " hits " . $username. " for " . $enemydmg. " damage.<br>";
+                }   
             }
             // get the skill file
             include 'skills/' . $skill . '.php';
+            
             // end with hp checks
-            $list .= "<br><br>" . $enemyname . " has " . round($enemyhp) . " HP<br>" . $username . " has " . $userhealth . " HP<br><br>"; 
-
-
-            if ($enemyhp <= 0 || $userhealth <= 0){
-               $list .= deadCheck($enemyhp, $enemygold ,$userhealth, $goldlost, $xpgain);
+            if ($skill != "heal"){
+                $list .= "<br><br>" . $enemyname . " has " . round($enemyhp) . " HP<br>" . $username . " has " . $userhealth . " HP<br><br>"; 
+                
+                if ($enemyhp <= 0 || $userhealth <= 0){
+                    $list .= deadCheck($enemyhp, $enemygold ,$userhealth, $goldlost, $xpgain);
+                }
+                everyTurn();
             }
             $filter = "None";
-            //everyTurn();
             updateUserinfo($filter);         
         } 
           
