@@ -58,6 +58,7 @@
             </div>
             <div class="game-container">
                 <?php
+                print_r($userinfo);
                 if (isset($_GET['content'])){
                     if ($_GET['content'] == 'gatherChop') {include 'content/gather/gatherChop.php';} 
                     if ($_GET['content'] == 'gatherMine') {include 'content/gather/gatherMine.php';}
