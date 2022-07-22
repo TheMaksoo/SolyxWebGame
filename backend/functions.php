@@ -151,4 +151,41 @@
         $random = $array[$num];
         return $random;
     }
+
+    function getUserClass(){
+        $class = $GLOBALS["userinfo"]['class'];
+        if ($class == "Night Assassin"){
+            $class = "Assassin";
+        }
+        if ($class == "Skilled Ranger"){
+            $class = "Ranger";
+        }
+        if ($class == "Grand Paladin"){
+            $class = "Paladin";
+        }
+        if ($class == "Master Samurai"){
+            $class = "Samurai";
+        }
+        if ($class == "Developed Necromancer"){
+            $class = "Necromancer";
+        }
+        if ($class == "Adequate Elementalist"){
+            $class = "Elementalist";
+        }
+        if ($class == "High Rogue"){
+            $class = "Rogue";
+        }
+        if ($class == "Adept Mesmer"){
+            $class = "Mesmer";
+        }
+        return $class;
+    }
+
+    function getIconClass($class){
+        $iconclass = "stats-icons";
+        if ($class != $GLOBALS["userinfo"]['class']){
+            $iconclass = "stats-icons-plus";
+        }
+        return $iconclass;
+    }
 ?>
