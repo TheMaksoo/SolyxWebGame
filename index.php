@@ -34,6 +34,7 @@ require __DIR__ . "/backend/config.php";
 </body>
 <?php
     include_once 'footer.php';
+    include_once 'copyrightFooter.php';
     ?>
 
 

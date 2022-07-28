@@ -24,8 +24,6 @@
 					<li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li> 
 				</ul>
 			</div>
-			<hr color="white" >
-			<p class="copyright-text">Copyright &copy; 2021 All Rights Reserved byTheMaksoo</a>.</p>
 		</div>
 	</footer>	
 </body>

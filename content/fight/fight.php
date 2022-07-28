@@ -64,7 +64,7 @@
             
             if ($skill != "heal"){
                 // starting hp of the enemy and user
-                $list .= $enemyname ." has " . round($enemyhpstart) . " HP<br>" . $username . " has " . $userhealthstart . " HP<br>";
+                $list .= "<span class=´type´><span>" . $enemyname ." has " . round($enemyhpstart) . " HP</span></span><span class=´type´><span>" . $username . " has " . $userhealthstart . " HP</span></span>";
                 // check if enemy is stun
                 if ($GLOBALS["userinfo"]["EnemyStun"] > 0){
                     $enemydmg = 0;
@@ -73,7 +73,7 @@
                 }
                 else{
                     // add enemy attack text
-                    $list .= "<br>" . $enemyname . " uses  " . $enemyattack. " hits " . $username. " for " . $enemydmg. " damage.<br>";
+                    $list .= "<span class=´type´><span>" . $enemyname . " uses  " . $enemyattack. " hits " . $username. " for " . $enemydmg. " damage.</span></span>";
                 }   
             }
             // get the skill file
@@ -81,7 +81,7 @@
             
             // end with hp checks
             if ($skill != "heal"){
-                $list .= "<br><br>" . $enemyname . " has " . round($enemyhp) . " HP<br>" . $username . " has " . $userhealth . " HP<br><br>"; 
+                $list .= "<span></span><span class=´type´><span>" . $enemyname . " has " . round($enemyhp) . " HP</span></span><span class=´type´><span>" . $username . " has " . $userhealth . " HP</span></span><span></span>"; 
                 
                 if ($enemyhp <= 0 || $userhealth <= 0){
                     $list .= deadCheck($enemyhp, $enemygold ,$userhealth, $goldlost, $xpgain);
@@ -98,23 +98,32 @@
 <!DOCTYPE html>
 <html>  
     <body>
-        <?php if ($_GET['Fight'] == 'false'){?>
-            <h1>You wandered around <?php echo $GLOBALS["userinfo"]["location"]?> and found <br> <?php echo $enemyName ?></h1>
-            <?php if ($bossImage != $base_url){ ?>
-            <img src="<?php print_r($bossImage) ?> " class="bossimg"/>
-            <?php } ?>
-            <h1><br>Would you like to fight it?</h1>
-        <?php } elseif ($_GET['Fight'] == 'true'){ ?>
-            <?php if (isset($_GET['skill'])){?>
-                <h1><?php print_r($list) ?></h1>              
-            <?php } ?>
-            
-        <?php if (!isset($_GET['skill'])) {?>
-            <h1> Name: <?php echo $GLOBALS["userinfo"]["selected_enemy"];  ?><br>HP: <?php echo $GLOBALS["userinfo"]["enemyhp"];?></h1>
-            <?php if ($bossImage != $base_url){ ?>
-            <img src="<?php print_r($bossImage) ?> " class="bossimg"/>
-            <?php } ?>
-            <h1>Choose your skill.</h1>
-        <?php }} ?>
+        <div>
+            <?php if ($_GET['Fight'] == 'false'){?>
+                <h1>You wandered around <?php echo $GLOBALS["userinfo"]["location"]?> and found <br> <?php echo $enemyName ?></h1>
+                <?php if ($bossImage != $base_url){ ?>
+                <span><img src="<?php print_r($bossImage) ?> " class="bossimg"/></span>
+                <?php } ?>
+                <h1><br>Would you like to fight it?</h1>
+            <?php } elseif ($_GET['Fight'] == 'true'){ ?>
+                <?php if (isset($_GET['skill'])){?>
+                    <h1><?php print_r($list) ?></h1>              
+                <?php } ?>
+                
+            <?php if (!isset($_GET['skill'])) {?>
+                <span class=´type´><h1> Name: <?php echo $GLOBALS["userinfo"]["selected_enemy"];  ?></h1></span><span class=´type´><h1>HP: <?php echo $GLOBALS["userinfo"]["enemyhp"];?></h1></span>
+                <?php if ($bossImage != $base_url){ ?>
+                <span><img src="<?php print_r($bossImage) ?> " class="bossimg"/></span>
+                <?php } ?>
+                <h1>Choose your skill.</h1>
+            <?php }} ?>
+        </div>
     </body>
-</html>    
+</html> 
+<script>
+$('lineUp').each(function(i) {
+  $(this).css({
+    "animation-delay": i + "s"
+  })
+});
+</script>
