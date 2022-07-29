@@ -34,7 +34,15 @@
 		$bleeding = 0;
 		$reap = 0;
 		$overloadselfdmg = 0;
-        $list = "";
+        $EnemyHp = "";
+        $UserHp = "";
+        $EnemyCombatSkill = "";
+        $EnemyCombatDamage = "";
+        $UserCombatSkill = "";
+        $UserCombatDamage = "";
+        $EnemyEndHp = "";
+        $UserEndHp = "";
+
         if (isset($_GET['skill']))
         {
             $skill = $_GET['skill'];
@@ -64,16 +72,19 @@
             
             if ($skill != "heal"){
                 // starting hp of the enemy and user
-                $list .= "<span class=´type´><span>" . $enemyname ." has " . round($enemyhpstart) . " HP</span></span><span class=´type´><span>" . $username . " has " . $userhealthstart . " HP</span></span>";
+                $EnemyHp = "" . $enemyname ." has " . round($enemyhpstart) . " HP";
+                $UserHp = "" . $username . " has " . round($userhealthstart) . " HP";
                 // check if enemy is stun
                 if ($GLOBALS["userinfo"]["EnemyStun"] > 0){
                     $enemydmg = 0;
                     // add enemy stun text
-                    $list .= "<br>" . $enemyname . " is stunned and can't fight.<br>"; 
+                    $EnemyCombatSkill = "" . $enemyname . " is stunned and can't fight.";
+                    $EnemyCombatDamage = "";
                 }
                 else{
                     // add enemy attack text
-                    $list .= "<span class=´type´><span>" . $enemyname . " uses  " . $enemyattack. " hits " . $username. " for " . $enemydmg. " damage.</span></span>";
+                    $EnemyCombatSkill = "" . $enemyname . " uses  " . $enemyattack;
+                    $EnemyCombatDamage = " hits " . $username. " for " . $enemydmg. " damage.";
                 }   
             }
             // get the skill file
@@ -81,10 +92,11 @@
             
             // end with hp checks
             if ($skill != "heal"){
-                $list .= "<span></span><span class=´type´><span>" . $enemyname . " has " . round($enemyhp) . " HP</span></span><span class=´type´><span>" . $username . " has " . $userhealth . " HP</span></span><span></span>"; 
+                $EnemyEndHp = "" . $enemyname . " has " . round($enemyhp) . " HP";
+                $UserEndHp = "" . $username . " has " . $userhealth . " HP"; 
                 
                 if ($enemyhp <= 0 || $userhealth <= 0){
-                    $list .= deadCheck($enemyhp, $enemygold ,$userhealth, $goldlost, $xpgain);
+                    $EnemyHp .= deadCheck($enemyhp, $enemygold ,$userhealth, $goldlost, $xpgain);
                 }
                 everyTurn();
             }
@@ -98,32 +110,34 @@
 <!DOCTYPE html>
 <html>  
     <body>
-        <div>
+        <div class="animated fadeInUp">
             <?php if ($_GET['Fight'] == 'false'){?>
-                <h1>You wandered around <?php echo $GLOBALS["userinfo"]["location"]?> and found <br> <?php echo $enemyName ?></h1>
+                <h2 class="animated fadeInUp">You wandered around <?php echo $GLOBALS["userinfo"]["location"]?> and found <br> <?php echo $enemyName ?></h2>
                 <?php if ($bossImage != $base_url){ ?>
-                <span><img src="<?php print_r($bossImage) ?> " class="bossimg"/></span>
+                <h2 class="animated fadeInUp"><img src="<?php print_r($bossImage) ?> " class="bossimg"/></h2>
                 <?php } ?>
-                <h1><br>Would you like to fight it?</h1>
+                <h2 class="animated fadeInUp"><br>Would you like to fight it?</h2>
             <?php } elseif ($_GET['Fight'] == 'true'){ ?>
                 <?php if (isset($_GET['skill'])){?>
-                    <h1><?php print_r($list) ?></h1>              
+                    <h2 class="animated fadeInUp"><?php print_r($EnemyHp) ?></h2>
+                    <h2 class="animated fadeInUp"style="border-bottom: 2px solid #AAAAAA"><?php print_r($UserHp) ?><br><br></h2>
+                    <h2 class="animated fadeInUp"><?php print_r($EnemyCombatSkill) ?></h2>
+                    <h2 class="animated fadeInUp"style="border-bottom: 2px solid #AAAAAA"><?php print_r($EnemyCombatDamage) ?><br><br></h2>
+                    <h2 class="animated fadeInUp"><?php print_r($UserCombatSkill) ?></h2>
+                    <h2 class="animated fadeInUp"style="border-bottom: 2px solid #AAAAAA"><?php print_r($UserCombatDamage) ?><br><br></h2>
+                    <h2 class="animated fadeInUp"><?php print_r($EnemyEndHp) ?></h2>
+                    <h2 class="animated fadeInUp"><?php print_r($UserEndHp) ?></h2>     
                 <?php } ?>
                 
             <?php if (!isset($_GET['skill'])) {?>
-                <span class=´type´><h1> Name: <?php echo $GLOBALS["userinfo"]["selected_enemy"];  ?></h1></span><span class=´type´><h1>HP: <?php echo $GLOBALS["userinfo"]["enemyhp"];?></h1></span>
+                <h2 class="animated fadeInUp"> Name: <?php echo $GLOBALS["userinfo"]["selected_enemy"];  ?></h2>
+                <h2 class="animated fadeInUp">HP: <?php echo $GLOBALS["userinfo"]["enemyhp"];?></h2>
                 <?php if ($bossImage != $base_url){ ?>
-                <span><img src="<?php print_r($bossImage) ?> " class="bossimg"/></span>
+                <h2 class="animated fadeInUp"><img src="<?php print_r($bossImage) ?> " class="bossimg"/></h2>
                 <?php } ?>
-                <h1>Choose your skill.</h1>
+                <h2 class="animated fadeInUp">Choose your skill.</h2>
             <?php }} ?>
         </div>
     </body>
 </html> 
-<script>
-$('lineUp').each(function(i) {
-  $(this).css({
-    "animation-delay": i + "s"
-  })
-});
-</script>
+

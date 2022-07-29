@@ -190,7 +190,7 @@ body::-webkit-scrollbar-thumb:hover {
   margin-inline-end: 0px;
 }
 
-.using span{
+.using h2{
   font-size: 16px;
   color: rgb(189, 189, 189);
   font-family: 'Montserrat', sans-serif;
@@ -351,6 +351,7 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 
+
 @keyframes fadein {
 from { opacity: 0; }
 to   { opacity: 1; }
@@ -373,6 +374,59 @@ to   { opacity: 1; }
 from { opacity: 0; }
 to   { opacity: 1; }
 }
+  
+.animated {
+  -webkit-animation-duration:1.3s;
+  animation-duration:1.3s;
+  -webkit-animation-fill-mode:both;
+  animation-fill-mode:both;
+}
+
+.fadeInUp {
+  -webkit-animation-name:fadeInUp;
+  animation-name:fadeInUp;
+}
+
+@-webkit-keyframes fadeInUp  {
+  0% {
+     opacity:0;
+     -webkit-transform:translate3d(0, 100%, 0);
+     transform:translate3d(0, 100%, 0);
+  }
+  
+  100% {
+     opacity:1;
+     -webkit-transform:none;
+     transform:none;
+  }
+
+}
+
+@keyframes fadeInUp  {
+  0% {
+     opacity:0;
+     -webkit-transform:translate3d(0, 60%, 0);
+     transform:translate3d(0, 60%, 0);
+  }
+  
+  100% {
+     opacity:1;
+     -webkit-transform:none;
+     transform:none;
+  }
+
+}
+
+.fadeInUp:nth-child(1) { animation-delay: 0.5s }
+.fadeInUp:nth-child(2) { animation-delay: 1.2s }
+.fadeInUp:nth-child(3) { animation-delay: 1.9s }
+.fadeInUp:nth-child(4) { animation-delay: 3s }
+.fadeInUp:nth-child(5) { animation-delay: 4s }
+.fadeInUp:nth-child(6) { animation-delay: 5s }
+.fadeInUp:nth-child(7) { animation-delay: 5.7s }
+.fadeInUp:nth-child(8) { animation-delay: 6.4s }
+
+
 
 .bossimg{
   margin-right: auto;
