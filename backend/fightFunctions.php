@@ -182,9 +182,9 @@
         }
     }
     function deadCheck($enemyhp, $enemygold, $userhealth, $goldlost, $xpgain){
-        $loot_text = "";
+        $reward = ["death" => "", "userdeath" => "", "kill" => "", "pterodactyl" => "", "goose" => "", "fox" => "", "newpet" => "", "gold" => "", "exp" => "", "lootbag" => "", ];
         if ($enemyhp <= 0 && $userhealth <= 0){
-			$loot_text = "&#9760; You both died!<br>" . $GLOBALS["userinfo"]["name"] . " lost " . $goldlost . " gold.";
+			$reward["death"] = "&#9760; You both died!<br>" . $GLOBALS["userinfo"]["name"] . " lost " . $goldlost . " gold.";
             $GLOBALS["userinfo"]["gold"] -= $goldlost;
 			if ( $GLOBALS["userinfo"]["gold"] < 0){
                 $GLOBALS["userinfo"]["gold"] = 0;
@@ -205,7 +205,7 @@
         }
 
         elseif ($userhealth <= 0){
-            $loot_text = "&#9760; " . $GLOBALS["userinfo"]["selected_enemy"] . " killed  " . $GLOBALS["userinfo"]["name"] . ".<br>" . $GLOBALS["userinfo"]["name"] . " lost " . $goldlost . " gold.";
+            $reward["userdeath"] = "&#9760; " . $GLOBALS["userinfo"]["selected_enemy"] . " killed  " . $GLOBALS["userinfo"]["name"] . ".<br>" . $GLOBALS["userinfo"]["name"] . " lost " . $goldlost . " gold.";
 			$GLOBALS["userinfo"]["gold"] -= $goldlost;
 			if ($GLOBALS["userinfo"]["gold"] < 0){
 				$GLOBALS["userinfo"]["gold"] = 0;
@@ -223,11 +223,7 @@
         }
 
         elseif ($enemyhp <= 0){
-            $pet_text = "";
 			$pterodactyl_bonus = 0;
-            $pterodactyl_bonus_text = "";
-            $fox_bonus_text = "";
-            $goose_bonus_text = "";
             $goose_bonus = 0;
 			try{
 				
@@ -280,38 +276,38 @@
 					if ($pet_type == "Fox"){
 						if ($pet_level <= 10){
 							$lootbag_chance = 8;
-							$fox_bonus_text = "<br>+5% pet crate bonus chance.";
+							$reward["fox"] = "+5% pet crate bonus chance.";
                         }
 						elseif ($pet_level <= 20){
 							$lootbag_chance = 13;
-							$fox_bonus_text = "<br>+10% pet crate bonus chance.";
+							$reward["fox"] = "+10% pet crate bonus chance.";
                         }
 						elseif ($pet_level <= 30){
 							$lootbag_chance = 18;
-							$fox_bonus_text = "<br>+15% pet crate bonus chance.";
+							$reward["fox"] = "+15% pet crate bonus chance.";
                         }
 						elseif ($pet_level <= 40){	
 							$lootbag_chance = 23;
-							$fox_bonus_text = "<br>+20% pet crate bonus chance.";
+							$reward["fox"] = "+20% pet crate bonus chance.";
                         }
 						elseif ($pet_level <= 50){
 							$lootbag_chance = 28;
-							$fox_bonus_text = "<br>+25% pet crate bonus chance.";
+							$reward["fox"] = "+25% pet crate bonus chance.";
                         }
 						elseif ($pet_level >= 51){
 							$lootbag_chance = 33;
-							$fox_bonus_text = "<br>+30% pet crate bonus chance.";
+							$reward["fox"] = "+30% pet crate bonus chance.";
                         }
                     }
                 }
-                $goose_bonus_text = "<br> +" . ceil($goose_bonus) . " Gold pet bonus.";
-                $pterodactyl_bonus_text = "<br>&#10024; +" . ceil($pterodactyl_bonus) . " Experience pet bonus.";
+                $reward["goose"] = "+" . ceil($goose_bonus) . " Gold pet bonus.";
+                $reward["pterodactyl"] = "&#10024; +" . ceil($pterodactyl_bonus) . " Experience pet bonus.";
 
                
             }
             catch(Exception $e){
+
             }
-            $pet_text = $pet_text . $pterodactyl_bonus_text . $goose_bonus_text . $fox_bonus_text;
             // if ($GLOBALS["userinfo"]["party"] != "None"){
 			// 	// $partyinfo = db.party.find_one({"_id": $GLOBALS["userinfo"]["party"]})
 			// 	$party_reward_list = "";
@@ -420,7 +416,7 @@
 				$pet_spawn = rand(1, 100);
 				if ($pet_spawn >= 90){
 					if ($GLOBALS["userinfo"]["pet_stage"] == "Golden Goose"){
-						$pet_text = "A tameable pet has spawned! It's a goose.";
+						$reward["newpet"] = "A tameable pet has spawned! It's a goose.";
 						$GLOBALS["userinfo"]["pet_find"] = "Golden Goose";
                     }
                 }
@@ -448,7 +444,7 @@
 				$pet_spawn = rand(1, 100);
 				if ($pet_spawn >= 90){
 					if ($GLOBALS["userinfo"]["pet_stage"] == "Polar Bear"){
-						$pet_text = "A tameable pet has spawned! It's a polar bear.";
+						$reward["newpet"] = "A tameable pet has spawned! It's a polar bear.";
 						$GLOBALS["userinfo"]["pet_find"] = "Polar Bear";
                     }
                 }
@@ -458,7 +454,7 @@
 				$pet_spawn = rand(1, 100);
 				if ($pet_spawn >= 90){
 					if ($GLOBALS["userinfo"]["pet_stage"] == "Fox"){
-						$pet_text = "A tameable pet has spawned! It's a fox.";
+						$reward["newpet"] = "A tameable pet has spawned! It's a fox.";
 						$GLOBALS["userinfo"]["pet_find"] = "Fox";
                     }
                 }
@@ -468,7 +464,7 @@
 				$pet_spawn = rand(1, 100);
 				if ($pet_spawn >= 90){
 					if ($GLOBALS["userinfo"]["pet_stage"] == "Small Cerberus"){
-						$pet_text = "A tameable pet has spawned! It's a small cerberus.";
+						$reward["newpet"] = "A tameable pet has spawned! It's a small cerberus.";
 						$GLOBALS["userinfo"]["pet_find"] = "Small Cerberus";
                     }
                 }
@@ -533,12 +529,13 @@
 
 			try{ 
 				if ($GLOBALS["userinfo"]["toggle"][0]["loot"] == False){
-					$loot_text = "&#128481; " . $GLOBALS["userinfo"]["name"] . " killed the " .  $GLOBALS["userinfo"]["selected_enemy"]. ".<br>" . $GLOBALS["userinfo"]["name"] . " gained " . $enemygold . " gold." . $goose_bonus_text . "<br>&#10024; " . $GLOBALS["userinfo"]["name"] . " gained " . $xpgain . " experience." . $pterodactyl_bonus_text;
+                    $reward["kill"] = "&#128481; " . $GLOBALS["userinfo"]["name"] . " killed the " .  $GLOBALS["userinfo"]["selected_enemy"] . ".";
+                    $reward["gold"] = $GLOBALS["userinfo"]["name"] . " gained " . $enemygold . " gold.";
+                    $reward["exp"] = "&#10024; " . $GLOBALS["userinfo"]["name"] . " gained " . $xpgain . " experience.";
                 }
                 _level_up_check_user();
             } 
             catch(Exception $e){
-                $loot_text = "";
                 }
             $GLOBALS["userinfo"]["health"] = ceil($userhealth);
 			$GLOBALS["userinfo"]["selected_enemy"] = "None";
@@ -567,16 +564,16 @@
 							
 			//else:
             $lootbag_chance = 3;
-            $lootbag_text = "";
+            
             $lootbag = rand(1, 100);
             if ($lootbag <= $lootbag_chance){
                 $chance2 = rand(1, 100);
                 if ($chance2 >= 50){
-                    $lootbag_text = "<:Crate:639425690072252426> " . $GLOBALS["userinfo"]["name"] . " obtained a crate!" . $fox_bonus_text;
+                    $reward["lootbag"] = "<:Crate:639425690072252426> " . $GLOBALS["userinfo"]["name"] . " obtained a crate!" . $reward["fox"];
                     $GLOBALS["userinfo"]["lootbag"] += 1;
                 }
                 else {	
-                    $lootbag_text = "<:Key:573780034355986432> " . $GLOBALS["userinfo"]["name"] . " obtained a key!" . $fox_bonus_text;	
+                    $reward["lootbag"] = "<:Key:573780034355986432> " . $GLOBALS["userinfo"]["name"] . " obtained a key!" . $reward["fox"];	
                     $GLOBALS["userinfo"]["keys"] += 1;
                 }
             }
@@ -584,7 +581,7 @@
 			$GLOBALS["userinfo"]["enemieskilled"] += 1;
         }
         // . $party_text
-	    return $loot_text;
+	    return $reward;
     }
 
     function _guild_mission_check(){

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>  
     <body>
-        <div>
+        <div class="fightbg">
             <h1 class="animated fadeInUp">Welcome back to<br></h1>
             <h1 class="animated fadeInUp">Solyx<br></h1>
             <h1 class="animated fadeInUp">Adventurer</h1>

@@ -19,10 +19,9 @@
     ?>
 <body >
     <main>
-        <section class="game-section" >
+        <section class="game-section" id="TheMaksoo">
             <div class="stats-container">
                 <ul> 
-                    <img src="https://cdn.discordapp.com/avatars/<?php $extention = isAnimated($_SESSION['user_avatar']); echo $_SESSION['user_id'] . "/" . $_SESSION['user_avatar'] . $extention; ?>" style="height: 40px; border-radius: 50%;"/>
                     <li><Strong>User info</Strong></li>
                     <li>Race: <img  src="img\icons\Race\<?php  print_r($userinfo['race']) ?>.webp" data-toggle="tooltip" data-original-title="<?php  print_r($userinfo['race']) ?>" class="stats-icons"></li>
                     <li>Class: <img  src="img\icons\Class\<?php  print_r($class) ?>.webp" data-toggle="tooltip" data-original-title="<?php  print_r($userinfo['class']) ?>" class="<?php print_r($iconclass) ?>"></li>
@@ -57,7 +56,7 @@
             <div class="game-container">
                 <div class="game-content">
                     <?php
-                    // print_r($userinfo);
+                    
                     if (isset($_GET['content'])){
                         if ($_GET['content'] == 'gatherChop') {include 'content/gather/gatherChop.php';} 
                         if ($_GET['content'] == 'gatherMine') {include 'content/gather/gatherMine.php';}
@@ -112,3 +111,11 @@
 <?php
     include_once 'copyrightFooter.php';
     ?>
+
+<script>
+ $(document).ready(function () {
+    $('html, body').animate({
+        scrollTop: $('#TheMaksoo').offset().top
+    }, 100);
+});
+</script>
