@@ -34,11 +34,11 @@ if ($_GET['Fight'] == 'true') {
     $UserHp = "";
     $EnemyCombatSkill = "";
     $EnemyCombatDamage = "";
+    $EnemyEffect = "";
     $UserCombatSkill = "";
     $UserCombatDamage = "";
     $EnemyEndHp = "";
     $UserEndHp = "";
-    $isded = 0;
     if (isset($_GET['skill'])) {
         $skill = $_GET['skill'];
         $youdmg = getYouDmg();
@@ -69,8 +69,8 @@ if ($_GET['Fight'] == 'true') {
 
         if ($skill != "heal") {
             // starting hp of the enemy and user
-            $EnemyHp = "" . $enemyname . " has " . round($enemyhpstart) . " HP";
-            $UserHp = "" . $username . " has " . round($userhealthstart) . " HP";
+            $EnemyHp = "" . $enemyname . " has " . round($enemyhpstart) . " ";
+            $UserHp = "You have " . round($userhealthstart) . " ";
             // check if enemy is stun
             if ($GLOBALS["userinfo"]["EnemyStun"] > 0) {
                 $enemydmg = 0;
@@ -80,7 +80,7 @@ if ($_GET['Fight'] == 'true') {
             } else {
                 // add enemy attack text
                 $EnemyCombatSkill = "" . $enemyname . " uses  " . $enemyattack;
-                $EnemyCombatDamage = " hits " . $username . " for " . $enemydmg . " damage.";
+                $EnemyCombatDamage = " hits you for " . $enemydmg . " damage.";
             }
         }
         // get the skill file
@@ -91,8 +91,8 @@ if ($_GET['Fight'] == 'true') {
         $GLOBALS["userinfo"]["health"] = $userhealth;
         // end with hp checks
         if ($skill != "heal") {
-            $EnemyEndHp = "" . $enemyname . " has " . round($enemyhp) . " HP";
-            $UserEndHp = "" . $username . " has " . $userhealth . " HP";
+            $EnemyEndHp = "" . $enemyname . " has " . round($enemyhp) . " ";
+            $UserEndHp = "You have " . $userhealth . " ";
 
             if ($enemyhp <= 0 || $userhealth <= 0) {
                 $reward = deadCheck($enemyhp, $enemygold, $userhealth, $goldlost, $xpgain);
@@ -117,59 +117,66 @@ if ($_GET['Fight'] == 'true') {
                 <?php if ($bossImage != $base_url) { ?>
                     <h2 class="animated fadeInUp"><img src="<?php print_r($bossImage) ?> " class="bossimg" /></h2>
                 <?php } ?>
-                <h2 class="animated fadeInUp"><br>Would you like to fight it?</h2>
+                <h2 class="animated fadeInUp"><br><img src='img\icons\Sword.webp' class='game-icons'>Would you like to fight it?<img src='img\icons\SwordReverse.webp' class='game-icons'></h2>
             </div>
         <?php }
         
         if ($_GET['Fight'] == 'true') {
             if (isset($_GET['skill'])) {
                 if ($isded == 1) { ?>
-                    <div class="fightbgsmh">
-                        <h2 class="FightKillAnimated fadeOutUp"><?php print_r($EnemyHp); ?></h2>
-                        <h2 class="FightKillAnimated fadeOutUp" style="border-bottom: 2px solid #AAAAAA"><?php print_r($UserHp) ?><br><br></h2>
-                        <h2 class="FightKillAnimated fadeOutUp"><?php print_r($EnemyCombatSkill) ?></h2>
-                        <h2 class="FightKillAnimated fadeOutUp" style="border-bottom: 2px solid #AAAAAA"><?php print_r($EnemyCombatDamage) ?><br><br></h2>
-                        <h2 class="FightKillAnimated fadeOutUp"><?php print_r($UserCombatSkill) ?></h2>
-                        <h2 class="FightKillAnimated fadeOutUp" style="border-bottom: 2px solid #AAAAAA"><?php print_r($UserCombatDamage) ?><br><br></h2>
-                        <h2 class="FightKillAnimated fadeOutUp"><?php print_r($EnemyEndHp) ?></h2>
-                        <h2 class="FightKillAnimated fadeOutUp"><?php print_r($UserEndHp) ?></h2>
-                    </div>
-                    <span class="FightKillReward">
+                    <div class="fightbg">
+                        <h2 class="animated fadeInUp"><?php print_r($EnemyHp); ?><img src='img\icons\Health.webp' class='game-icons'></h2>
+                        <h2 class="animated fadeInUp"><?php print_r($UserHp) ?><img src='img\icons\Health.webp' class='game-icons'></h2>
+                        <h2 class="animated fadeInUp" style="border-bottom: 2px solid #AAAAAA"></h2>
+                        <h2 class="animated fadeInUp"><?php print_r($EnemyCombatSkill) ?></h2>
+                        <h2 class="animated fadeInUp"><?php print_r($EnemyCombatDamage) ?></h2>
+                        <h2 class="animated fadeInUp"><?php print_r($EnemyEffect) ?></h2>
+                        <h2 class="animated fadeInUp" style="border-bottom: 2px solid #AAAAAA"></h2>
+                        <h2 class="animated fadeInUp"><?php print_r($UserCombatSkill) ?></h2>
+                        <h2 class="animated fadeInUp"><?php print_r($UserCombatDamage) ?></h2>
+                        <h2 class="animated fadeInUp" style="border-bottom: 2px solid #AAAAAA"></h2>
+                        <h2 class="animated fadeInUp"><?php print_r($EnemyEndHp) ?><img src='img\icons\Health.webp' class='game-icons'></h2>
+                        <h2 class="animated fadeInUp"><?php print_r($UserEndHp) ?><img src='img\icons\Health.webp' class='game-icons'></h2>
+                        <h2 class="animated fadeInUp" style="border-bottom: 2px solid #AAAAAA"></h2>
+                        <h2></h2>
                         <?php if ($reward["death"] != "") { ?>
-                            <h2 class="FightKillRewardAnimated fadeInUpkill"><?php print_r($reward["death"]); ?></h2>
+                            <h2 class="animated fadeInUp"><?php print_r($reward["death"]); ?><img src='img\icons\Sword.webp' class='game-icons'></h2>
                         <?php }
                             if ($reward["userdeath"] != "") { ?>
-                            <h2 class="FightKillRewardAnimated fadeInUpkill"><?php print_r($reward["userdeath"]); ?></h2>
+                            <h2 class="animated fadeInUp"><?php print_r($reward["userdeath"]); ?><img src='img\icons\Sword.webp' class='game-icons'></h2>
                         <?php } ?>
-                        <h2 class="FightKillRewardAnimated fadeInUpkill"><?php print_r($reward["kill"]); ?></h2>
-                        <h2 class="FightKillRewardAnimated fadeInUpkill" style="border-bottom: 2px solid #AAAAAA"></h2>
-                        <h2 class="FightKillRewardAnimated fadeInUpkill"><?php print_r($reward["gold"]); ?></h2>
+                        <h2 class="animated fadeInUp"><?php print_r($reward["kill"]); ?><img src='img\icons\Sword.webp' class='game-icons'></h2>
+                        <h2 class="animated fadeInUp" style="border-bottom: 2px solid #AAAAAA"></h2>
+                        <h2 class="animated fadeInUp"><?php print_r($reward["gold"]); ?><img src='img\icons\recources\Gold.webp' class='game-icons'></h2>
                         <?php if ($reward["goose"] != "") { ?>
-                            <h2 class="FightKillRewardAnimated fadeInUpkill"><?php print_r($reward["goose"]); ?></h2>
+                            <h2 class="animated fadeInUp"><?php print_r($reward["goose"]); ?><img src='img\icons\recources\Gold.webp' class='game-icons'></h2>
                         <?php } ?>
-                        <h2 class="FightKillRewardAnimated fadeInUpkill" style="border-bottom: 2px solid #AAAAAA"></h2>
-                        <h2 class="FightKillRewardAnimated fadeInUpkill"><?php print_r($reward["exp"]) ?></h2>
+                        <h2 class="animated fadeInUp" style="border-bottom: 2px solid #AAAAAA"></h2>
+                        <h2 class="animated fadeInUp"><?php print_r($reward["exp"]) ?><img src='img\icons\Exp.webp' class='game-icons'></h2>
                         <?php if ($reward["pterodactyl"] != "") { ?>
-                            <h2 class="FightKillRewardAnimated fadeInUpkill"><?php print_r($reward["pterodactyl"]) ?></h2>
+                            <h2 class="animated fadeInUp"><?php print_r($reward["pterodactyl"]) ?><img src='img\icons\Exp.webp' class='game-icons'></h2>
                         <?php } ?>
-                        <h2 class="FightKillRewardAnimated fadeInUpkill" style="border-bottom: 2px solid #AAAAAA"></h2>
-                        <h2 class="FightKillRewardAnimated fadeInUpkill"><?php print_r($reward["lootbag"]) ?></h2>
+                        <h2 class="animated fadeInUp" style="border-bottom: 2px solid #AAAAAA"></h2>
+                        <h2 class="animated fadeInUp"><?php print_r($reward["lootbag"]) ?></h2>
                         <?php if ($reward["fox"] != "") { ?>
-                            <h2 class="FightKillRewardAnimated fadeInUpkill"><?php print_r($reward["fox"]) ?></h2>
+                            <h2 class="animated fadeInUp"><?php print_r($reward["fox"]) ?><img src='img\icons\Lootbag.webp' class='game-icons'></h2>
                         <?php }
                             if ($reward["newpet"] != "") { ?>
-                            <h2 class="FightKillRewardAnimated fadeInUpkill" style="border-bottom: 2px solid #AAAAAA"></h2>
-                            <h2 class="FightKillRewardAnimated fadeInUpkill"><?php print_r($reward["newpet"]) ?></h2>
+                            <h2 class="animated fadeInUp" style="border-bottom: 2px solid #AAAAAA"></h2>
+                            <h2 class="animated fadeInUp"><?php print_r($reward["newpet"]) ?></h2>
                         <?php } ?>
-                    </span>
+                    </div>
                 <?php } else { ?>
-                    <div class="fightbg">
+                    <div>
                         <h2 class="animated fadeInUp"><?php print_r($EnemyHp) ?></h2>
-                        <h2 class="animated fadeInUp" style="border-bottom: 2px solid #AAAAAA"><?php print_r($UserHp) ?><br><br></h2>
+                        <h2 class="animated fadeInUp"><?php print_r($UserHp) ?></h2>
+                        <h2 class="animated fadeInUp" style="border-bottom: 2px solid #AAAAAA"></h2>
                         <h2 class="animated fadeInUp"><?php print_r($EnemyCombatSkill) ?></h2>
-                        <h2 class="animated fadeInUp" style="border-bottom: 2px solid #AAAAAA"><?php print_r($EnemyCombatDamage) ?><br><br></h2>
+                        <h2 class="animated fadeInUp"><?php print_r($EnemyCombatDamage) ?></h2>
+                        <h2 class="animated fadeInUp" style="border-bottom: 2px solid #AAAAAA"></h2>
                         <h2 class="animated fadeInUp"><?php print_r($UserCombatSkill) ?></h2>
-                        <h2 class="animated fadeInUp" style="border-bottom: 2px solid #AAAAAA"><?php print_r($UserCombatDamage) ?><br><br></h2>
+                        <h2 class="animated fadeInUp"><?php print_r($UserCombatDamage) ?></h2>
+                        <h2 class="animated fadeInUp" style="border-bottom: 2px solid #AAAAAA"></h2>
                         <h2 class="animated fadeInUp"><?php print_r($EnemyEndHp) ?></h2>
                         <h2 class="animated fadeInUp"><?php print_r($UserEndHp) ?></h2>
                     </div>

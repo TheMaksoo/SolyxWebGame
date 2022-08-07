@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
-<body>
-	<footer class="footer">
+<body class="footer">
+	<div >
 		<p class="copyright-text">Copyright &copy; 2021 All Rights Reserved byTheMaksoo</a>.</p>
-	</footer>	
+	</div>
 </body>
 </html> 

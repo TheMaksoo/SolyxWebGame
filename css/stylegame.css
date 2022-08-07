@@ -1,0 +1,218 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+
+/* game */
+
+.game-section {
+  /* background */
+  background-image: linear-gradient(180deg, #dddddd  0%, rgba(255, 255, 255, 0) 2%, rgba(255, 255, 255, 0) 98%, #dddddd  100%), url('../img/locations/GoldenTemple.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 89vh;
+  /* grid for the 4 sections */
+  display: grid;
+  grid-template-columns: 0.15fr 0.7fr 0.15fr;
+  padding: 1%;
+}
+
+.game-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  max-width: fit-content;
+  border-radius: 2vh;
+  padding: 2vh;
+  box-shadow: 0 4px 20px 0 #00000033;
+  background: rgba(248, 248, 248, 0.7);
+  /* fade in animation */
+  -webkit-animation: fadein 1s;
+  animation: fadein 1s;
+  
+}
+
+.game-icons{
+  height: 1em;
+}
+
+@keyframes fadein {
+from { opacity: 0; }
+to   { opacity: 1; }
+}
+
+@-webkit-keyframes fadein {
+from { opacity: 0; }
+to   { opacity: 1; }
+}
+
+/* Normal Fight animation */
+.animated {
+  -webkit-animation-duration:1.3s;
+  animation-duration:1.3s;
+  -webkit-animation-fill-mode:both;
+  animation-fill-mode:both;
+}
+
+.fadeInUp {
+  -webkit-animation-name:fadeInUp;
+  animation-name:fadeInUp;
+}
+
+@-webkit-keyframes fadeInUp  {
+  0% {
+     opacity:0;
+     -webkit-transform:translate3d(0, 60%, 0);
+     transform:translate3d(0, 60%, 0);
+  }
+  
+  100% {
+     opacity:1;
+     -webkit-transform:none;
+     transform:none;
+  }
+
+}
+
+@keyframes fadeInUp  {
+  0% {
+     opacity:0;
+     -webkit-transform:translate3d(0, 60%, 0);
+     transform:translate3d(0, 60%, 0);
+  }
+  
+  100% {
+     opacity:1;
+     -webkit-transform:none;
+     transform:none;
+  }
+
+}
+
+.fadeInUp:nth-child(1) { animation-delay: 0.5s }
+.fadeInUp:nth-child(2) { animation-delay: 1.2s }
+.fadeInUp:nth-child(3) { animation-delay: 1.9s }
+.fadeInUp:nth-child(4) { animation-delay: 2.6s }
+.fadeInUp:nth-child(5) { animation-delay: 3.3s }
+.fadeInUp:nth-child(6) { animation-delay: 4s }
+.fadeInUp:nth-child(7) { animation-delay: 4.7s }
+.fadeInUp:nth-child(8) { animation-delay: 5.4s }
+.fadeInUp:nth-child(9) { animation-delay: 6.1s }
+.fadeInUp:nth-child(10) { animation-delay: 6.8s }
+.fadeInUp:nth-child(11) { animation-delay: 7.5s }
+.fadeInUp:nth-child(12) { animation-delay: 8.2s }
+.fadeInUp:nth-child(13) { animation-delay: 9.8s }
+.fadeInUp:nth-child(14) { animation-delay: 10.5s }
+.fadeInUp:nth-child(15) { animation-delay: 11.2s }
+.fadeInUp:nth-child(16) { animation-delay: 11.9s }
+.fadeInUp:nth-child(17) { animation-delay: 12.6s }
+.fadeInUp:nth-child(18) { animation-delay: 13.3s }
+.fadeInUp:nth-child(19) { animation-delay: 14s }
+.fadeInUp:nth-child(20) { animation-delay: 14.7s }
+.fadeInUp:nth-child(21) { animation-delay: 15.4s }  
+.fadeInUp:nth-child(22) { animation-delay: 16.1s }
+.fadeInUp:nth-child(23) { animation-delay: 16.8s }
+.fadeInUp:nth-child(24) { animation-delay: 17.5s }
+.fadeInUp:nth-child(25) { animation-delay: 18.2s }
+.fadeInUp:nth-child(26) { animation-delay: 18.9s }
+.fadeInUp:nth-child(27) { animation-delay: 19.6s }
+.fadeInUp:nth-child(28) { animation-delay: 20.3s }
+
+.bossimg{
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 45vh;
+  max-height: 30vh;
+  border-radius: 5vh;
+  margin-bottom: 1vh;
+}
+
+.commands-container{
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background-color: #595959 0,5;
+  top: -5vh;
+}
+
+.game-container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.inventory-container{
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  margin-right: 0px;
+  box-shadow: 0 4px 20px 0 rgb(0 0 0 / 20%);
+  background: rgba(248,248,248,0.85);
+  padding: 0.5rem;
+  background-repeat: repeat;
+  text-decoration-line: none;
+  border-radius: 15px;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: medium ;
+  color: #303030;
+}
+
+.inventory-container ul{
+  list-style-type: none
+}
+
+.inventory-container li{
+  border-bottom: 1px solid #CCCCCC;
+  line-height: 2em;
+}
+
+.inventory-icons{
+  height: 1em;
+  max-width: 1em;
+  float: right;
+}
+
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  margin-right: 0px;
+  box-shadow: 0 4px 20px 0 rgb(0 0 0 / 20%);
+  background: rgba(248,248,248,0.85);
+  padding: 0.5rem;
+  border-radius: 15px;
+  color: #303030;
+}
+
+.stats-container ul{
+  list-style-type: none
+}
+
+.stats-container li{
+  border-bottom: 1px solid #CCCCCC;
+  line-height: 2em;
+}
+
+.stats-icons{
+  height: 2em;
+  float: right;
+}
+
+.stats-icons-plus{
+  height: 2em;
+  float: right;
+  background: rgb(190,4,4);
+  background: -moz-radial-gradient(circle, rgba(190,4,4,1) 50%, rgba(248,248,248,0) 75%);
+  background: -webkit-radial-gradient(circle, rgba(190,4,4,1) 50%, rgba(248,248,248,0) 75%);
+  background: radial-gradient(circle, rgba(190,4,4,1) 50%, rgba(248,248,248,0) 75%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#be0404",endColorstr="#dddddd",GradientType=1);
+}

@@ -184,7 +184,7 @@
     function deadCheck($enemyhp, $enemygold, $userhealth, $goldlost, $xpgain){
         $reward = ["death" => "", "userdeath" => "", "kill" => "", "pterodactyl" => "", "goose" => "", "fox" => "", "newpet" => "", "gold" => "", "exp" => "", "lootbag" => "", ];
         if ($enemyhp <= 0 && $userhealth <= 0){
-			$reward["death"] = "&#9760; You both died!<br>" . $GLOBALS["userinfo"]["name"] . " lost " . $goldlost . " gold.";
+			$reward["death"] = "You both died!<br>You lost " . $goldlost . " gold.";
             $GLOBALS["userinfo"]["gold"] -= $goldlost;
 			if ( $GLOBALS["userinfo"]["gold"] < 0){
                 $GLOBALS["userinfo"]["gold"] = 0;
@@ -205,7 +205,7 @@
         }
 
         elseif ($userhealth <= 0){
-            $reward["userdeath"] = "&#9760; " . $GLOBALS["userinfo"]["selected_enemy"] . " killed  " . $GLOBALS["userinfo"]["name"] . ".<br>" . $GLOBALS["userinfo"]["name"] . " lost " . $goldlost . " gold.";
+            $reward["userdeath"] = $GLOBALS["userinfo"]["selected_enemy"] . " killed you.<br>You lost " . $goldlost . " gold.";
 			$GLOBALS["userinfo"]["gold"] -= $goldlost;
 			if ($GLOBALS["userinfo"]["gold"] < 0){
 				$GLOBALS["userinfo"]["gold"] = 0;
@@ -275,33 +275,33 @@
                     }
 					if ($pet_type == "Fox"){
 						if ($pet_level <= 10){
-							$lootbag_chance = 8;
-							$reward["fox"] = "+5% pet crate bonus chance.";
+							$Lootbag_chance = 8;
+							$reward["fox"] = "pet bonus +5% chance ";
                         }
 						elseif ($pet_level <= 20){
-							$lootbag_chance = 13;
-							$reward["fox"] = "+10% pet crate bonus chance.";
+							$Lootbag_chance = 13;
+							$reward["fox"] = "pet bonus +10% chance ";
                         }
 						elseif ($pet_level <= 30){
-							$lootbag_chance = 18;
-							$reward["fox"] = "+15% pet crate bonus chance.";
+							$Lootbag_chance = 18;
+							$reward["fox"] = "pet bonus +15% chance ";
                         }
 						elseif ($pet_level <= 40){	
-							$lootbag_chance = 23;
-							$reward["fox"] = "+20% pet crate bonus chance.";
+							$Lootbag_chance = 23;
+							$reward["fox"] = "pet bonus +20% chance ";
                         }
 						elseif ($pet_level <= 50){
-							$lootbag_chance = 28;
-							$reward["fox"] = "+25% pet crate bonus chance.";
+							$Lootbag_chance = 28;
+							$reward["fox"] = "pet bonus +25% chance ";
                         }
 						elseif ($pet_level >= 51){
-							$lootbag_chance = 33;
-							$reward["fox"] = "+30% pet crate bonus chance.";
+							$Lootbag_chance = 33;
+							$reward["fox"] = "pet bonus +30% chance ";
                         }
                     }
                 }
-                $reward["goose"] = "+" . ceil($goose_bonus) . " Gold pet bonus.";
-                $reward["pterodactyl"] = "&#10024; +" . ceil($pterodactyl_bonus) . " Experience pet bonus.";
+                $reward["goose"] = "pet bonus +" . ceil($goose_bonus) . " ";
+                $reward["pterodactyl"] = "pet bonus +" . ceil($pterodactyl_bonus) . " ";
 
                
             }
@@ -529,9 +529,9 @@
 
 			try{ 
 				if ($GLOBALS["userinfo"]["toggle"][0]["loot"] == False){
-                    $reward["kill"] = "&#128481; " . $GLOBALS["userinfo"]["name"] . " killed the " .  $GLOBALS["userinfo"]["selected_enemy"] . ".";
-                    $reward["gold"] = $GLOBALS["userinfo"]["name"] . " gained " . $enemygold . " gold.";
-                    $reward["exp"] = "&#10024; " . $GLOBALS["userinfo"]["name"] . " gained " . $xpgain . " experience.";
+                    $reward["kill"] = "You killed the " .  $GLOBALS["userinfo"]["selected_enemy"] . " ";
+                    $reward["gold"] = "You gained " . $enemygold . " ";
+                    $reward["exp"] = "You gained " . $xpgain . " ";
                 }
                 _level_up_check_user();
             } 
@@ -569,11 +569,11 @@
             if ($lootbag <= $lootbag_chance){
                 $chance2 = rand(1, 100);
                 if ($chance2 >= 50){
-                    $reward["lootbag"] = "<:Crate:639425690072252426> " . $GLOBALS["userinfo"]["name"] . " obtained a crate!" . $reward["fox"];
+                    $reward["lootbag"] = "You obtained a <img src='img\\icons\\Crate.webp' class='stats-icons'>";
                     $GLOBALS["userinfo"]["lootbag"] += 1;
                 }
                 else {	
-                    $reward["lootbag"] = "<:Key:573780034355986432> " . $GLOBALS["userinfo"]["name"] . " obtained a key!" . $reward["fox"];	
+                    $reward["lootbag"] = "You obtained a <img src='img\\icons\\Key.webp' class='stats-icons'>";	
                     $GLOBALS["userinfo"]["keys"] += 1;
                 }
             }

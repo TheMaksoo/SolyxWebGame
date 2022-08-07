@@ -16,6 +16,7 @@
     $filter = "None";
     $class = getUserClass();
     $iconclass = getIconClass($class);
+    $isded = 0;
     ?>
 <body >
     <main>
@@ -111,11 +112,3 @@
 <?php
     include_once 'copyrightFooter.php';
     ?>
-
-<script>
- $(document).ready(function () {
-    $('html, body').animate({
-        scrollTop: $('#TheMaksoo').offset().top
-    }, 100);
-});
-</script>

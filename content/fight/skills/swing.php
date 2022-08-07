@@ -9,7 +9,7 @@ if ($GLOBALS["userinfo"]["lvl"] >= 90){
 if ($GLOBALS["userinfo"]["Buff1"] == "Blockade"){
     $youdmg = round(($youdmg / 100) * 85);
     $youdef = $youdef * 2;
-    $UserCombatSkill = "" . $username . " has the blockade buff doubling defense.";
+    $UserCombatSkill = "You have the blockade buff doubling defense.";
     $UserCombatDamage = "" . $move . " dealing " . $youdmg . " damage. ";
 }
 
