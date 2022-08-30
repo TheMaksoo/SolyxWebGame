@@ -76,7 +76,7 @@ if(session('access_token')) {
 	$_SESSION['user_locale'] = $user->locale;
     
   
-	header("Location: $base_url/game.php");
+	header("Location: $base_url/game.php?content=welcome");
 } 
 else {
   	echo '<h3>Not logged in</h3>';

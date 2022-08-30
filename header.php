@@ -34,8 +34,8 @@
 	});
 	</script>
 	<body>
-		<header class="nav-bar-bg">
-			<div class="nav-bar">
+		<header class="nav-bar-bg" id="nav">
+			<div class="nav-bar" >
 				<a href="index.php"><img src="img/common/solyxicon.png" style="width:40; height: 40px; border-radius: 50%; margin-bottom: 20px; margin-left: 20px"></a>
 				<ul class="nav-list">
 					<?php if (isset($_SESSION['user_id'])){ if ($_SESSION['user_id'] == 387317544228487168){ ?>
@@ -48,10 +48,7 @@
 						<a href="game.php" data-toggle="tooltip" data-original-title="Userinfo"><?php echo '<strong>', $_SESSION['user_name'] . '#' . $_SESSION['user_discriminator'],  '</strong>'?></a>
 						<a href="login.php?action=logout">Logout</a>
 						<img src="https://cdn.discordapp.com/avatars/<?php $extention = isAnimated($_SESSION['user_avatar']); echo $_SESSION['user_id'] . "/" . $_SESSION['user_avatar'] . $extention; ?>" style="width:40; height: 40px; border-radius: 50%; margin-right: 20px;"/>
-						
-						
 					<?php else: ?>
-						
 						<a href='index.php'>Home</a>
 						<a href='news.php'>News</a>
 						<a href='tutorial.php'>Tutorial</a>
@@ -63,5 +60,21 @@
 				</ul>
 			</div>
 		</header>
+		<p class="navicon"><i id="navicon" class="fa-solid fa-angle-up" onclick="navhide()"></i></p>
 	</body>
 </html>
+
+<script >
+function navhide() {
+	var x = document.getElementById("nav");
+	var y = document.getElementById("navicon");
+	if (x.style.display === "none") {
+		x.style.display = "block";
+		y.classList.toggle("fa-angle-up");
+		
+		
+	} else {
+		x.style.display = "none";
+		y.classList.toggle("fa-chevron-down");
+	}
+	}</script>
