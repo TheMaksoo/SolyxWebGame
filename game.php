@@ -59,10 +59,12 @@
                     <?php
                     
                     if (isset($_GET['content'])){
+                        if ($_GET['content'] == 'gatherChop') {include 'content/gather/gatherOptions.php';} 
                         if ($_GET['content'] == 'gatherChop') {include 'content/gather/gatherChop.php';} 
                         if ($_GET['content'] == 'gatherMine') {include 'content/gather/gatherMine.php';}
                         if ($_GET['content'] == 'gatherFish') {include 'content/gather/gatherFish.php';}
                         if ($_GET['content'] == 'fight') {include 'content/fight/fight.php';}
+                        if ($_GET['content'] == 'welcome') {include 'content/welcome.php';}
                     }
                     else{
                         include 'content/welcome.php';
