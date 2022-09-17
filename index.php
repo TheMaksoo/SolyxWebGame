@@ -16,7 +16,7 @@ require __DIR__ . "/backend/config.php";
      <main>
         <section class="about-section">
             <div class="about">
-                <img src="img/common/solyxpfp.jpeg" style="width:350; height: 350px; border-radius: 5%;".jpg>
+                <img src="img/common/solyxpfp.png" style="width:350; height: 350px; border-radius: 5%;".jpg>
                 <div class="about-container">
                     <a>About Solyx</a>
                     <p>Solyx is  text based RPG, with in depth lore about monsters, quests, locations and items, classes with specialization, PvP battles, lots of weapons, armor, and earnable titles.</p>

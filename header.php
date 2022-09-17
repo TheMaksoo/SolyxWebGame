@@ -5,6 +5,12 @@
 <?php
 	//session_cache_limiter('private_no_expire');
 	session_start();
+	$curPageName = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);  
+	if ($curPageName != 'welcome.php') { 
+		$arrow = 'fa-chevron-down';}
+	else { 
+		$arrow =  'fa-angle-up';
+		}
 ?>
 
 
@@ -34,10 +40,10 @@
 	});
 	</script>
 	<body>
-		<header class="nav-bar-bg" id="nav">
-			<div class="nav-bar" >
-				<a href="index.php"><img src="img/common/solyxicon.png" style="width:40; height: 40px; border-radius: 50%; margin-bottom: 20px; margin-left: 20px"></a>
-				<ul class="nav-list">
+		<header class="nav-bar-bg" id="nav" <?php if($curPageName != 'welcome.php') { echo 'style="display: none;"';} ?>>
+			<div class="nav-bar">
+				<a href="game.php"><img src="img/common/solyxicon.png" style="width:40; height: 40px; border-radius: 50%; margin-bottom: 20px; margin-left: 20px"></a>
+				<ul class="nav-list" style="display:<?php if ($_GET['content'] != 'welcome'){ echo 'block';}  ?>;">
 					<?php if (isset($_SESSION['user_id'])){ if ($_SESSION['user_id'] == 387317544228487168){ ?>
 					<a href='onlineCode.php'data-toggle="tooltip" data-original-title="online coding" ><i class="fa-solid fa-code"></i></a> <?php }} ?>
 						
@@ -60,7 +66,7 @@
 				</ul>
 			</div>
 		</header>
-		<p class="navicon"><i id="navicon" class="fa-solid fa-angle-up" onclick="navhide()"></i></p>
+		<p class="navicon"><i id="navicon" class="fa-solid <?php echo $arrow; ?>" onclick="navhide()"></i></p>
 	</body>
 </html>
 

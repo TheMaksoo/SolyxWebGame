@@ -23,7 +23,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
   max-width: fit-content;
   border-radius: 2vh;
   padding: 2vh;
@@ -32,6 +33,7 @@
   /* fade in animation */
   -webkit-animation: fadein 1s;
   animation: fadein 1s;
+  max-height: 80vh;
   
 }
 
@@ -199,16 +201,16 @@ to   { opacity: 1; }
 
 .stats-container li{
   border-bottom: 1px solid #CCCCCC;
-  line-height: 2em;
+  line-height: 1.7em;
 }
 
 .stats-icons{
-  height: 2em;
+  height: 1.7em;
   float: right;
 }
 
 .stats-icons-plus{
-  height: 2em;
+  height: 1.7em;
   float: right;
   background: rgb(190,4,4);
   background: -moz-radial-gradient(circle, rgba(190,4,4,1) 50%, rgba(248,248,248,0) 75%);

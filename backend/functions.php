@@ -1,8 +1,5 @@
 <?php
     require __DIR__ . "/config.php";
-    require $_SERVER['DOCUMENT_ROOT'] . '/solyx/vendor/autoload.php';
-  
-
 
     function isAnimated($avatar)
     {
