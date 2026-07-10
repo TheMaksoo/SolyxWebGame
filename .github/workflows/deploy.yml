@@ -1,0 +1,43 @@
+name: Deploy Website
+
+# Push to main → deploy to solyx.gg root via FTP
+#
+# 🔑 REQUIRED SECRETS (same as karting):
+#   FTP_SERVER, FTP_USERNAME, FTP_PASSWORD
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-solyx-website
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: 🚀 Deploy to solyx.gg
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server:    ${{ secrets.FTP_SERVER }}
+          username:  ${{ secrets.FTP_USERNAME }}
+          password:  ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./
+          server-dir: /public_html/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/vendor/**
+            **/backend/**
+            **/.env
+
+      - name: Summary
+        run: |
+          echo "### 🎉 solyx.gg deployed!" >> $GITHUB_STEP_SUMMARY
+          echo "**URL:** https://solyx.gg" >> $GITHUB_STEP_SUMMARY
