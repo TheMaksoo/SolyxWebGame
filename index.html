@@ -47,7 +47,7 @@
     /* CARDS */
     .projects-wrap { max-width:1080px;width:100%;margin:40px auto 0;padding:0 40px 80px; }
     .section-label { font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--faint);margin-bottom:18px;text-align:center; }
-    .projects { display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px; }
+    .projects { display:grid;grid-template-columns:repeat(2,1fr);gap:20px; }
     .card { display:flex;flex-direction:column;gap:14px;padding:26px 24px 24px;background:linear-gradient(180deg,var(--surface),var(--surface2));border:1px solid var(--border);border-radius:var(--r);transition:transform .2s,border-color .2s,box-shadow .2s; }
     .card:hover { transform:translateY(-6px);border-color:var(--accent2);box-shadow:0 18px 44px rgba(232,69,42,.16); }
     .card-icon { width:46px;height:46px;border-radius:12px;background:linear-gradient(145deg,#2a1512,#1a0d0b);border:1px solid #3a2420;display:flex;align-items:center;justify-content:center; }
@@ -81,6 +81,7 @@
 
     @media(max-width:640px) {
       .nav-links { display:none; }
+      .projects { grid-template-columns:1fr; }
       .projects-wrap, .also { padding-left:20px;padding-right:20px; }
       .footer { flex-direction:column;text-align:center;padding:24px 20px; }
     }
@@ -96,6 +97,7 @@
     </div>
     <div class="nav-links">
       <a href="/discord-bot/">Discord Bot</a>
+      <a href="/game.php">Web Game</a>
       <a href="/train-station-monitor/">Factorio Mod</a>
       <a href="/karting/login">Karting</a>
     </div>
@@ -120,9 +122,17 @@
     <a class="card" href="/discord-bot/">
       <div class="card-icon"><div class="card-icon-inner"></div></div>
       <div class="card-title">Discord Bot</div>
-      <div class="card-desc">A solo-developed Discord bot focused on text-based RPG. In-depth lore, quests, classes, PvP battles, weapons, armour, and earnable titles.</div>
+      <div class="card-desc">A solo-developed Discord RPG bot with in-depth lore, quests, classes, PvP battles, weapons, armour, and earnable titles.</div>
       <div class="card-stat">490k+ Users · 1600+ Servers</div>
       <div class="card-cta">Open Discord Bot →</div>
+    </a>
+
+    <a class="card" href="/game.php">
+      <div class="card-icon"><div style="font-size:22px;">🎮</div></div>
+      <div class="card-title">Web Game</div>
+      <div class="card-desc">Play the Solyx RPG directly in your browser. Level up, fight monsters, complete quests and compete on the leaderboard.</div>
+      <div class="card-stat">Browser · Free to play</div>
+      <div class="card-cta">Play now →</div>
     </a>
 
     <a class="card" href="/train-station-monitor/">
@@ -163,6 +173,7 @@
   </div>
   <div class="footer-links">
     <a href="/discord-bot/">Discord</a>
+    <a href="/game.php">Web Game</a>
     <a href="/train-station-monitor/">Mods</a>
     <a href="/karting/login">Karting</a>
     <a href="https://github.com/TheMaksoo" target="_blank">GitHub</a>
